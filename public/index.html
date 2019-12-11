@@ -1,17 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html>
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>digital-erp</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but digital-erp doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        Digital ERP
+    </title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/element-ui.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+</head>
+<body>
+<div class="master-container" id="app">
+    <div class="master-wrapper">
+
+      <!--<template v-if="$route.meta.show_sidebar != false">
+            <div class="sidebar-menu-btn">
+                <span class="strip-line strip-line-1"></span>
+                <span class="strip-line strip-line-2"></span>
+                <span class="strip-line strip-line-3"></span>
+            </div>
+            <div class="sidebar-overlay"></div>
+            <aside id="admin_sidebar">
+                <sidebar-nav></sidebar-nav>
+            </aside>
+            <page-top-bar></page-top-bar>
+        </template>-->
+
+        <!-- Main Body -->
+        <main id="main_body">
+            <transition name="fade">
+                <router-view :key="($route.path.includes('resources')) ? JSON.stringify($route) : ''"></router-view>
+            </transition>
+        </main>
+
+    </div> <!-- .master-wrapper -->
+</div> <!-- .master-container -->
+<script src="/js/app.js" charset="utf-8"></script>
+<script src="/js/bootstrap.min.js" charset="utf-8"></script>
+</body>
 </html>

@@ -1,0 +1,145 @@
+html {
+    background-color: #e4e4e4e4;
+}
+
+body {
+    //max-width: $app-body-wrap;
+    margin: 0 auto;
+    //background-color: #ffffff;
+    font-family: 'Gothic A1', sans-serif;;
+    font-size: 14px;
+    color: #333333;
+}
+
+.master-container,
+.master-wrapper,
+main,
+aside,
+nav,
+footer {
+    position: relative;
+}
+
+
+html,
+body,
+.master-container,
+.master-wrapper,
+main#main_body {
+    min-height: 100%;
+    height: auto;
+}
+
+.master-wrapper {
+    //height: auto;
+    box-sizing: border-box;
+    position: relative;
+}
+
+main#main_body {
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    transition-duration: .5s;
+}
+
+main#main_body.sidebar-margin,
+.el-loading-mask.is-fullscreen {
+    transform: translateX(270px);
+    width: calc(100% - #{270px});
+}
+
+main#main_body,
+.app-nav.sidebar-nav {
+    margin-top: 0px;
+}
+
+.home-route main#main_body {
+    margin-top: 0;
+}
+
+.non-admin main#main_body {
+    transform: translateX(0);
+    width: 100%;
+    height: 100vh;
+}
+
+aside {
+    width: 270px;
+    height: 100%;
+    //position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5000;
+    transform: translateX(0);
+    transition-duration: .75s;
+
+    .app-nav {
+        height: 100%;
+    }
+}
+
+.sidebar-overlay {
+    position: absolute;
+    z-index: 4998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparentize(#fff, .25);
+    display: none;
+}
+
+@media (min-width: 1440px) {
+    body {
+        border-left: 1px solid #cccccc;
+        border-right: 1px solid #cccccc;
+    }
+}
+
+// --------------------------------------------------
+// Links
+// --------------------------------------------------
+a {
+    display: inline-block;
+}
+
+a, a:hover, a:focus, a:visited, a:active {
+    outline: 0;
+    text-decoration: none;
+}
+
+// --------------------------------------------------
+// Forms
+// --------------------------------------------------
+input, button, textarea, select {
+    outline: 0;
+}
+
+// --------------------------------------------------
+// Text content
+// --------------------------------------------------
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.4em;
+}
+
+p {
+    line-height: 1.4em;
+}
+
+// --------------------------------------------------
+// Image
+// --------------------------------------------------
+
+img {
+    max-width: 100%;
+}
+// --------------------------------------------------
+// padding
+// --------------------------------------------------
+.p-t-30 {padding-top: 30px;}
+.p-b-50 {padding-bottom: 50px;}
+.p-b-41 {padding-bottom: 41px;}
+.p-t-5  {padding-top: 5px;}
+.p-b-33 {padding-bottom: 33px;}

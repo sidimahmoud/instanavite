@@ -1,0 +1,205 @@
+/*
+|--------------------------------------------------------------------------
+| Default State
+|--------------------------------------------------------------------------
+*/
+.el-form {
+    label {
+        font-size: $app-primary-font-size - 2;
+        font-weight: 700;
+    }
+
+    &.padding-top-medium {
+        padding-top: 15px;
+    }
+}
+
+.el-form-item {
+
+    @extend .app-display-flex, .app-flex-left;
+    flex-wrap: nowrap;
+    margin-bottom: 12px;
+
+    &.is-required .el-form-item__label:before {
+        color: $app-danger-color;
+    }
+
+    .el-form-item__content {
+        width: 100%;
+    }
+
+    &.label-quarter-width > .el-form-item__label,
+    &.label-half-width > .el-form-item__label,
+    &.label-full-width > .el-form-item__label {
+        text-align: left;
+        margin-bottom: 0;
+    }
+
+    &.label-quarter-width > .el-form-item__label {
+        width: 25%;
+    }
+
+    &.label-quarter-width > .el-form-item__content {
+        width: 75%;
+    }
+
+    &.label-half-width > .el-form-item__label,
+    &.label-half-width > .el-form-item__content {
+        width: 50%;
+    }
+
+    &.label-full-width > .el-form-item__label,
+    &.label-full-width > .el-form-item__content {
+        width: 100%;
+        padding-right: 0;
+        text-align: left;
+    }
+
+    &.label-short > .el-form-item__label,
+    &.label-medium > .el-form-item__label,
+    &.label-long > .el-form-item__label,
+    &.label-fluid > .el-form-item__label,
+    &.label-block > .el-form-item__label,
+    &.label-switch > .el-form-item__label {
+        width: 100%;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    &.label-short > .el-form-item__label {
+        max-width: 125px;
+    }
+
+    &.label-medium > .el-form-item__label {
+        max-width: 185px;
+    }
+
+    &.label-long > .el-form-item__label {
+        max-width: 250px;
+    }
+
+    &.label-fluid > .el-form-item__label {
+        max-width: 100%;
+    }
+
+    &.label-block {
+        flex-wrap: wrap;
+    }
+
+    &.label-block > .el-form-item__label {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    &.label-switch > .el-form-item__content {
+        width: 115px;
+        flex-grow: 0;
+        text-align: center;
+    }
+
+    &.label-center > .el-form-item__label {
+        text-align: center;
+    }
+
+    &.label-right > .el-form-item__label {
+        text-align: right;
+    }
+
+    .el-form-item__content .el-switch {
+        top: -2px;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Error State
+|--------------------------------------------------------------------------
+*/
+.el-form-item.is-error {
+    .el-input__inner,
+    .el-input__inner:focus,
+    .el-textarea__inner,
+    .el-textarea__inner:focus {
+        border-color: $app-danger-color;
+    }
+
+    .el-form-item__error {
+        color: $app-danger-color;
+    }
+}
+
+
+// **************************************************
+// Extra-Extra small/Mobile Portrait Viewport
+@media (max-width: $xxs-max) {
+
+    .el-form-item {
+        flex-wrap: wrap;
+    }
+
+    .el-form-item.label-quarter-width,
+    .el-form-item.label-half-width {
+        & > .el-form-item__label, & > .el-form-item__content {
+            width: 100%;
+        }
+    }
+
+    .el-form-item.label-quarter-width,
+    .el-form-item.label-half-width {
+        & > .el-form-item__label {
+            padding-right: 0;
+            text-align: left;
+        }
+    }
+
+    .el-form-item.label-short > .el-form-item__label,
+    .el-form-item.label-medium > .el-form-item__label,
+    .el-form-item.label-long > .el-form-item__label,
+    .el-form-item.label-fluid > .el-form-item__label {
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+}
+// **************************************************
+
+// **************************************************
+// Extra Small/Mobile Landscape Viewport
+@media (min-width: $xs-min) and (max-width: $xs-max) {
+    .el-form-item.label-quarter-width,
+    .el-form-item.label-half-width {
+        & > .el-form-item__label, & > .el-form-item__content {
+            width: 100%;
+        }
+    }
+
+    .el-form-item.label-quarter-width,
+    .el-form-item.label-half-width {
+        & > .el-form-item__label {
+            padding-right: 0;
+            text-align: left;
+        }
+    }
+}
+// **************************************************
+
+
+// **************************************************
+// Small/Tablet Viewport
+@media (min-width: $sm-min) and (max-width: $sm-max) {
+    .el-form-item.label-quarter-width,
+    .el-form-item.label-half-width {
+        & > .el-form-item__label, & > .el-form-item__content {
+            width: 100%;
+        }
+    }
+
+    .el-form-item.label-quarter-width,
+    .el-form-item.label-half-width {
+        & > .el-form-item__label {
+            padding-right: 0;
+            text-align: left;
+        }
+    }
+}
+// **************************************************
