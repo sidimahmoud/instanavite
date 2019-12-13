@@ -99,6 +99,49 @@
     |--------------------------------------------------------------------------
     */
     methods: {
+      ...mapActions('auth', ['requestAccessToken']),
+      ...mapMutations('auth', ['initAccessToken', 'destroyAccessToken']),
+      /**
+       * Handle when the Log In form was submitted.
+       *
+       * @return {boolean}
+       */
+      handleFormSubmit () {
+
+        // Prepare payload data to be sent to API.
+        let data = {
+          grant_type: 'password',
+          username: this.form.email,
+          password: this.form.password,
+          client_id: app_client_id,
+          client_secret: app_client_secret,
+          scope:'*'
+        };
+        console.log(data);
+
+        // Clear old token
+        this.destroyAccessToken();
+
+        // Request freshly baked token from the oven!
+        this.requestAccessToken({data}).then((r) => {
+          if( r.data.token_type!=='Bearer'){
+            this.$notify.error({
+              title: 'Unable to login',
+              message: window._.isNil(r.response) ? 'Email or password is incorrect' : r.data.message,
+            });
+          }
+          else {
+            window.location.reload();
+          }
+
+        }).catch((e) => {
+          this.$notify.error({
+            title: 'Unable to login',
+            message: window._.isNil(e.response) ? 'Email or password is incorrect' : e.response.data.message,
+          });
+        });
+
+      }, // End of handleFormSubmit() method
 
 
     }, // End of component > methods
@@ -109,7 +152,13 @@
     |--------------------------------------------------------------------------
     */
     mounted () {
+      const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
 
+      // If user has access token already, redirect to dashboard.
+      if (hasAccessToken) {
+        console.log('There is a token already! Redirecting to Dashboard.');
+        this.$router.push({name: 'starting-point'});
+      }
 
     }, // End of component > mounted
 

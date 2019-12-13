@@ -16,6 +16,14 @@ export default [
   {
     path: '/', component: Vue.component('login-page')
   },
+  // Admin Dashboard Page
+  {
+    path: '/dashboard', component: Vue.component('dashboard-page'),
+    name: 'starting-point',
+    meta: {
+      page_class: 'dashboard-route',
+    }
+  },
 
 
 ] // End of default

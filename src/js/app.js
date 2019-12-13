@@ -15,13 +15,13 @@ Vue.use(ElementUI);
 //Vue.use(VueFuse);
 
 import './components';
-//import store from './store';
+import store from './store';
 import router from './routes';
 
 
 new Vue({
     el: '#app',
-    //store,
+    store,
     router,
     beforeCreate: function() {
 
