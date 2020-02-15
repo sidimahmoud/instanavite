@@ -12,7 +12,6 @@
 'use strict';
 
 import APICaller from "../../helpers/APICaller";
-import {gep} from "../../helpers/Vuex";
 
 let apiPrefix = window.app_api_prefix_3;
 
@@ -33,7 +32,7 @@ export default {
 
     return APICaller({
       method: 'post',
-      endpoint: '/oauth/token',
+      endpoint: '/api/oauth/token',
       data: payload.data,
     })
       .then((r) => {
@@ -54,76 +53,5 @@ export default {
       .catch((e) => e);
 
   }, // End of requestAccessToken method
-
-  /**
-   * API Action to get the user data from the API by using
-   * the given token.
-   *
-   * @param  {object} context - the context of $store
-   *
-   * @param  {object} payload - an object which contains option values
-   *
-   */
-  getUserData (context, payload) {
-
-    const method = 'get';
-    const endpoint = gep('users/profile?include=roles.permissions.paths,permissions', apiPrefix);
-    //const endpoint = gep('users/profile', apiPrefix);
-
-    return APICaller({method, endpoint})
-      .then((r) => {
-        const data = r.data.data.user;
-
-        context.commit('setUserData', data);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  },
-
-  /**
-   * Update the Two Factor Auth Enabler / Disabler
-   *
-   * @param  {object} context
-   *   : the context of $store
-   *
-   * @param  {object} payload
-   *   : an object which contains option values
-   *
-   * @return {*}
-   */
-  update2FA: function (context, payload) {
-
-    // Define the suffix to be used for the endpoint
-    let suffix = payload.enable ? 'enable' : 'disable';
-
-    // Reach out to API
-    return APICaller({
-      endpoint: '/api/v1/users/1/two-factor/' + suffix,
-      method: 'post',
-    });
-
-  }, // End of update2FA
-
-  /**
-   * Login impersonaion as specific user
-   *
-   * @param  {object} context
-   *   : the context of $store
-   *
-   * @param  {object} payload
-   *   : an object which contains option values
-   *
-   * @return {*}
-   */
-  loginAs: function (context, payload) {
-    // Reach out to API
-    return APICaller({
-      method: 'post',
-      endpoint: gep('users/login/as', apiPrefix),
-      data: payload,
-    });
-
-  }, // End of update2FA
 
 } // End of export default
