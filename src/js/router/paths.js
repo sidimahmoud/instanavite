@@ -66,6 +66,14 @@ export default [
       full_screen: true
     }
   },
+  {
+    path: '/others', component: Vue.component('others'),
+    name: 'others-page',
+    meta: {
+      page_class: 'others-route',
+      full_screen: false
+    }
+  },
 
 
 ] // End of default

@@ -66,10 +66,9 @@
             <el-row>
                 <el-col :md="14" :offset="1">
                     <h4>DOWNLOAD OUR <span class="text-green">APP</span></h4>
-                    <img src="/images/about-us/app-features.png" height="200px" width="400px"/>
                 </el-col>
                 <el-col :md="8" :offset="1">
-                    <img src="/images/about-us/deliver-app.png" height="250px" width="220px"/>
+                    <img src="/images/about-us/deliver-app.png"/>
                 </el-col>
             </el-row>
         </div>

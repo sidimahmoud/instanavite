@@ -29,6 +29,7 @@ Vue.component('dashboard-page', require('../components/pages/Dashboard/Dashboard
 Vue.component('cart-page', require('../components/pages/cart/CartPage').default);
 Vue.component('about-us', require('../components/pages/AboutUs').default);
 Vue.component('product-details', require('../components/pages/ProductDetails').default);
+Vue.component('others', require('../components/pages/Others').default);
 
 /*
 |--------------------------------------------------------------------------

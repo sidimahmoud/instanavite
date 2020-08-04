@@ -10,27 +10,27 @@
             <el-button class="open-button" @click="openForm" v-if="!showForm">Clavarder <i class="fas fa-comments"></i> </el-button>
 
             <div class="chat-popup" id="myForm" v-if="showForm">
-                <h2>Clavarder</h2>
-
-
+                <h3>Clavarder</h3>
                 <div class="messaging">
                     <div class="inbox_msg">
                         <div v-if="!isLoggedIn" style="color:#000;text-align:centre;padding:10px">Afin d'obtenir une assistance adaptée, veuillez vous <a href="javascript:;" @click="handleLogin" type="primary">connecter</a></div>
                         <div v-else class="mesgs">
-                            <div v-for="m in listData" class="msg_history" v-bind:key="m.id">
-                                <div v-if="m.from_admin" class="incoming_msg">
-                                    <!--<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>-->
-                                    <div class="received_msg">
-                                        <div class="received_withd_msg">
+                            <div class="msg_history" id="msg_history">
+                                <div v-for="m in listData" v-bind:key="m.id">
+                                    <div v-if="m.from_Admin" class="incoming_msg">
+                                        <!--<div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>-->
+                                        <div class="received_msg">
+                                            <div class="received_withd_msg">
+                                                <p>{{m.message}}</p>
+                                                <span class="time_date"> {{m.created_at}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else-if="!m.from_Admin" class="outgoing_msg">
+                                        <div class="sent_msg">
                                             <p>{{m.message}}</p>
                                             <span class="time_date"> {{m.created_at}}</span>
                                         </div>
-                                    </div>
-                                </div>
-                                <div v-else-if="!m.from_admin" class="outgoing_msg">
-                                    <div class="sent_msg">
-                                        <p>{{m.message}}</p>
-                                        <span class="time_date"> {{m.created_at}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@
                 
             </div>
         </div>
-        <!--<bottom-page></bottom-page>-->
+        <bottom-page></bottom-page>
     </div>
 </template>
 <script>
@@ -134,7 +134,11 @@ export default {
                     this.getList({user_id: this.userData.id});
                 },1000)
             });
-        }
+        },
+        scrollToEnd() {
+            var container = this.$el.querySelector("#msg_history");
+            container.scrollTop = container.scrollHeight;
+        },
     },
     
     /*
@@ -151,6 +155,10 @@ export default {
     */
     mounted() {
         this.getList({user_id: this.userData.id});
+        setTimeout(() => {
+            this.scrollToEnd();
+        },3000)
+        
     },
 }
 </script>

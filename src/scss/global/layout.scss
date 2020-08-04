@@ -1,11 +1,7 @@
-html {
-    background-color: #e4e4e4e4;
-}
-
 body {
     //max-width: $app-body-wrap;
     margin: 0 auto;
-    //background-color: #ffffff;
+    background-color: #ffffff;
     font-family: 'Gothic A1', sans-serif;;
     font-size: 14px;
     color: #333333;
@@ -15,19 +11,16 @@ body {
 .master-wrapper,
 main,
 aside,
-nav,
-footer {
+nav {
     position: relative;
 }
 
-
+  
 html,
 body,
 .master-container,
-.master-wrapper,
-main#main_body {
-    min-height: 100%;
-    height: auto;
+.master-wrapper{
+    min-height: 100vh;
 }
 
 .master-wrapper {
@@ -37,31 +30,7 @@ main#main_body {
 }
 
 main#main_body {
-    width: 100%;
-    position: relative;
-    z-index: 5;
-    transition-duration: .5s;
-}
-
-main#main_body.sidebar-margin,
-.el-loading-mask.is-fullscreen {
-    transform: translateX(270px);
-    width: calc(100% - #{270px});
-}
-
-main#main_body,
-.app-nav.sidebar-nav {
-    margin-top: 0px;
-}
-
-.home-route main#main_body {
-    margin-top: 0;
-}
-
-.non-admin main#main_body {
-    transform: translateX(0);
-    width: 100%;
-    height: 100vh;
+    padding-bottom: 12rem;
 }
 
 aside {

@@ -16,7 +16,7 @@
               <span class="icon-header" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
               
             </el-badge>
-            <span style="margin-left:2%">Livraison tous les jours de 7h à 23h - <span class="text-red">Gatineau</span></span>   
+            <span style="margin-left: 1rem">Livraison tous les jours de 7h à 23h - <span class="text-red">Gatineau</span></span>   
         </div>
 
     </div> <!-- /.app-page-top-bar -->
