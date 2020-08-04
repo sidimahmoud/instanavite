@@ -1,0 +1,150 @@
+.app-page-top-bar {
+    background-color: #fff;
+    //height: 55px;
+    display: block;
+    height: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px !important;
+
+    .icon-header{
+      background-color: #ffc600;
+      height: 40px;
+      width: 45px;
+      color: #ffffff;
+      padding: 10px !important;
+    }
+}
+
+
+.top-bar-extras {
+
+    a, a:focus, a:visited, a:active {
+      color: #fff;
+      transition-duration: .5s;
+      text-align: center;
+  
+      img {
+        position: relative;
+        top: 4px;
+        width: auto;
+        height: 22px;
+      }
+  
+      span {
+        position: relative;
+        font-size: 18px;
+      }
+    }
+  
+    ul, ul > li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: inline-block;
+    }
+  
+    & > ul > li {
+      margin: 0 7px;
+    }
+  
+    .el-button {
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+      border: 0;
+      width: auto;
+      min-width: auto;
+      height: auto;
+      display: inline-block;
+    }
+  
+  }
+
+.top-bar-img {
+  display: block;
+  margin-left: 15%;
+  margin-top: 1%;
+}
+
+.search-icon{
+  color: #ffc600;
+  width: 100%;
+}
+
+.header-input-field {
+    margin-left: 10%;
+    width: 40%;
+    margin-right: 10%;
+}
+
+.app-page-top-bar-extra {
+    background-color:#1363a8;
+    color: #aec7dd;
+    height: auto;
+    width: 100%;
+    padding: 8px !important;
+    text-align: center;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    li {
+        display: inline;
+        margin-left: 2%;
+    }
+    span {
+        color: #fff;
+        font: Roboto;
+        cursor: pointer;
+    }
+
+    /* Change the link color to #111 (black) on hover */
+    li a:hover {
+        color: #ffc600;
+    }
+
+    .last-number{
+      display: inline;
+      margin-left: 5%;
+      background-color:#1363a8;
+      color: #ffc600;
+
+      .icon-li {
+        background-color:#ffc600;
+        color: #1363a8;
+        height: 18px;
+        width: 18px;;
+        padding: 2px;
+      }
+    }
+      
+}
+
+.offcanvas-header{ display:none; }
+
+@media (max-width: 992px) {
+  .offcanvas-header{ display:block; }
+  .navbar-collapse {
+    position: fixed;
+    top:0; 
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    visibility: hidden;
+    background-color: black;
+    transition: visibility .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  }
+  .navbar-collapse.show {
+    visibility: visible;
+    transform: translateX(-100%);
+  }
+}

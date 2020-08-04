@@ -1,3 +1,67 @@
 .app-page {
   min-height: 100vh;
 }
+
+.div-header {
+  background-color:#1363a8;
+  color: #fff;
+  height: auto;
+  width: 100%;
+  padding: 10px !important;
+}
+
+.master-layout {
+  padding-bottom: 2%;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+#header {
+  background: #ededed;
+}
+#content {
+  padding-bottom: 100px;
+  /* Height of the footer element */
+}
+#footer {
+  background: #18191b;
+  width: 100%;
+  height: auto;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 4%;
+
+  ul {
+    list-style-type: none;
+    padding: 0
+  }
+
+  a {
+    color: #fff;
+  }
+}
+
+.list-pagination {
+  margin-top: 5%;
+}
+
+//text colors
+.text-jaune{
+  color: #ffc600;
+}
+.text-green{
+  color: #20c760;
+}
+.text-red {
+  color: #E91E63;
+}

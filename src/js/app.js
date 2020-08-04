@@ -7,11 +7,13 @@ import Vue from 'vue';
 
 // and its plugins...
 import ElementUI from './elementui';
+import locale from 'element-ui/lib/locale/lang/en'
 import '@fortawesome/fontawesome-free/css/all.css';
 import '@fortawesome/fontawesome-free/js/all.js';
+import 'element-ui/lib/theme-chalk/index.css';
 
 // Use the plugins
-Vue.use(ElementUI);
+Vue.use(ElementUI, { locale });
 //Vue.use(VueFuse);
 
 import './components';
@@ -23,8 +25,4 @@ new Vue({
     el: '#app',
     store,
     router,
-    beforeCreate: function() {
-
-    },
-
 });

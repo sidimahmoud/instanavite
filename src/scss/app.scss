@@ -4,10 +4,27 @@
 @import "global/style";
 @import "global/layout";
 @import "global/variables";
+@import "global/forms";
+@import "global/cart";
+@import "global/about";
+@import "global/chat";
+
 /*----------------------
 --------pages----------
 ------------------------*/
 @import "pages/user/LoginPage";
+
+/*----------------------
+--------partials----------
+------------------------*/
+@import "partials/headers";
+@import "partials/bottom";
+
+/*----------------------
+--------lists-----------
+------------------------*/
+@import "lists/products";
+
 /*----------------------
 --------forms----------
 ------------------------*/

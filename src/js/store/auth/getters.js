@@ -57,7 +57,8 @@ export default {
 
         // Get the API Access Token from localStorage
         let t = localStorage.getItem("app_access_token");
-        return !isEmpty(t);
+
+        return isEmpty(t);
     },
 
     /**

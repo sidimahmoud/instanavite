@@ -30,11 +30,11 @@ export default {
    */
   requestAccessToken: function (context, payload) {
 
-    return APICaller({
-      method: 'post',
-      endpoint: '/api/oauth/token',
-      data: payload.data,
-    })
+    return axios({
+        method: 'post',
+        url: 'http://api.instantavite.com/oauth/token',
+        data: payload.data
+      })
       .then((r) => {
         //if response return qr and access_code
         //return
@@ -44,6 +44,7 @@ export default {
         console.group('Gathering Login Responses');
         context.commit('setAccessToken', token);
         context.commit('setUserData', userData);
+        context.dispatch('getUserData');
         console.groupEnd();
 
       }
@@ -53,5 +54,22 @@ export default {
       .catch((e) => e);
 
   }, // End of requestAccessToken method
+
+  getUserData: function (context, payload) {
+    console.log('ici')
+    let token = localStorage.getItem("app_access_token")
+    return axios({
+      method: 'get',
+      url: 'http://api.instantavite.com/api/users/current',
+      headers: {'Authorization': `Bearer ${token}`},
+    })
+    .then((r) => {
+      let userData = r.data;
+      context.commit('setUserData', userData);
+      return r;
+    })
+    .catch((e) => e);
+    
+  }
 
 } // End of export default

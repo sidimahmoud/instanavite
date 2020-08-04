@@ -1,55 +1,80 @@
 <template>
   <div class="login-page">
-      <div class="wrap-login p-t-30 p-b-50">
-              <span class="login100-form-title p-b-41">
-               Account Login
-             </span>
-             <el-form class="login-form" id="login_form" :model="form" ref="login_form" :rules="rules"
-                      @keyup.enter.native="handleFormSubmit">
+    <div class="wrap-login p-t-30 p-b-50">
+      <span class="login100-form-title p-b-41">
+        Account Login
+      </span>
+      <el-form class="login-form" id="login_form" :model="form" ref="login_form" :rules="rules"
+              @keyup.enter.native="handleFormSubmit">
 
-               <!-- Email -->
-               <el-form-item label="Email"
-                             class="el-form-item label-short"
-                             prop="email">
-                 <el-input id="login_email"
-                           v-model="form.email"
-                           placeholder="your@email.com"/>
-               </el-form-item>
+        <!-- Email -->
+        <el-form-item label="Email"
+                      class="el-form-item label-short"
+                      prop="email">
+          <el-input id="login_email"
+                    v-model="form.email"
+                    placeholder="your@email.com"/>
+        </el-form-item>
 
-               <!-- Password -->
-               <el-form-item label="Password"
-                             class="el-form-item label-short"
-                             prop="password">
-                 <el-input id="login_password" v-model="form.password" type="password"
-                           placeholder="*******"/>
-               </el-form-item>
+        <!-- Password -->
+        <el-form-item label="Password"
+                      class="el-form-item label-short"
+                      prop="password">
+          <el-input id="login_password" v-model="form.password" type="password"
+                    placeholder="*******"/>
+        </el-form-item>
 
-               <!-- Remember Me -->
-               <!--<el-form-item class="el-form-item" label>
-                 <el-checkbox id="login_remember" v-model="form.remember">
-                   <span>Remember Me</span>
-                 </el-checkbox>
-               </el-form-item>-->
+        <!-- Remember Me -->
+        <!--<el-form-item class="el-form-item" label>
+          <el-checkbox id="login_remember" v-model="form.remember">
+            <span>Remember Me</span>
+          </el-checkbox>
+        </el-form-item>-->
 
-               <!-- Submit Button -->
-               <el-form-item class="el-form-item">
-                 <el-button id="login_submit_btn"
-                            type="primary"
-                            icon="el-icon-fa fa-sign-in"
-                            @click="handleFormSubmit">
-                   Log In
-                 </el-button>
-               </el-form-item>
+        <!-- Submit Button -->
+        <el-form-item class="el-form-item">
+          <el-button id="login_submit_btn"
+                    type="primary"
+                    icon="el-icon-fa fa-sign-in"
+                    @click="handleFormSubmit">
+            Log In
+          </el-button>
+        </el-form-item>
 
-             </el-form> <!-- /#login_form -->
-           </div> <!-- /.form-container -->
+      </el-form> <!-- /#login_form -->
 
+      <el-divider>ou</el-divider>
+
+      <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure">Continue with Google</GoogleLogin>
+      <facebook-login class="button"
+        appId="420905468863679"
+        @login="onLogin"
+        @logout="onLogout"
+        @get-initial-status="getUserData"
+        @sdk-loaded="sdkLoaded">
+      </facebook-login>
+
+      
+    </div> <!-- /.form-container -->
   </div> <!-- /.login-page -->
 </template>
 
 <script>
+  import facebookLogin from 'facebook-login-vuejs'
+  import GoogleLogin from 'vue-google-login';
   import {mapMutations, mapActions} from "vuex";
   export default {
+
+    /*
+    |--------------------------------------------------------------------------
+    | component > components
+    |--------------------------------------------------------------------------
+    */
+    components: {
+      facebookLogin,
+      GoogleLogin
+    },
+
     /*
     |--------------------------------------------------------------------------
     | component > data
@@ -83,6 +108,29 @@
             {required: true, message: 'Please input your password', trigger: 'blur'},
           ],
         },
+
+
+        /// Faceboook login
+        isConnected: false,
+        name: '',
+        email: '',
+        personalID: '',
+        picture: '',
+        FB: undefined,
+
+        //google login
+
+        // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
+        params: {
+          client_id: "792431621404-7390cbc2r1nmntn2djrbrrq9ijl2m8ag.apps.googleusercontent.com"
+        },
+        // only needed if you want to render the button with the google ui
+        renderParams: {
+          width: 250,
+          height: 50,
+          longtitle: true
+        }
+
       };
     }, // End of component > data
 
@@ -131,7 +179,9 @@
             });
           }
           else {
-            window.location.reload();
+            this.$router.push({
+              path: "/",
+            });
           }
 
         }).catch((e) => {
@@ -143,6 +193,44 @@
 
       }, // End of handleFormSubmit() method
 
+      //facebook login
+      getUserData() {
+        this.FB.api('/me', 'GET', { fields: 'id,name,email,picture' },
+          user => {
+            this.personalID = user.id;
+            this.email = user.email;
+            this.name = user.name;
+            this.picture = user.picture.data.url;
+          }
+        )
+      },
+      sdkLoaded(payload) {
+        this.isConnected = payload.isConnected
+        this.FB = payload.FB
+        if (this.isConnected) this.getUserData()
+      },
+      onLogin() {
+        this.isConnected = true
+        this.getUserData()
+      },
+      onLogout() {
+        this.isConnected = false;
+      },
+
+      //google login
+      onSuccess(googleUser) {
+        console.log(googleUser);
+
+        // This only gets the user information: id, name, imageUrl and email
+        console.log(googleUser.getBasicProfile());
+      },
+      onFailure(googleUser) {
+        console.log(googleUser);
+
+        // This only gets the user information: id, name, imageUrl and email
+        console.log(googleUser.getBasicProfile());
+      },
+
 
     }, // End of component > methods
 
@@ -152,15 +240,17 @@
     |--------------------------------------------------------------------------
     */
     mounted () {
+      
       const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
 
       // If user has access token already, redirect to dashboard.
       if (hasAccessToken) {
         console.log('There is a token already! Redirecting to Dashboard.');
-        this.$router.push({name: 'starting-point'});
+        this.$router.push({path: '/'});
       }
-
     }, // End of component > mounted
 
   } // End of export default
 </script>
+<style>
+</style>

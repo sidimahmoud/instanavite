@@ -130,7 +130,7 @@ export default {
      * @return {void}
      */
     setUserData: function (state, userData) {
-
+        console.log(userData)
         // Set userData values and store it to localStorage
         state.userData = userData;
         localStorage.setItem('app_user_data', JSON.stringify(userData));
