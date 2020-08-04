@@ -26,7 +26,7 @@ export default {
   sendMessage (context, payload = {}) {
     axios({
       method: 'post',
-      url: 'http://api.instantavite.com/api/inboxes',
+      url: 'wwww.api.instantavite.com/api/inboxes',
       data: payload.data
     })
     .then((response) => {
@@ -45,7 +45,7 @@ export default {
    */
   getList (context, payload = {}) {
 
-    axios.get(`http://api.instantavite.com/api/inboxes?filter[user_id]=${payload.user_id}`)
+    axios.get(`wwww.api.instantavite.com/api/inboxes?filter[user_id]=${payload.user_id}`)
       .then((response) => {
           context.commit('setList', response.data)
       });
