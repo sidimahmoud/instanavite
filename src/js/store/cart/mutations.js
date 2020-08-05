@@ -23,14 +23,16 @@ export default {
         if (found) {
             found.quantity ++;
             found.total = found.quantity * found.price;
+            state.cartTotal += found.total;
         } else {
             state.cart.push(item);
-
+            state.cartTotal += item.price;
             Vue.set(item, 'quantity', 1);
             Vue.set(item, 'total', item.price);
         }
 
         state.cartCount++;
+        
         Notification({
             title: 'Success',
             message: 'Product added to cart',
@@ -45,7 +47,7 @@ export default {
         if (index > -1) {
             let product = state.cart[index];
             state.cartCount -= product.quantity;
-    
+            state.cartTotal -= product.total;
             state.cart.splice(index, 1);
         }
         this.commit('cart/saveCart');
@@ -54,6 +56,7 @@ export default {
     saveCart(state) {
         window.localStorage.setItem('cart', JSON.stringify(state.cart));
         window.localStorage.setItem('cartCount', state.cartCount);
+        window.localStorage.setItem('cartTotal', state.cartTotal);
     }
 
 

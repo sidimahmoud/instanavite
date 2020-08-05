@@ -24,7 +24,7 @@ export default {
    * @returns {*}
    */
   getList (context, payload = {}) {
-    axios.get('http://api.instantavite.com/api/products')
+    axios.get('https://api.instantavite.com/api/products')
         .then((response) => {
             context.commit('setList', response.data)
         });
@@ -40,7 +40,7 @@ export default {
    * @returns {*}
    */
   getListByParams (context, payload = {}) {
-    axios.get('http://api.instantavite.com/api/products', {
+    axios.get('https://api.instantavite.com/api/products', {
         params: payload
       })
         .then((response) => {
@@ -59,7 +59,7 @@ export default {
    * @returns {*}
    */
   getProduct (context, payload = {}) {
-    axios.get(`http://api.instantavite.com/api/products/${payload.id}`)
+    axios.get(`https://api.instantavite.com/api/products/${payload.id}`)
         .then((response) => {
             context.commit('setItem', response)
         });

@@ -38,6 +38,22 @@
             </el-table>
             <div>
                 <h5><strong> CART TOTALS</strong></h5>
+                <div class="total-box">
+                    <table>
+                        <tr>
+                            <th>Subtotal</th>
+                            <td>${{cartTotal}} </td>
+                        </tr>
+                        <tr>
+                            <th>Shipping costs</th>
+                            <td>$20 </td>
+                        </tr>
+                        <tr>
+                            <th>Total</th>
+                            <td>${{cartTotal + 20}}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <div style="margin-top:1rem">
@@ -131,6 +147,7 @@ export default {
     computed: {
         ...mapGetters('cart', {
             cartData: 'cartData',
+            cartTotal:'cartTotal'
         }),
     },
     /*

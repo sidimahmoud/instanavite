@@ -19,6 +19,6 @@ export default {
     
     cart: cart ? JSON.parse(cart) : [],
     cartCount: cartCount ? parseInt(cartCount) : 0,
-    cartTotal: cartTotal ? parseDouble(cartTotal) : 0,
+    cartTotal: cartTotal ? parseFloat(cartTotal) : 0,
 
 } // End of export default

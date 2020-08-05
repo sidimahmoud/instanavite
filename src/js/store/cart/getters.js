@@ -16,6 +16,7 @@ import {isEmpty} from "../../helpers/Common";
 export default {
     cartData: (state) => state.cart,
     cartCount: (state) => state.cartCount,
-
+    cartTotal: (state) => state.cartTotal,
+    
 } // End of export default
 
