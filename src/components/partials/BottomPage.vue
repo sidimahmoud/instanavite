@@ -18,7 +18,7 @@
           <h5>Usefull links</h5>
           <ul>
             <li><a href="#">Nous joindre</a></li>
-            <li><a href="#">Terms et Conditions</a></li>
+            <li><a href="/#/terme-condition">Terms et Conditions</a></li>
             <li><a href="#">FAQ</a></li>
           </ul>
         </el-col>

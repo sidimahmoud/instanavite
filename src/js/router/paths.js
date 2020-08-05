@@ -74,6 +74,16 @@ export default [
       full_screen: false
     }
   },
+  {
+    path: '/terme-condition', component: Vue.component('terme-condition'),
+    name: 'terme-condition-page',
+    meta: {
+      page_class: 'terme-condition-route',
+      full_screen: false
+    }
+  },
+
+  
 
 
 ] // End of default
