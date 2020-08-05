@@ -107,7 +107,7 @@ export default {
         }),
 
         loadCategories(){
-            axios.get('http://api.instantavite.com/api/categories')
+            axios.get('https://api.instantavite.com/api/categories')
             .then((response) => {
                 this.categoriesOpts = response.data;
             });  
