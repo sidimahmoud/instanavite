@@ -7,7 +7,7 @@
             <router-view :key="($route.path.includes('resources')) ? JSON.stringify($route) : ''"></router-view> 
         </main>
         <div v-if="isShowFull">
-            <el-button class="open-button" @click="openForm" v-if="!showForm">Clavarder <i class="fas fa-comments"></i> </el-button>
+            <button class="open-button" @click="openForm" v-if="!showForm">Clavarder <i class="fas fa-comments"></i> </button>
 
             <div class="chat-popup" id="myForm" v-if="showForm">
                 <h3>Clavarder</h3>
