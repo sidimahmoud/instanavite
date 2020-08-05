@@ -32,7 +32,7 @@ export default {
 
     return axios({
         method: 'post',
-        url: 'wwww.api.instantavite.com/oauth/token',
+        url: 'http://api.instantavite.com/oauth/token',
         data: payload.data
       })
       .then((r) => {
@@ -60,7 +60,7 @@ export default {
     let token = localStorage.getItem("app_access_token")
     return axios({
       method: 'get',
-      url: 'wwww.api.instantavite.com/api/users/current',
+      url: 'http://api.instantavite.com/api/users/current',
       headers: {'Authorization': `Bearer ${token}`},
     })
     .then((r) => {
