@@ -10,11 +10,6 @@
   padding: 10px !important;
 }
 
-.master-layout {
-  position: relative;
-  min-height: 100vh;
-}
-
 html,
 body {
   margin: 0;
@@ -31,25 +26,6 @@ body {
 #content {
   padding-bottom: 100px;
   /* Height of the footer element */
-}
-#footer {
-  background: #18191b;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 11rem;
-
-  ul {
-    list-style-type: none;
-    padding: 0
-  }
-
-  a {
-    color: #fff;
-  }
-}
-.footer-content {
-  padding-left: 10rem;
 }
 
 .list-pagination {

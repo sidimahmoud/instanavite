@@ -3,9 +3,9 @@
         <div class="top-menu">
           <nav class="menu">
             <ul>
-                <li><span @click="handleCategories"><i class="fa fa-bars"></i>    BROWSE CATEGORIES</span></li>
+                <!--<li><span @click="handleCategories"><i class="fa fa-bars"></i>    BROWSE CATEGORIES</span></li>-->
                 <li><span @click="handleCategories">AUTRES PRODUITS</span></li>
-                <li><span @click="handleOthers">COMMANDE TELEPHONIQUE</span></li>
+                <li><span @click="handleOthers">COMMANDES SPÉCIAUX</span></li>
                 <li><span @click="handleAbout">ABOUT US</span></li>
                 <li><span @click="handleCategories">CONTACT</span></li>
 

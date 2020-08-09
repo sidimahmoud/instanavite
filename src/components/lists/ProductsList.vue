@@ -1,21 +1,26 @@
 <template>
     <div class="product-container">
         <el-row>
+            <div class="categorie-wrapper-mobile">
+                <div class="categorie-filter" v-for="cat in categoriesOpts" v-bind:key="cat.id">
+                    <span @click="filterByCategorie(cat)">{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
+                </div>
+            </div>
             <el-col :md="4">
-                <div class="produit-wrapper">
+                <div class="catgorie-wrapper">
                     <diV class="div-header">
-                        <i class="fa fa-bars"></i>    BROWSE CATEGORIE
+                        <i class="fa fa-bars"></i>    CATÉGORIES
                     </div>
                     <div class="categorie-filter" v-for="cat in categoriesOpts" v-bind:key="cat.id">
                         <span @click="filterByCategorie(cat)">{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
                     </div>
                 </div>
             </el-col>
-            <el-col :md="18" :offset="1">
+            <el-col :md="18">
                 <div class="produit-wrapper">
                     <div class="produit-list-header">
-                        <span>Total Products: {{listPagination.total}}</span>
-                        <el-select v-model="sortBy" placeholder="Sory By" style="float:right;">
+                        <!--<span>Total Products: {{listPagination.total}}</span>-->
+                        <el-select v-model="sortBy" placeholder="Trier par" style="float:right;">
                             <el-option label="name" value="name"></el-option>
                             <el-option label="date" value="date"></el-option>
                             <el-option label="price" value="price"></el-option>
@@ -23,39 +28,36 @@
                         
                     </div>
                     <!-- content here -->
-                    <div class="product-grid product-grid--flexbox">
-                        <div class="product-grid__wrapper">
-                            <!-- Product list start here -->
+                    <div>
+                        <!-- Product list start here -->
 
-                            <!-- Single product -->
-                            <div class="product-grid__product-wrapper"  v-for="item in listData" v-bind:key="item.id">
-                                <div class="product-grid__product">
-                                    <div class="product-grid__img-wrapper">			
-                                        <img :src="item.image" alt="Img" class="product-grid__img" />
-                                    </div>
-                                    <span class="product-grid__title">{{item.name}}</span>
-                                    <span class="product-grid__price">${{item.price}} / {{item.size}}</span>
-                                    <p class="product-grid__description"></p>
-                                    <span class="product-grid__btn product-grid__add-to-cart" @click="addToCart(item)"><i class="fa fa-cart-arrow-down"></i> Add to cart</span>				
-                                    <!--<span class="product-grid__btn product-grid__view" @click="handleDetails(item)"><i class="fa fa-eye"></i> View more</span>-->
+                        <!-- Single product -->
+                        <div class="grid" >
+                            <div class="item-product" v-for="item in listData" v-bind:key="item.id">
+                                <div class="product-grid__img-wrapper">			
+                                    <img :src="item.image" alt="Img" class="product-grid__img" height="120px"/>
                                 </div>
+                                <span class="product-grid__title">{{item.name}}</span>
+                                <span class="product-grid__price">${{item.price}} / {{item.size}}</span>
+                                <p class="product-grid__description"></p>
+                                <span class="product-grid__btn product-grid__add-to-cart" @click="addToCart(item)"><i class="fa fa-cart-arrow-down"></i> Add to cart</span>				
+                                <!--<span class="product-grid__btn product-grid__view" @click="handleDetails(item)"><i class="fa fa-eye"></i> View more</span>-->
                             </div>
-                            <!-- end Single product -->
-                            
-                            <div class="list-pagination">
-                                <!--Pagination-->
-                                <el-pagination
-                                    layout="total, sizes, prev, pager, next, jumper"
-                                    :page-size="listPagination.per_page"
-                                    :page-sizes="[15, 20, 50, 100, 200]"
-                                    :total="listPagination.total"
-                                    :current-page="listPagination.current_page"
-                                    @current-change="reloadList"
-                                >
-                                </el-pagination>
-                            </div>
-                            
                         </div>
+                        <!-- end Single product -->
+                        <!--Pagination
+                        <div class="list-pagination">
+                            
+                            <el-pagination
+                                layout="total, sizes, prev, pager, next, jumper"
+                                :page-size="listPagination.per_page"
+                                :page-sizes="[15, 20, 50, 100, 200]"
+                                :total="listPagination.total"
+                                :current-page="listPagination.current_page"
+                                @current-change="reloadList"
+                            >
+                            </el-pagination>
+                        </div>-->
                     </div>
                 </div>
             </el-col>

@@ -8,6 +8,8 @@ import Vue from 'vue';
 Vue.component('topbar-page', require('../components/partials/Topbar').default);
 Vue.component('topbar-extras', require('../components/partials/TopbarExtras').default);
 Vue.component('bottom-page', require('../components/partials/BottomPage').default);
+Vue.component('topbar-page', require('../components/partials/Topbar').default);
+Vue.component('topbar-mobile', require('../components/partials/Mobile/TopbarMobile').default);
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +33,6 @@ Vue.component('about-us', require('../components/pages/AboutUs').default);
 Vue.component('product-details', require('../components/pages/ProductDetails').default);
 Vue.component('others', require('../components/pages/Others').default);
 Vue.component('terme-condition', require('../components/pages/TermeCondition').default);
-
 
 /*
 |--------------------------------------------------------------------------

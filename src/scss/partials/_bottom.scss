@@ -1,3 +1,27 @@
+#footer {
+    background: #18191b;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 11rem;
+    color: #fff;
+
+    ul {
+        list-style-type: none;
+        padding: 0
+    }
+
+    a {
+        color: #fff;
+    }
+    h5{
+        color: #1363a8;
+    }
+}
+.footer-content {
+    padding-left: 10rem;
+}
+
 .copy-right-footer{
     background-color: #fff;
     width: 100%;
@@ -8,4 +32,17 @@
         color: #fff;
     }
 }
+
+//app in phone
+@media (max-width: 768px) {
+    #footer {
+        display: none;
+    }
+}
   
+//app in phone
+@media (max-width: 500px) {
+    #footer {
+        display: none;
+    }
+}

@@ -2,13 +2,13 @@
   <div id="footer">
     <div class="footer-content">
       <el-row style="padding-top: 1rem;">
-        <el-col :md="7">
-          <img src="/images/defaults/logo.png" height="60px" width="300px"/>
+        <el-col :md="8">
+          <img src="/images/defaults/logo.png" height="70px" width="350px"/>
           <div>
             <i class="fa fa-phone"></i> +1 (234) 567 08 09
           </div>
           <div>
-            <i class="fa fa-envelope"></i> intantavite@gmail.com
+            <i class="fa fa-envelope"></i> <a href="#">communications@instantavite.ca</a>
           </div>
           <div>
             <i class="fa fa-phone"></i> GC47+R2 Ville-Marie, Montréal, QC, Canada
@@ -24,12 +24,9 @@
         </el-col>
         <el-col :md="6" :offset="2">
           <h5>Payments</h5>
-          <ul>
-            
-          </ul>
-        </el-col>
-        <el-col :md="3" :offset="2">
-          
+          <img src="/images/payment/04.png"/>
+          <img src="/images/payment/04.png"/>
+          <img src="/images/payment/03.png"/>
         </el-col>
       </el-row>
     </div>

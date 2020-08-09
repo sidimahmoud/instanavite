@@ -56,7 +56,7 @@ export default {
   }, // End of requestAccessToken method
 
   getUserData: function (context, payload) {
-    console.log('ici')
+
     let token = localStorage.getItem("app_access_token")
     return axios({
       method: 'get',
