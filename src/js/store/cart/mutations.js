@@ -19,7 +19,7 @@ export default {
 
     addToCart(state, item) {
         let found = state.cart.find(product => product.id == item.id);
-
+        item.product_id=item.id;
         if (found) {
             found.quantity ++;
             found.total = found.quantity * found.price;
@@ -34,7 +34,7 @@ export default {
         state.cartCount++;
         
         Notification({
-            title: 'Success',
+            title: '',
             message: 'Product added to cart',
             type: 'success'
         });

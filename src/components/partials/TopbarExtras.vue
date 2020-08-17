@@ -4,7 +4,19 @@
           <nav class="menu">
             <ul>
                 <!--<li><span @click="handleCategories"><i class="fa fa-bars"></i>    BROWSE CATEGORIES</span></li>-->
-                <li><span @click="handleCategories">AUTRES PRODUITS</span></li>
+                <li>
+                  <el-dropdown>
+                    <span class="el-dropdown-link" @click="handleCategories">
+                      AUTRES PRODUITS<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                      <el-dropdown-item>Produits Sprotive</el-dropdown-item>
+                      <el-dropdown-item>Produits elctronique</el-dropdown-item>
+                      <el-dropdown-item>Produits mecanique</el-dropdown-item>
+                      <el-dropdown-item divided>Autre Produits</el-dropdown-item>
+                    </el-dropdown-menu>
+                  </el-dropdown>
+                </li>
                 <li><span @click="handleOthers">COMMANDES SPÉCIAUX</span></li>
                 <li><span @click="handleAbout">ABOUT US</span></li>
                 <li><span @click="handleCategories">CONTACT</span></li>

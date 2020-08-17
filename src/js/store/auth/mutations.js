@@ -257,6 +257,9 @@ export default {
      */
     addQrCode: function (state, payload) {
         state.qrCode = payload;
-    }
-
+    },
+    setUserEmail: function (state, payload) {
+        state.user_email = payload;
+    },
+    
 } // End of export default

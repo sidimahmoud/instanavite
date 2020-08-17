@@ -16,11 +16,18 @@
   position: fixed;
   bottom: 0;
   right: 15px;
-  border: 3px solid #f1f1f1;
+  border: 1px solid #f1f1f1;
   z-index: 1200;
   background-color: #1363a8;
   color: #fff;
   text-align: center;
+  width: 22%;
+}
+
+.chat-header{
+  display : inline-block;
+  width: 100%;
+  padding-right: 1rem;
 }
 
 
@@ -128,18 +135,26 @@ img{ max-width:20%;}
   width: 33px;
 }
 .messaging { 
-  width: 100%;z-index: 1000; 
+  width: 100%;
+  z-index: 1000; 
   background-color: #fff;
 }
 .msg_history {
   overflow-y: scroll;
-  max-height: 20rem;
+  max-height: 24rem;
 }
 
 .button-close{
-  width: 50%;
-  height:30px;
-  margin-top: 2%;
-  padding: 5px;
-  margin-bottom: 2%;
+  width: 94%;
+  height:2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background: #1363a8 !important;
+}
+
+.close-icon{
+  float: right;
+  color: red;
+  cursor: pointer;
 }

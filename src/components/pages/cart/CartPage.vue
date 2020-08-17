@@ -49,8 +49,24 @@
                             <td>$20 </td>
                         </tr>
                         <tr>
+                            <th>TPS</th>
+                            <td>$5</td>
+                        </tr>
+                        <tr>
+                            <th>TVQ</th>
+                            <td>$5</td>
+                        </tr>
+                        <tr>
+                            <th>SHIPPING FEES</th>
+                            <td>$5</td>
+                        </tr>
+                        <tr>
+                            <th>Order preparation fees</th>
+                            <td>$5</td>
+                        </tr>
+                        <tr>
                             <th>Total</th>
-                            <td>${{cartTotal + 20}}</td>
+                            <td>${{totalDispaly}}</td>
                         </tr>
                     </table>
                 </div>
@@ -63,22 +79,22 @@
                         <h5><strong>BILLING DETAILS</strong></h5>
                         <el-form>
                             <el-form-item>
-                                <el-input placeholder="First name"></el-input>
+                                <el-input v-model="detail.first_name" placeholder="First name"></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-input placeholder="Last name"></el-input>
+                                <el-input v-model="detail.last_name" placeholder="Last name"></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-input placeholder="Phone"></el-input>
+                                <el-input v-model="detail.mobile" placeholder="Mobile"></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-input placeholder="email"></el-input>
+                                <el-input v-model="detail.email" placeholder="email"></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-input placeholder="address"></el-input>
+                                <el-input v-model="detail.address" placeholder="address"></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-input placeholder="Postcode"></el-input>
+                                <el-input v-model="detail.post_code" placeholder="Postcode"></el-input>
                             </el-form-item>
                         </el-form>
                     </div>
@@ -87,9 +103,8 @@
                     <div class="cart-products">
                         <h5><strong>PAYMENT OPTIONS</strong></h5>
                         <div style="text-align:center">
-                            <img src="/images/defaults/paypal.png" height="35px" width="70px"/>
-                            <img src="/images/defaults/cart.png" height="35px" width="70px"/>
-                            <img src="/images/defaults/cart.png" height="35px" width="70px"/>
+                            <img src="/images/defaults/payments1.jpg"/>
+                            <img src="/images/payment/03.png">
                         </div>
                         <el-form>
                             <el-form-item>
@@ -102,7 +117,7 @@
                                 <el-input placeholder="CVV"></el-input>
                             </el-form-item>
                         </el-form>
-                        <el-button type="primary">Complete Order</el-button>
+                        <el-button type="primary" @click="createOrder">Complete Order</el-button>
                     </div>
                 </el-col>
             </el-row>
@@ -110,7 +125,9 @@
     </div>
 </template>
 <script>
-import {mapMutations, mapGetters} from "vuex";
+import {mapMutations, mapGetters, mapActions} from "vuex";
+import { Notification } from 'element-ui';
+
 export default {
     name: "product-list",
     props: {
@@ -122,22 +139,16 @@ export default {
     */
     data(){
         return {
+            detail: {
+                first_name: '',
+                last_name: '',
+                mobile: '',
+                email:'',
+                address: '65 Bremner Blvd, Toronto, ON M5J 0A7, Canada',
+                post_code:''
+            }
             
         }
-    },
-    /*
-    |--------------------------------------------------------------------------
-    | Component > methods
-    |--------------------------------------------------------------------------
-    */
-    methods: {
-        ...mapMutations('cart', {
-            removeFromCart: 'removeFromCart',
-        }),
-        handleDelete(item){
-            this.removeFromCart(item);
-        }
-        
     },
     /*
     |--------------------------------------------------------------------------
@@ -149,6 +160,52 @@ export default {
             cartData: 'cartData',
             cartTotal:'cartTotal'
         }),
+        totalDispaly(){
+            let somme = this.cartTotal + 40;
+            return somme.toFixed(2);
+        }
+    },
+    /*
+    |--------------------------------------------------------------------------
+    | Component > methods
+    |--------------------------------------------------------------------------
+    */
+    methods: {
+        ...mapMutations('cart', {
+            removeFromCart: 'removeFromCart'
+        }),
+        ...mapActions('cart', {
+            addOrder: 'createOrder'
+        }),
+        handleDelete(item){
+            this.removeFromCart(item);
+        },
+        createOrder(){
+            let payload= {
+                language: "Français",
+                address: this.detail.address,
+                client_id: 1,
+                super_market_id: 1,
+                is_immediate: false,
+                instructions: "",
+                start_date: "2020-02-28 15:26:43",
+                manually_handled: false,
+                mobile: null,
+                status_id: 1,
+                is_test: 1,
+                booker_name: this.detail.first_name,
+                amount: this.cartTotal + 20, // cart total + delivery fee
+                products: this.cartData
+            }
+            this.addOrder(payload).then(()=>{
+                Notification({
+                    title: 'Success',
+                    message: 'Thank you for your order we will deliver soon.',
+                    type: 'success'
+                });
+            });
+        }
+        
     },
     /*
     |--------------------------------------------------------------------------

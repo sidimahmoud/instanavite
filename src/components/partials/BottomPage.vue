@@ -24,9 +24,8 @@
         </el-col>
         <el-col :md="6" :offset="2">
           <h5>Payments</h5>
-          <img src="/images/payment/04.png"/>
-          <img src="/images/payment/04.png"/>
-          <img src="/images/payment/03.png"/>
+          <img src="/images/defaults/payments1.jpg"/>
+          <img src="/images/payment/03.png">
         </el-col>
       </el-row>
     </div>

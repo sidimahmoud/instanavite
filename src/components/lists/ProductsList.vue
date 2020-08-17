@@ -9,7 +9,7 @@
             <el-col :md="4">
                 <div class="catgorie-wrapper">
                     <diV class="div-header">
-                        <i class="fa fa-bars"></i>    CATÉGORIES
+                        PRODUITS PAR CATÉGORIE
                     </div>
                     <div class="categorie-filter" v-for="cat in categoriesOpts" v-bind:key="cat.id">
                         <span @click="filterByCategorie(cat)">{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
@@ -38,7 +38,7 @@
                                     <img :src="item.image" alt="Img" class="product-grid__img" height="120px"/>
                                 </div>
                                 <span class="product-grid__title">{{item.name}}</span>
-                                <span class="product-grid__price">${{item.price}} / {{item.size}}</span>
+                                <span class="product-grid__price">${{item.price.toFixed(2)}} / {{item.size}}</span>
                                 <p class="product-grid__description"></p>
                                 <span class="product-grid__btn product-grid__add-to-cart" @click="addToCart(item)"><i class="fa fa-cart-arrow-down"></i> Add to cart</span>				
                                 <!--<span class="product-grid__btn product-grid__view" @click="handleDetails(item)"><i class="fa fa-eye"></i> View more</span>-->

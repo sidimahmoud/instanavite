@@ -51,4 +51,6 @@ export default {
      */
     userRoles: {},
 
+    user_email: ''
+
 } // End of export default

@@ -16,6 +16,10 @@
       width: 110px;
     }
 
+    .app-info{
+      margin-left: 1rem;
+    }
+
     .header-input-field {
       margin-left: 5%;
       width: 40%;
@@ -101,6 +105,9 @@
     padding-top: 5px;
     padding-bottom: 5px;
 
+    .top-menu{
+    }
+
     ul {
         list-style-type: none;
         margin: 0;
@@ -108,8 +115,8 @@
     }
     
     li {
-        display: inline;
-        margin-left: 2%;
+      display: inline;
+      margin-left: 2%;
     }
     span {
         color: #fff;
