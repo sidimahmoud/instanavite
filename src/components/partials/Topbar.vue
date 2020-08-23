@@ -18,7 +18,7 @@
           <span class="icon-header"><i class="fas fa-user"></i></span>
         </el-badge> 
         <el-badge :value="cartCount" class="item" type="primary">
-          <span class="icon-header" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
+          <span class="icon-header-cart" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
         </el-badge>
         <span class="app-info"><strong>Livraison tous les jours de 7h à 23h - GATINEAU</strong></span>
       </div> 

@@ -209,9 +209,9 @@ body {
 	
 	&__add-to-cart {
 		color: #fff;
-		background: $primary;
+		background: #1363a8;//$primary;
 		
-		&:hover { background: lighten($primary, 10%); }
+		&:hover { background: lighten(#1363a8, 10%); }
 	}
 	
 	&__view {
