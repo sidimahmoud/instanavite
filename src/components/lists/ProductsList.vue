@@ -35,7 +35,7 @@
                         <div class="grid" >
                             <div class="item-product" v-for="item in listData" v-bind:key="item.id">
                                 <div class="product-grid__img-wrapper">			
-                                    <img :src="item.image" alt="Img" class="product-grid__img" height="120px"/>
+                                    <img :src="item.image" alt="Img" class="product-grid__img"/>
                                 </div>
                                 <span class="product-grid__title">{{item.name}}</span>
                                 <span class="product-grid__price">${{item.price.toFixed(2)}} / {{item.size}}</span>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <!-- end Single product -->
-                        <!--Pagination
+                        <!--Pagination-->
                         <div class="list-pagination">
                             
                             <el-pagination
@@ -57,7 +57,7 @@
                                 @current-change="reloadList"
                             >
                             </el-pagination>
-                        </div>-->
+                        </div>
                     </div>
                 </div>
             </el-col>

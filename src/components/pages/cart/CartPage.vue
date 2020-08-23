@@ -185,6 +185,7 @@ export default {
                 language: "Français",
                 address: this.detail.address,
                 client_id: 1,
+                town_id:1,
                 super_market_id: 1,
                 is_immediate: false,
                 instructions: "",
@@ -197,7 +198,7 @@ export default {
                 amount: this.cartTotal + 20, // cart total + delivery fee
                 products: this.cartData
             }
-            this.addOrder(payload).then(()=>{
+            this.addOrder(payload).then(() => {
                 Notification({
                     title: 'Success',
                     message: 'Thank you for your order we will deliver soon.',

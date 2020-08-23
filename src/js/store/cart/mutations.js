@@ -23,10 +23,10 @@ export default {
         if (found) {
             found.quantity ++;
             found.total = found.quantity * found.price;
-            state.cartTotal += found.total;
+            state.cartTotal += found.total.toFixed(2);
         } else {
             state.cart.push(item);
-            state.cartTotal += item.price;
+            state.cartTotal += item.price.toFixed(2);
             Vue.set(item, 'quantity', 1);
             Vue.set(item, 'total', item.price);
         }
