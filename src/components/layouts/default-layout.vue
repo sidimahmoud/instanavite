@@ -11,11 +11,11 @@
             <button class="open-button" @click="openForm" v-if="!showForm">Clavarder <i class="fas fa-comments"></i> </button>
 
             <div class="chat-popup" id="myForm" v-if="showForm">
-                <div class="chat-header"><h4>Clavarder <small><i class="close-icon" @click="closeForm">X</i></small></h4> </div>
+                <div class="chat-header"><h4>Clavardage <small><i class="close-icon" @click="closeForm">X</i></small></h4> </div>
                 <div class="messaging">
                     <div class="inbox_msg">
                         <!--v-if="!isLoggedIn" -->
-                        <div v-if="!isListening" style="color:#000;text-align:centre;padding:10px">
+                        <div v-if="!isListening" style="color:#000;text-align:centre;padding:5px">
                             <el-form :model="formInline" ref="userObject" :rules="rules" :validate-on-rule-change="true">
                                 <!-- Nom -->
                                 <el-form-item label="Nom (optional)" class="label-short">
@@ -29,7 +29,7 @@
 
                                 <!-- Message -->
                                 <el-form-item label="Message" class="label-short" prop="question">
-                                    <el-input type="textarea" v-model="formInline.message" :rows="5"/>
+                                    <el-input type="textarea" v-model="formInline.message" :rows="3"/>
                                 </el-form-item>
 
                                 <el-button type="primary"
@@ -72,7 +72,7 @@
                 
             </div>
         </div>
-        <bottom-page></bottom-page>
+        <bottom-page v-if="isShowFull"></bottom-page>
     </div>
 </template>
 <script>
@@ -235,9 +235,9 @@ export default {
     */
     mounted() {
         this.getList({user_id: this.userEmail});
-        setTimeout(() => {
+        /*setTimeout(() => {
             this.scrollToEnd();
-        },3000)
+        },3000)*/
         
     },
 }

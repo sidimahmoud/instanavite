@@ -20,7 +20,7 @@
                 <li><span @click="handleOthers">COMMANDES SPÉCIAUX</span></li>
                 <li><span @click="handleAbout">ABOUT US</span></li>
                 <li><span @click="handleCategories">CONTACT</span></li>
-
+                
                 <li class="last-number"><i class="fas fa-phone-alt icon-li"></i>  123-456-789 </li>
             </ul>
           </nav>

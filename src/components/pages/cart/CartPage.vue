@@ -1,29 +1,25 @@
 <template>
     <div class="cart-container">
         <div class="cart-products">
-            <h5><strong> SHOPPING ITEMS</strong></h5>
+            <h5><strong>PRODUITS SÉLECTIONÉS</strong></h5>
             <el-table
                 :data="cartData"
                 style="width: 100%">
                 <el-table-column
                     prop="name"
-                    label="Name"
-                    width="250">
+                    label="Name">
                 </el-table-column>
                 <el-table-column
                     prop="price"
-                    label="Price"
-                    width="200">
+                    label="Price">
                 </el-table-column>
                 <el-table-column
                     prop="quantity"
-                    label="Quantity"
-                    width="200">
+                    label="Quantity">
                 </el-table-column>
                 <el-table-column
                     prop="total"
-                    label="total"
-                    width="200">
+                    label="total">
                 </el-table-column>
                 <el-table-column
                     label="Action">
@@ -36,37 +32,39 @@
                 </el-table-column>
                 
             </el-table>
+            <br/>
+            <br/>
             <div>
                 <h5><strong> CART TOTALS</strong></h5>
                 <div class="total-box">
                     <table>
                         <tr>
                             <th>Subtotal</th>
-                            <td>${{cartTotal}} </td>
+                            <td><strong>${{cartTotal}} </strong></td>
                         </tr>
                         <tr>
                             <th>Shipping costs</th>
-                            <td>$20 </td>
+                            <td><strong>$20.00</strong> </td>
                         </tr>
                         <tr>
                             <th>TPS</th>
-                            <td>$5</td>
+                            <td><strong>$5.00</strong></td>
                         </tr>
                         <tr>
                             <th>TVQ</th>
-                            <td>$5</td>
+                            <td><strong>$5.00</strong></td>
                         </tr>
                         <tr>
                             <th>SHIPPING FEES</th>
-                            <td>$5</td>
+                            <td><strong>$5.00</strong></td>
                         </tr>
                         <tr>
                             <th>Order preparation fees</th>
-                            <td>$5</td>
+                            <td><strong>$5.00</strong></td>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td>${{totalDispaly}}</td>
+                            <td><strong>${{totalDispaly}}</strong></td>
                         </tr>
                     </table>
                 </div>
@@ -103,7 +101,8 @@
                     <div class="cart-products">
                         <h5><strong>PAYMENT OPTIONS</strong></h5>
                         <div style="text-align:center">
-                            <img src="/images/defaults/payments1.jpg"/>
+                            <img src="/images/defaults/visa.png" height="60px"/>
+                            <img src="/images/defaults/mastercard.png" height="60px"/>
                             <img src="/images/payment/03.png">
                         </div>
                         <el-form>
@@ -118,7 +117,10 @@
                             </el-form-item>
                         </el-form>
                         <el-button type="primary" @click="createOrder">Complete Order</el-button>
+
+                        <br/><br/><br/>or via  <img src="/images/payment/03.png">
                     </div>
+                   
                 </el-col>
             </el-row>
         </div>

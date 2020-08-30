@@ -11,8 +11,8 @@
                     <diV class="div-header">
                         PRODUITS PAR CATÉGORIE
                     </div>
-                    <div class="categorie-filter" v-for="cat in categoriesOpts" v-bind:key="cat.id">
-                        <span @click="filterByCategorie(cat)">{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
+                    <div :class="cat.active ? 'categorie-selected' : 'categorie-filter'" v-for="cat in categoriesOpts" v-bind:key="cat.id"  @click="filterByCategorie(cat)">
+                        <span>{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
                     </div>
                 </div>
             </el-col>
@@ -21,9 +21,8 @@
                     <div class="produit-list-header">
                         <!--<span>Total Products: {{listPagination.total}}</span>-->
                         <el-select v-model="sortBy" placeholder="Trier par" style="float:right;">
-                            <el-option label="name" value="name"></el-option>
-                            <el-option label="date" value="date"></el-option>
-                            <el-option label="price" value="price"></el-option>
+                            <el-option label="Prix croissant" value="price-asc"></el-option>
+                            <el-option label="Prix décroissant" value="price-desc"></el-option>
                         </el-select>
                         
                     </div>
@@ -42,6 +41,9 @@
                                 <p class="product-grid__description"></p>
                                 <span class="product-grid__btn product-grid__add-to-cart" @click="addToCart(item)"><i class="fa fa-cart-arrow-down"></i> Add to cart</span>				
                                 <!--<span class="product-grid__btn product-grid__view" @click="handleDetails(item)"><i class="fa fa-eye"></i> View more</span>-->
+                            </div>
+                            <div v-if="isEmpty(listData)">
+                                Vous ne trouvez pas <strong>{{search_product}} </strong>? Appelez nous au 125-542-5524 et nous vous livrerons ce produit au prix du commerce.
                             </div>
                         </div>
                         <!-- end Single product -->
@@ -66,6 +68,7 @@
 </template>
 <script>
 import {mapMutations, mapActions, mapGetters} from "vuex";
+import {isEmpty} from "~/js/helpers/Common";
 
 export default {
     name: "product-list",
@@ -80,7 +83,9 @@ export default {
         return {
             categoriesOpts: [],
             categorie_block_class : "fa fa-plus filter-icon",
-            sortBy: ''
+            sortBy: '',
+            search_product: '',
+            categorie_selected: ''
         }
     },
     /*
@@ -115,9 +120,11 @@ export default {
             });  
         },
         filterByCategorie(cat){
+            this.toggleClass(cat.id);
             let payload = {
                 'filter[categorie_id]': cat.id
             }
+            this.categorie_selected = cat.id;
             this.loadListByParams(payload); 
         },
         addToCart(item) {
@@ -126,7 +133,8 @@ export default {
 
         reloadList(n){
             let payload = {
-                'page': n
+                'page': n,
+                'filter[categorie_id]': this.categorie_selected
             }
             this.loadListByParams(payload); 
         },
@@ -136,7 +144,19 @@ export default {
                 params: {id: item.id}
             });
         },
-        
+        toggleClass(id) {
+            // Create variable for all fighters (name takes up less space)
+            let allCategories = this.categoriesOpts;
+            // Get the clicked fighter
+            let cat = allCategories.find(e => e.id === id)
+            // Set all fighters to have a active key of false so that they "loose focus"
+            allCategories = allCategories.map(e => window.vue.set(e, 'active', false))
+            // Use Vue.set to tell vue that we updated the object and it needs to be re-rendered
+            window.vue.set(cat, 'active', !cat.active)
+        },
+        isEmpty (v) {
+            return isEmpty(v);
+        },
     },
     
     /*
@@ -152,7 +172,16 @@ export default {
     |--------------------------------------------------------------------------
     */
     mounted() {
-        this.loadList();
+        const params = _.clone(this.$route.query);
+        const filters = _.filter(Object.keys(params), (v) => _.includes(v, 'filter'));
+
+        if (filters.length > 0) {
+            _.each(filters, (x) => {
+                this.search_product = params[x];
+            });
+        }
+
+        this.loadList(params);
         this.loadCategories();
     },
 }

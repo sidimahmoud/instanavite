@@ -1,9 +1,7 @@
 <template>
-  <div class="login-page">
+  <div class="login-view">
     <div class="wrap-login p-t-30 p-b-50">
-      <span class="login100-form-title p-b-41">
-        Account Login
-      </span>
+      <img src="/images/defaults/logo.png"/>
       <el-form class="login-form" id="login_form" :model="form" ref="login_form" :rules="rules"
               @keyup.enter.native="handleFormSubmit">
 
@@ -35,32 +33,26 @@
         <el-form-item class="el-form-item">
           <el-button id="login_submit_btn"
                     type="primary"
-                    icon="el-icon-fa fa-sign-in"
-                    @click="handleFormSubmit">
-            Log In
-          </el-button>
+                    class="login-button"
+                    @click="handleFormSubmit">Se connecter</el-button>
         </el-form-item>
 
-      </el-form> <!-- /#login_form -->
-
-      <el-divider>ou</el-divider>
-
-      <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure">Continue with Google</GoogleLogin>
-      <facebook-login class="button"
-        appId="420905468863679"
-        @login="onLogin"
-        @logout="onLogout"
-        @get-initial-status="getUserData"
-        @sdk-loaded="sdkLoaded">
-      </facebook-login>
-
-      
+      </el-form> <!-- /#login_form --> 
     </div> <!-- /.form-container -->
+    <div>
+      <el-divider>ou</el-divider>
+      <div class="social-login">
+        <div>
+          <v-facebook-login app-id="261288108609958"></v-facebook-login><br/>
+          <div id="google-signin-button" class="g-signin2" data-width="215" data-onsuccess="onSignIn" data-onfailure="onFailure"></div>
+        </div>
+      </div>
+    </div>
   </div> <!-- /.login-page -->
 </template>
 
 <script>
-  import facebookLogin from 'facebook-login-vuejs'
+  import VFacebookLogin from 'vue-facebook-login-component'
   import GoogleLogin from 'vue-google-login';
   import {mapMutations, mapActions} from "vuex";
   export default {
@@ -71,8 +63,8 @@
     |--------------------------------------------------------------------------
     */
     components: {
-      facebookLogin,
-      GoogleLogin
+      GoogleLogin,
+      VFacebookLogin
     },
 
     /*
@@ -212,6 +204,7 @@
       onLogin() {
         this.isConnected = true
         this.getUserData()
+        this.redirectUser()
       },
       onLogout() {
         this.isConnected = false;
@@ -231,6 +224,19 @@
         console.log(googleUser.getBasicProfile());
       },
 
+      onSignIn(googleUser) {
+        console.log(googleUser)
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        this.redirectUser()
+      },
+
+      redirectUser(){
+        this.$router.push({path: '/'});
+      }
 
     }, // End of component > methods
 
@@ -240,7 +246,7 @@
     |--------------------------------------------------------------------------
     */
     mounted () {
-      
+     
       const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
 
       // If user has access token already, redirect to dashboard.
@@ -248,9 +254,18 @@
         console.log('There is a token already! Redirecting to Dashboard.');
         this.$router.push({path: '/'});
       }
+
+     
     }, // End of component > mounted
 
   } // End of export default
 </script>
+
 <style>
+.social-login {
+  align-content: center !important;
+  text-align: center !important;
+  display: inline-block !important;
+}
+
 </style>

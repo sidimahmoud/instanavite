@@ -18,11 +18,12 @@
 
     .app-info{
       margin-left: 1rem;
+      font-size: small;
     }
 
     .header-input-field {
-      margin-left: 5%;
-      width: 40%;
+      margin-left: 2%;
+      width: 28%;
     }
 
     .app-header-action {
@@ -113,8 +114,8 @@
     padding-top: 5px;
     padding-bottom: 5px;
 
-    .top-menu{
-    }
+    /*.top-menu{
+    }*/
 
     ul {
         list-style-type: none;
@@ -138,10 +139,11 @@
     }
 
     .last-number{
-      display: inline;
-      margin-left: 5%;
+      float: right;
       background-color:#1363a8;
       color: #ffc600;
+      margin-right: 1rem;
+      
 
       .icon-li {
         background-color:#ffc600;
@@ -161,7 +163,7 @@
   .app-page-top-bar {
     .header-input-field {
       margin-left: 5%;
-      width: 55%;
+      width: 40%;
     }
   }
   .app-page-top-bar-mobile{
@@ -179,7 +181,7 @@
 
     .header-input-field {
       margin-left: 2rem;
-      width: 30%;
+      width: 25%;
     }
 
     .icon-header{

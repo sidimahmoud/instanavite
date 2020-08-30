@@ -27,6 +27,8 @@ Vue.component('products-list', require('../components/lists/ProductsList').defau
 // pages->user
 Vue.component('login-page', require('../components/pages/user/LoginPage').default);
 Vue.component('dashboard-page', require('../components/pages/Dashboard/Dashboard').default);
+Vue.component('user-profile', require('../components/pages/user/UserProfile').default);
+
 //cart
 Vue.component('cart-page', require('../components/pages/cart/CartPage').default);
 Vue.component('about-us', require('../components/pages/AboutUs').default);

@@ -67,6 +67,14 @@ export default [
     }
   },
   {
+    path: '/profile', component: Vue.component('user-profile'),
+    name: 'profile-page',
+    meta: {
+      page_class: 'profile-route',
+      full_screen: false
+    }
+  },
+  {
     path: '/others', component: Vue.component('others'),
     name: 'others-page',
     meta: {

@@ -24,10 +24,12 @@ export default {
    * @returns {*}
    */
   getList (context, payload = {}) {
-    axios.get('https://api.instantavite.com/api/products')
-        .then((response) => {
-            context.commit('setList', response.data)
-        });
+    axios.get('https://api.instantavite.com/api/products', {
+      params: payload
+    })
+    .then((response) => {
+        context.commit('setList', response.data)
+    });
   }, // End of requestAccessToken method
 
   /**

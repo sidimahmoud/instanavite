@@ -26,6 +26,15 @@
 
 	.product-grid__img {
 		height: 80px !important;
+		transition: transform .2s;
+		-ms-transform: scale(1); /* IE 9 */
+		-webkit-transform: scale(1); /* Safari 3-8 */
+		transform: scale(1); 
+	}
+	.product-grid__img:hover {
+		-ms-transform: scale(4); /* IE 9 */
+		-webkit-transform: scale(4); /* Safari 3-8 */
+		transform: scale(4); 
 	}
 }
 
@@ -144,7 +153,7 @@ body {
 		width: auto;
 		overflow: hidden;
 		position: relative;
-		
+		z-index: -1;
 	}
 	
 	&__price {
@@ -233,6 +242,20 @@ body {
 		padding: 1%;
 		float: right;
 	}
+}
+.categorie-filter:hover {
+	background-color: #1363a8;
+	color: #000;
+}
+.categorie-filter:focus {
+	background-color: #1363a8;
+	color: #000;
+}
+.categorie-selected {
+	border-bottom: 1px solid #eee;
+	cursor: pointer;
+	padding: 5%;
+	color: #ffc600;
 }
 
 .produit-list-header {

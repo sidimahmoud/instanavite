@@ -5,6 +5,8 @@ import { extendMoment } from 'moment-range';
 let sd = (v, d) => {
   return v === undefined || v === null ? d : v;
 };
+// Import window.Vue...
+window.vue = require('vue');
 
 // Set API url
 // noinspection ES6ModulesDependencies

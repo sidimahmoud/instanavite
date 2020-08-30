@@ -33,11 +33,11 @@ export default {
 
         state.cartCount++;
         
-        Notification({
+        /*Notification({
             title: '',
-            message: 'Product added to cart',
+            message: 'Produit ajouté au panier',
             type: 'success'
-        });
+        });*/
         this.commit('cart/saveCart');
     },
 

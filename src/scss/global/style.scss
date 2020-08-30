@@ -46,7 +46,15 @@ body {
 
 /*------------------Other----------------------*/
 .others-page {
-  height: 100%;
-  padding: 1rem;
-  padding-left: 15rem;
+  color: #fff;
+  width: 100%;
+  background-image: url("/images/defaults/technical.jpg");
+  /* Full height */
+  
+  min-height: 430px;
+  padding-left: 10%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
