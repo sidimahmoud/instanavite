@@ -28,7 +28,7 @@
             <el-col :md="6">
                 <div style="margin: 1 rem">
                     <div style="margin: 1 rem">
-                        <i class="fa fa-location"></i> GC47+R2 Ville-Marie, Montréal, QC, Canada
+                        <i class="fa fa-map-marker-alt"></i> GC47+R2 Ville-Marie, Montréal, QC, Canada
                     </div>
                     <div style="margin: 1 rem">
                         <i class="fa fa-phone"></i> +1 (234) 567 08 09
