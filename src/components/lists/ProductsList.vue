@@ -180,8 +180,12 @@ export default {
                 this.search_product = params[x];
             });
         }
-
         this.loadList(params);
+       /* let payload = {
+            'filter[categorie_id]': 5
+        };
+        this.categorie_selected = 5;
+        this.loadListByParams(payload);*/
         this.loadCategories();
     },
 }

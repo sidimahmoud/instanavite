@@ -46,9 +46,9 @@ body {
 
 /*------------------Other----------------------*/
 .others-page {
-  color: #fff;
+  color: #000;
   width: 100%;
-  background-image: url("/images/defaults/technical.jpg");
+  //background-image: url("/images/defaults/technical.jpg");
   /* Full height */
   
   min-height: 430px;
@@ -58,3 +58,11 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.contact-container {
+  width: 100%;
+
+  min-height: 430px;
+  padding-left: 15%;
+  padding-top: 1%;
+} 

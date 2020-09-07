@@ -49,6 +49,15 @@ export default [
     }
   },
   {
+    path: '/contact', component: Vue.component('contact-us'),
+    name: 'contact-page',
+    meta: {
+      page_class: 'contact-route',
+      full_screen: false
+    }
+  },
+  
+  {
     path: '/product/:id',
     component: Vue.component('product-details'),
     name: 'product-details-page',

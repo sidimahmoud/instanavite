@@ -17,7 +17,9 @@
         <el-badge :value="cartCount" class="item" type="primary">
           <span class="icon-header-cart" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
         </el-badge>
-        <span class="app-info"><strong>Livraison dans la région de GATINEAU – Tous les jours de 7h à 23h</strong></span>
+        <el-badge> 
+          <span class="app-info"><strong>Livraison dans la région de GATINEAU </strong></span> <br/> <span class="app-info"><strong>Tous les jours de 7h à 23h</strong></span>
+        </el-badge>
       </div> 
     </div> <!-- /.app-page-top-bar -->
 </template>

@@ -34,7 +34,7 @@
             </el-table>
             <br/>
             <br/>
-            <div>
+            <div v-if="cartTotal > 0">
                 <h5><strong> CART TOTALS</strong></h5>
                 <div class="total-box">
                     <table>
@@ -76,6 +76,13 @@
                     <div class="cart-products">
                         <h5><strong>BILLING DETAILS</strong></h5>
                         <el-form>
+                            <div class="el-input google-maps-address-field">
+                                <input type="text" v-bind:id="id"
+                                    ref="google_address_autocomplete"
+                                    v-model="address"
+                                    class="el-input__inner"
+                                    placeholder="Address"/>
+                            </div>
                             <el-form-item>
                                 <el-input v-model="detail.first_name" placeholder="First name"></el-input>
                             </el-form-item>
@@ -87,9 +94,6 @@
                             </el-form-item>
                             <el-form-item>
                                 <el-input v-model="detail.email" placeholder="email"></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-input v-model="detail.address" placeholder="address"></el-input>
                             </el-form-item>
                             <el-form-item>
                                 <el-input v-model="detail.post_code" placeholder="Postcode"></el-input>
@@ -107,13 +111,13 @@
                         </div>
                         <el-form>
                             <el-form-item>
-                                <el-input placeholder="Cart Number"></el-input>
+                                <el-input placeholder="Cart Number" disabled></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-input placeholder="MM/YY"></el-input>
+                                <el-input placeholder="MM/YY" disabled></el-input>
                             </el-form-item>
                             <el-form-item>
-                                <el-input placeholder="CVV"></el-input>
+                                <el-input placeholder="CVV" disabled></el-input>
                             </el-form-item>
                         </el-form>
                         <el-button type="primary" @click="createOrder">Complete Order</el-button>
@@ -129,6 +133,7 @@
 <script>
 import {mapMutations, mapGetters, mapActions} from "vuex";
 import { Notification } from 'element-ui';
+import {isEmpty} from "~/js/helpers/Common";
 
 export default {
     name: "product-list",
@@ -148,7 +153,10 @@ export default {
                 email:'',
                 address: '65 Bremner Blvd, Toronto, ON M5J 0A7, Canada',
                 post_code:''
-            }
+            },
+            id: "google_address_autocomplete",
+            address: "",
+            coordinates: ""
             
         }
     },
@@ -183,31 +191,71 @@ export default {
             this.removeFromCart(item);
         },
         createOrder(){
-            let payload= {
-                language: "Français",
-                address: this.detail.address,
-                client_id: 1,
-                town_id:1,
-                super_market_id: 1,
-                is_immediate: false,
-                instructions: "",
-                start_date: "2020-02-28 15:26:43",
-                manually_handled: false,
-                mobile: null,
-                status_id: 1,
-                is_test: 1,
-                booker_name: this.detail.first_name,
-                amount: this.cartTotal + 20, // cart total + delivery fee
-                products: this.cartData
-            }
-            this.addOrder(payload).then(() => {
-                Notification({
-                    title: 'Success',
-                    message: 'Thank you for your order we will deliver soon.',
-                    type: 'success'
+            if(!isEmpty(this.coordinates)){
+                let payload= {
+                    language: "Français",
+                    address: this.detail.address,
+                    client_id: 1,
+                    town_id:1,
+                    super_market_id: 1,
+                    is_immediate: false,
+                    instructions: "",
+                    start_date: "2020-02-28 15:26:43",
+                    manually_handled: false,
+                    mobile: this.detail.mobile,
+                    status_id: 1,
+                    is_test: 1,
+                    booker_name: this.detail.first_name,
+                    amount: this.cartTotal + 40, // cart total + delivery fee
+                    products: this.cartData,
+                    coordinates: this.coordinates
+                }
+                this.addOrder(payload).then(() => {
+                    Notification({
+                        title: 'Success',
+                        message: 'Thank you for your order we will deliver soon.',
+                        type: 'success'
+                    });
                 });
+            } else {
+                Notification({
+                    title: 'Error',
+                    message: 'The address cannot be empty.',
+                    type: 'warning'
+                });
+            }
+            
+        },
+         /**
+         * Helper method to get and return the preferred city value form
+         * Google Maps Autocomplete result.
+         *
+         * @param {object} place
+         *   The getPlace() for Autocomplete result upon choosing a suggestion.
+         *   e.g. autocomplete.getPlace()
+         *
+         * @return {string}
+         */
+        getCityValue(place) {
+            let result = '';
+
+            // Iterate and get "locality" value,
+            // if there are none, just get "postal_code" as a fallback.
+            _.each(place.address_components, (v) => {
+                if (
+                    _.includes(v.types, 'locality') ||
+                    _.includes(v.types, 'postal_town')
+                ) {
+                    result = v.short_name;
+                    return false; // Break the loop
+                }
             });
-        }
+            return result;
+        },
+
+        getCoordinate(place) {
+            return place.geometry.location.lat()+","+place.geometry.location.lng();
+        },
         
     },
     /*
@@ -223,6 +271,26 @@ export default {
     |--------------------------------------------------------------------------
     */
     mounted() {
+        // Define the target element and instantiate it with google autocomplete.
+        let input = document.getElementById(this.id);
+        let autocomplete = new google.maps.places.Autocomplete(input, this.autocompleteOpts);
+
+        // Add listener when a selection has been chosen or changed.
+        autocomplete.addListener('place_changed', () => {
+            let result = autocomplete.getPlace().formatted_address;
+            
+            let city = this.getCityValue(autocomplete.getPlace());
+            let coordinate= this.getCoordinate(autocomplete.getPlace());
+            this.coordinates = coordinate;
+            console.log('coordinate');
+            console.log(coordinate);
+           /* this.$emit('input', result); // Update this component's value.
+            this.$emit('update:city', city); // Update city prop value.
+            this.$emit('update:coordinate', coordinate); // Update coordinate prop value.*/
+        });
+
+        // Reflect the previous value to the form as it's disappearing
+        // when autocomplete is re-instantiated on mount.
     },
 }
 </script>
