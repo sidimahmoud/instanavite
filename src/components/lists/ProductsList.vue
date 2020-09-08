@@ -20,9 +20,9 @@
                 <div class="produit-wrapper">
                     <div class="produit-list-header">
                         <!--<span>Total Products: {{listPagination.total}}</span>-->
-                        <el-select v-model="sortBy" placeholder="Trier par" style="float:right;">
-                            <el-option label="Prix croissant" value="price-asc"></el-option>
-                            <el-option label="Prix décroissant" value="price-desc"></el-option>
+                        <el-select v-model="sortBy" placeholder="Trier par" style="float:right;" @change="orderByChange">
+                            <el-option label="Prix croissant" value="price"></el-option>
+                            <el-option label="Prix décroissant" value="-price"></el-option>
                         </el-select>
                         
                     </div>
@@ -157,6 +157,14 @@ export default {
         isEmpty (v) {
             return isEmpty(v);
         },
+        orderByChange(){
+            let payload = {
+                'filter[categorie_id]': this.categorie_selected,
+                'sort': this.sortBy
+            }
+
+            this.loadListByParams(payload); 
+        }
     },
     
     /*
@@ -180,12 +188,15 @@ export default {
                 this.search_product = params[x];
             });
         }
-        this.loadList(params);
-       /* let payload = {
-            'filter[categorie_id]': 5
-        };
-        this.categorie_selected = 5;
-        this.loadListByParams(payload);*/
+        if(!isEmpty(params)) {
+            this.loadList(params);
+        } else {
+            let payload = {
+                'filter[categorie_id]': 5
+            };
+            this.categorie_selected = 5;
+            this.loadListByParams(payload);
+        }
         this.loadCategories();
     },
 }

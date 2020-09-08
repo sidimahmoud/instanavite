@@ -1,38 +1,39 @@
 <template>
     <div class="cart-container">
         <div class="cart-products">
-            <h5><strong>PRODUITS SÉLECTIONÉS</strong></h5>
-            <el-table
-                :data="cartData"
-                style="width: 100%">
-                <el-table-column
-                    prop="name"
-                    label="Name">
-                </el-table-column>
-                <el-table-column
-                    prop="price"
-                    label="Price">
-                </el-table-column>
-                <el-table-column
-                    prop="quantity"
-                    label="Quantity">
-                </el-table-column>
-                <el-table-column
-                    prop="total"
-                    label="total">
-                </el-table-column>
-                <el-table-column
-                    label="Action">
-                    <template slot-scope="scope">
-                        <el-button
-                            size="mini"
-                            type="danger"
-                        @click="handleDelete(scope.row)"><i class="fas fa-trash"></i></el-button>
-                    </template>
-                </el-table-column>
-                
-            </el-table>
-            <br/>
+            <div class="table-product">
+                <h5><strong>PRODUITS SÉLECTIONÉS</strong></h5>
+                <el-table
+                    :data="cartData"
+                    style="width: 100%">
+                    <el-table-column
+                        prop="name"
+                        label="Name">
+                    </el-table-column>
+                    <el-table-column
+                        prop="price"
+                        label="Price">
+                    </el-table-column>
+                    <el-table-column
+                        prop="quantity"
+                        label="Quantity">
+                    </el-table-column>
+                    <el-table-column
+                        prop="total"
+                        label="total">
+                    </el-table-column>
+                    <el-table-column
+                        label="Action">
+                        <template slot-scope="scope">
+                            <el-button
+                                size="mini"
+                                type="danger"
+                            @click="handleDelete(scope.row)"><i class="fas fa-trash"></i></el-button>
+                        </template>
+                    </el-table-column>
+                    
+                </el-table>
+            </div>
             <br/>
             <div v-if="cartTotal > 0">
                 <h5><strong> CART TOTALS</strong></h5>
