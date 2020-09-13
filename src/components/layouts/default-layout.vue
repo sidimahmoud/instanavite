@@ -14,8 +14,8 @@
                 <div class="chat-header"><h4>Clavardage <small><i class="close-icon" @click="closeForm">X</i></small></h4> </div>
                 <div class="messaging">
                     <div class="inbox_msg">
-                        <!--v-if="!isLoggedIn" -->
-                        <div v-if="!isListening" style="color:#000;text-align:centre;padding:5px">
+                        <!-- v-if="!isLoggedIn" -->
+                        <div v-if="!isListening" style="color:#000;text-align:centre;padding: 3px">
                             <el-form :model="formInline" ref="userObject" :rules="rules" :validate-on-rule-change="true">
                                 <!-- Nom -->
                                 <el-form-item label="Nom (optional)" class="label-short">

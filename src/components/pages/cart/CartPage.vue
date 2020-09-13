@@ -121,9 +121,16 @@
                                 <el-input placeholder="CVV" disabled></el-input>
                             </el-form-item>
                         </el-form>
+                        <div ref="card"></div>
                         <el-button type="primary" @click="createOrder">Complete Order</el-button>
 
-                        <br/><br/><br/>or via  <img src="/images/payment/03.png">
+                        <br/><br/>Or via<br/>
+                        <PayPal
+                            amount="10.00"
+                            currency="USD"
+                            :client="credentials"
+                            env="sandbox">
+                        </PayPal>
                     </div>
                    
                 </el-col>
@@ -135,10 +142,22 @@
 import {mapMutations, mapGetters, mapActions} from "vuex";
 import { Notification } from 'element-ui';
 import {isEmpty} from "~/js/helpers/Common";
+import PayPal from 'vue-paypal-checkout';
+
+/*let stripe = Stripe(`YOUR_STRIPE_PUBLISHABLE_KEY`),
+    elements = stripe.elements(),
+    card = undefined;*/
 
 export default {
     name: "product-list",
-    props: {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Component > components
+    |--------------------------------------------------------------------------
+    */
+    components: {
+      PayPal
     },
     /*
     |--------------------------------------------------------------------------
@@ -152,13 +171,15 @@ export default {
                 last_name: '',
                 mobile: '',
                 email:'',
-                address: '65 Bremner Blvd, Toronto, ON M5J 0A7, Canada',
+                address: '',
                 post_code:''
             },
             id: "google_address_autocomplete",
             address: "",
-            coordinates: ""
-            
+            coordinates: "",
+            credentials: {
+                sandbox: 'AQd-XDPukcWgJQfqJPTfVvsTP6HsdZ1fcFzy0ceLLGKYaIZ_GjQDCPLng1OhJ6aKcV_h3Np2AbWHRyiX',
+            }   
         }
     },
     /*
@@ -195,7 +216,7 @@ export default {
             if(!isEmpty(this.coordinates)){
                 let payload= {
                     language: "Français",
-                    address: this.detail.address,
+                    address: this.address,
                     client_id: 1,
                     town_id:1,
                     super_market_id: 1,
@@ -290,8 +311,9 @@ export default {
             this.$emit('update:coordinate', coordinate); // Update coordinate prop value.*/
         });
 
-        // Reflect the previous value to the form as it's disappearing
-        // when autocomplete is re-instantiated on mount.
+        /*card = elements.create('card');
+        card.mount(this.$refs.card);*/
+
     },
 }
 </script>

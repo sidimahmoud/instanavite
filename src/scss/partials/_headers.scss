@@ -7,13 +7,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1rem;
     padding-left: 2rem;
     border-bottom: 1px solid #eee;
 
     .app-header-logo{
-      height: 50px;
+      height: 60px;
       width: 110px;
+      margin-top: 1%;
+      margin-bottom: 1%;
     }
 
     .app-info{
@@ -23,11 +24,22 @@
 
     .header-input-field {
       margin-left: 2%;
-      width: 28%;
+      width: 35%;
     }
 
     .app-header-action {
       float: right;
+    }
+
+    .app-header-action-menu {
+      margin-top: 6%;
+      padding-right: 1rem;
+    }
+
+    .app-header-language {
+      float: right;
+      margin-top: 0% !important;
+      color:  #ffc600;
     }
 
     .icon-header{
