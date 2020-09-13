@@ -15,7 +15,7 @@
         </div>
         <div class="about-section1">
             Vos articles sont transportés dans des emballages recyclables et réutilisables, de plus les produits frais sont gardés dans des sacs isolés pour conserver leur fraîcheur.
-            Visitez également notre site web encourageant l’entraide et la réutilisation (recyclage) d’objets <a href="www.gogivego.com">ici</a>.   
+            Visitez également notre site web encourageant l’entraide et la réutilisation (recyclage) d’objets <a href="https://gogivego.com/fr/">ici</a>.   
         </div>
 
         <div class="about-section3">
