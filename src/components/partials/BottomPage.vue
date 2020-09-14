@@ -17,7 +17,7 @@
         <el-col :md="6" :offset="2">
           <h5>Usefull links</h5>
           <ul>
-            <li><a href="#">Nous joindre</a></li>
+            <!--<li><a href="#">Nous joindre</a></li>-->
             <li><a href="/#/terme-condition">Termes et Conditions</a></li>
             <li><a href="#">FAQ</a></li>
           </ul>

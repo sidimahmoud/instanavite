@@ -18,22 +18,24 @@
                     <el-form-item label="Message" class="label-short" prop="question">
                         <el-input type="textarea" v-model="formInline.message" :rows="3"/>
                     </el-form-item>
-
-                    <el-button type="primary"
-                            @click="submitForm('userObject')">
-                        Send
-                    </el-button>
+                    <div class="actions-form-item">
+                        <el-button type="primary"
+                                @click="submitForm('userObject')">
+                            Envoyer
+                        </el-button>
+                    </div>
                 </el-form>
+               
             </el-col>
-            <el-col :md="6">
-                <div style="margin: 1 rem">
-                    <div style="margin: 1 rem">
+            <el-col :md="6" :offset="1">
+                <div style="margin-top: 3rem">
+                    <div style="margin: 1rem">
                         <i class="fa fa-map-marker-alt"></i> GC47+R2 Ville-Marie, Montréal, QC, Canada
                     </div>
-                    <div style="margin: 1 rem">
+                    <div style="margin: 1rem">
                         <i class="fa fa-phone"></i> +1 (234) 567 08 09
                     </div>
-                    <div style="margin: 1 rem">
+                    <div style="margin: 1rem">
                         <i class="fa fa-envelope"></i> <a href="#">communications@instantavite.ca</a>
                     </div>
                 </div>

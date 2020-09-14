@@ -44,10 +44,6 @@
                             <td><strong>${{cartTotal}} </strong></td>
                         </tr>
                         <tr>
-                            <th>Shipping costs</th>
-                            <td><strong>$20.00</strong> </td>
-                        </tr>
-                        <tr>
                             <th>TPS</th>
                             <td><strong>$5.00</strong></td>
                         </tr>
@@ -56,7 +52,7 @@
                             <td><strong>$5.00</strong></td>
                         </tr>
                         <tr>
-                            <th>SHIPPING FEES</th>
+                            <th>Shipping fees</th>
                             <td><strong>$5.00</strong></td>
                         </tr>
                         <tr>
@@ -78,27 +74,30 @@
                         <h5><strong>BILLING DETAILS</strong></h5>
                         <el-form>
                             <div class="el-input google-maps-address-field">
-                                <input type="text" v-bind:id="id"
-                                    ref="google_address_autocomplete"
-                                    v-model="address"
-                                    class="el-input__inner"
-                                    placeholder="Address"/>
+                                <el-form-item>
+                                    <input type="text" v-bind:id="id"
+                                        ref="google_address_autocomplete"
+                                        v-model="address"
+                                        class="el-input__inner"
+                                        placeholder="Address"/>
+                                </el-form-item>
                             </div>
-                            <el-form-item>
-                                <el-input v-model="detail.first_name" placeholder="First name"></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-input v-model="detail.last_name" placeholder="Last name"></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-input v-model="detail.mobile" placeholder="Mobile"></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-input v-model="detail.email" placeholder="email"></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-input v-model="detail.post_code" placeholder="Postcode"></el-input>
-                            </el-form-item>
+                                <el-form-item>
+                                    <el-input v-model="detail.first_name" placeholder="First name"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-input v-model="detail.last_name" placeholder="Last name"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-input v-model="detail.mobile" placeholder="Mobile"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-input v-model="detail.email" placeholder="email"></el-input>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-input v-model="detail.post_code" placeholder="Zipcode"></el-input>
+                                </el-form-item>
+                            
                         </el-form>
                     </div>
                 </el-col>
@@ -124,7 +123,7 @@
                         <div ref="card"></div>
                         <el-button type="primary" @click="createOrder">Complete Order</el-button>
 
-                        <br/><br/>Or via<br/>
+                        <br/><br/>Or via<br/><br/>
                         <PayPal
                             amount="10.00"
                             currency="USD"
@@ -193,7 +192,7 @@ export default {
             cartTotal:'cartTotal'
         }),
         totalDispaly(){
-            let somme = this.cartTotal + 40;
+            let somme = this.cartTotal + 20;
             return somme.toFixed(2);
         }
     },
@@ -228,7 +227,7 @@ export default {
                     status_id: 1,
                     is_test: 1,
                     booker_name: this.detail.first_name,
-                    amount: this.cartTotal + 40, // cart total + delivery fee
+                    amount: this.cartTotal + 20, // cart total + delivery fee
                     products: this.cartData,
                     coordinates: this.coordinates
                 }

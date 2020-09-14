@@ -7,13 +7,12 @@
                 <li>
                   <el-dropdown>
                     <span class="el-dropdown-link" @click="handleCategories">
-                      AUTRES PRODUITS<i class="el-icon-arrow-down el-icon--right"></i>
+                      NOS PARTENAIRES<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item>Produits Sprotive</el-dropdown-item>
                       <el-dropdown-item>Produits elctronique</el-dropdown-item>
                       <el-dropdown-item>Produits mecanique</el-dropdown-item>
-                      <el-dropdown-item divided>Autre Produits</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </li>

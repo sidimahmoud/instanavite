@@ -192,9 +192,9 @@ export default {
             this.loadList(params);
         } else {
             let payload = {
-                'filter[categorie_id]': 5
+                'filter[categorie_id]': 7
             };
-            this.categorie_selected = 5;
+            this.categorie_selected = 7;
             this.loadListByParams(payload);
         }
         this.loadCategories();
