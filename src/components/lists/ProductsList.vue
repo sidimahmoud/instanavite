@@ -122,7 +122,7 @@ export default {
         filterByCategorie(cat){
             this.toggleClass(cat.id);
             let payload = {
-                'filter[categorie_id]': cat.id
+                'filter[categorie]': cat.id
             }
             this.categorie_selected = cat.id;
             this.loadListByParams(payload); 
@@ -134,7 +134,7 @@ export default {
         reloadList(n){
             let payload = {
                 'page': n,
-                'filter[categorie_id]': this.categorie_selected
+                'filter[categorie]': this.categorie_selected
             }
             this.loadListByParams(payload); 
         },
@@ -159,7 +159,7 @@ export default {
         },
         orderByChange(){
             let payload = {
-                'filter[categorie_id]': this.categorie_selected,
+                'filter[categorie]': this.categorie_selected,
                 'sort': this.sortBy
             }
 
@@ -192,7 +192,7 @@ export default {
             this.loadList(params);
         } else {
             let payload = {
-                'filter[categorie_id]': 7
+                'filter[categorie]': 7
             };
             this.categorie_selected = 7;
             this.loadListByParams(payload);
