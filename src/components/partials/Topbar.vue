@@ -1,10 +1,9 @@
 <template>
     <div class="app-page-top-bar">  
-      <img class="app-header-logo" src="/images/defaults/small.png" @click="handleHome"/>
+      <img class="app-header-logo" src="/images/defaults/small-logo.png" @click="handleHome"/>
       
       <el-input class="header-input-field" placeholder="Chercher un produit" v-model="product" @keyup.enter.native="browseProduct">
-          <span class="el-icon-search el-input__icon app-cursor-pointer fas fa-search search-icon"
-              slot="suffix" @click="browseProduct"></span>
+        <span class="el-icon-search el-input__icon app-cursor-pointer fas fa-search search-icon" slot="suffix" v-bind:click="browseProduct"></span>
       </el-input>
 
       <div class="app-header-language">
@@ -92,6 +91,7 @@
         });
       },
       browseProduct(){
+        console.log("triggerd");
         const _this = this;
         let query = {};
         
