@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block " >
-                                <span v-if="!authLoading">Sign in </span>
+                                <span @click="signIn">Sign in </span>
                                 <div class="text-center text-white" v-if="authLoading">
                                     <span class="spinner-border spinner-border-sm" role="staitus" aria-hidden="true"/>
                                     Loading...
@@ -188,7 +188,8 @@
         },
         googleSignInParams: {
           client_id: '562139948414-sgs3p6c198oc9o4c65mse9l17c6t524h.apps.googleusercontent.com'
-        }
+        },
+        authLoading: false
 
       };
     }, // End of component > data
@@ -291,6 +292,10 @@
       ongSignInError (error) {
         // `error` contains any error occurred.
         console.log('OH NOES', error)
+      },
+      signIn(){
+        this.authLoading = true;
+        this.redirectUser();
       }
 
     }, // End of component > methods
