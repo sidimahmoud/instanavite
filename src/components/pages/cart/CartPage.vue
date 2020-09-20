@@ -201,11 +201,7 @@ export default {
         createOrder(){
             stripe.createToken(card).then(function(result) {
                 console.log(result.token);
-                if (isEmpty(result)) {
-                    // Inform the customer that there was an error.
-                    var errorElement = document.getElementById('card-errors');
-                    errorElement.textContent = result.error.message;
-                } else {
+                if (!isEmpty(result.token)) {
                     // Send the token to your server.
                     stripeTokenHandler(result.token);
                 }
