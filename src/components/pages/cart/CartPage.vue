@@ -207,8 +207,6 @@ export default {
                     _this.processPayment(result.token);
                 }
             });
-            
-            
         },
         processPayment(token) {
             // Insert the token ID into the form so it gets submitted to the server
@@ -228,7 +226,7 @@ export default {
                     status_id: 1,
                     is_test: 1,
                     booker_name: this.detail.first_name,
-                    amount: this.cartTotal + 20, // cart total + delivery fee
+                    amount: this.cartTotal + 4, // cart total + delivery fee
                     products: this.cartData,
                     coordinates: this.coordinates,
                     stripeToken: token.id,
