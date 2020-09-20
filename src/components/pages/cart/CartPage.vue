@@ -45,19 +45,19 @@
                         </tr>
                         <tr>
                             <th>TPS</th>
-                            <td><strong>$5.00</strong></td>
+                            <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
                             <th>TVQ</th>
-                            <td><strong>$5.00</strong></td>
+                            <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
                             <th>Shipping fees</th>
-                            <td><strong>$5.00</strong></td>
+                            <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
                             <th>Order preparation fees</th>
-                            <td><strong>$5.00</strong></td>
+                            <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
                             <th>Total</th>
@@ -70,7 +70,7 @@
         <div style="margin-top:1rem">
             <el-row>
                 <el-col :md="11">
-                    <div style="padding:1%;height:405px;background-color: #f8f8f8;">
+                    <div style="padding:1%;height:353px;background-color: #f8f8f8;">
                         <!-- <div class="cart-products"> -->
                             <h5><strong>BILLING DETAILS</strong></h5>
                             <form>
@@ -80,18 +80,12 @@
                                         v-model="address"
                                         class="el-input__inner"
                                         placeholder="Address"/>
+                                    <el-input class="custom-cart" v-model="detail.post_code" placeholder="Zipcode"></el-input>
                                 </div>
                                     <el-input class="custom-cart" v-model="detail.first_name" placeholder="First name"></el-input>
-                                
                                     <el-input class="custom-cart" v-model="detail.last_name" placeholder="Last name"></el-input>
-                                
                                     <el-input class="custom-cart" v-model="detail.mobile" placeholder="Mobile"></el-input>
-                                
                                     <el-input class="custom-cart" v-model="detail.email" placeholder="email"></el-input>
-                                
-                                    <el-input class="custom-cart" v-model="detail.post_code" placeholder="Zipcode"></el-input>
-                                    
-                                
                             </form>
                        <!--  </div> -->
                     </div>
@@ -104,12 +98,16 @@
                             <img src="/images/defaults/mastercard.png" height="60px"/>
                             <img src="/images/payment/03.png">
                         </div>
-                        <el-form>
+                        <!-- <el-form>
+                            <div ref="card"></div>
                             <el-input class="custom-cart" placeholder="Cart Number" disabled></el-input>
                             <el-input class="custom-cart" placeholder="MM/YY" disabled></el-input>
                             <el-input class="custom-cart" placeholder="CVV" disabled></el-input>
-                        </el-form>
-                        <div ref="card"></div>
+                        </el-form> -->
+                        <!-- Used to display Element errors. -->
+                        <div id="card-errors" role="alert"></div>
+                        <div class="cart-ref" ref="card"></div>
+                        
                         <el-button class="cart-submit-button" type="primary" @click="createOrder">Complete Order</el-button>
 
                         <br/><br/>Or via<br/><br/>
@@ -132,9 +130,9 @@ import { Notification } from 'element-ui';
 import {isEmpty} from "~/js/helpers/Common";
 import PayPal from 'vue-paypal-checkout';
 
-/*let stripe = Stripe(`YOUR_STRIPE_PUBLISHABLE_KEY`),
+let stripe = Stripe(`pk_test_51HB0HpHDyIu0bdYb9hDG5OPvMMk6YeWFVjAPiMJGJwOSnDGBdT6oq7XFZuxdUwsZlb6cLnh1P0vvfV70lg6zfBIc00a1yYpRgE`),
     elements = stripe.elements(),
-    card = undefined;*/
+    card = undefined;
 
 export default {
     name: "product-list",
@@ -181,7 +179,7 @@ export default {
             cartTotal:'cartTotal'
         }),
         totalDispaly(){
-            let somme = this.cartTotal + 20;
+            let somme = this.cartTotal + 4;
             return parseFloat(somme).toFixed(2);
         }
     },
@@ -201,6 +199,23 @@ export default {
             this.removeFromCart(item);
         },
         createOrder(){
+            stripe.createToken(card).then(function(result) {
+                console.log(result.token);
+                if (result.error) {
+                    // Inform the customer that there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+            
+            
+        },
+        stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+
             if(!isEmpty(this.coordinates)){
                 let payload= {
                     language: "Français",
@@ -218,7 +233,8 @@ export default {
                     booker_name: this.detail.first_name,
                     amount: this.cartTotal + 20, // cart total + delivery fee
                     products: this.cartData,
-                    coordinates: this.coordinates
+                    coordinates: this.coordinates,
+                    stripeToken: token,
                 }
                 this.addOrder(payload).then(() => {
                     Notification({
@@ -234,7 +250,6 @@ export default {
                     type: 'warning'
                 });
             }
-            
         },
          /**
          * Helper method to get and return the preferred city value form
@@ -299,9 +314,15 @@ export default {
             this.$emit('update:coordinate', coordinate); // Update coordinate prop value.*/
         });
 
-        /*card = elements.create('card');
-        card.mount(this.$refs.card);*/
+        card = elements.create('card');
+        card.mount(this.$refs.card);
 
     },
 }
 </script>
+<style scoped>
+    .cart-ref {
+      margin: 5%;
+    }
+
+</style>
