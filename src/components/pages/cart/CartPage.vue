@@ -203,7 +203,7 @@ export default {
             stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {
-                    // Send the token to your server.
+                    // Send the token to your server.  
                     _this.stripeTokenHandler(result.token);
                 }
             });
