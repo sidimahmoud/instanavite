@@ -100,7 +100,13 @@ export default [
     }
   },
 
-  
-
+  {
+    path: '/register-user', component: Vue.component('register-user'),
+    name: 'register-user-page',
+    meta: {
+      page_class: 'register-user-route',
+      full_screen: true
+    }
+  },
 
 ] // End of default

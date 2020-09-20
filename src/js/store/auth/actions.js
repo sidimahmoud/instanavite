@@ -70,6 +70,19 @@ export default {
     })
     .catch((e) => e);
     
-  }
+  },
+  async socialStudentAuth({commit}, provider) {
+    commit('auth_request');
+    return new Promise((resolve, reject) => {
+        axios.get(`/authorize/${provider}`)
+            .then(resp => {
+                resolve(resp)
+            })
+            .catch(err => {
+                commit('auth_error');
+                reject(err)
+            })
+    })
+},
 
 } // End of export default
