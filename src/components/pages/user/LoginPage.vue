@@ -47,7 +47,7 @@
   </div>
 </template>-->
 <template>
-    <div style="margin-top:20%" class="container">
+    <div style="margin-top:5%" class="container">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="signup-form bg-white">
