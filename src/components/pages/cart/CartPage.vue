@@ -108,7 +108,7 @@
                         <div id="card-errors" role="alert"></div>
                         <div class="cart-ref" ref="card"></div>
                         
-                        <el-button class="cart-submit-button" type="primary" @click="processPayment">Complete Order</el-button>
+                        <el-button class="cart-submit-button" type="primary" @click="createOrder">Complete Order</el-button>
 
                         <br/><br/>Or via<br/><br/>
                         <PayPal
@@ -130,7 +130,7 @@ import { Notification } from 'element-ui';
 import {isEmpty} from "~/js/helpers/Common";
 import PayPal from 'vue-paypal-checkout';
 
-let stripe = Stripe(`pk_test_51HB0HpHDyIu0bdYb9hDG5OPvMMk6YeWFVjAPiMJGJwOSnDGBdT6oq7XFZuxdUwsZlb6cLnh1P0vvfV70lg6zfBIc00a1yYpRgE`),
+let stripe = Stripe(`pk_live_51HB0HpHDyIu0bdYbv47CLk1imRIm5l8JwxVpg3uWGClstvnaVKQ8hPa4gnkqOIMZvOWTL7JOKIiNn2muThX3O9YA00EYiEVmHx`),
     elements = stripe.elements(),
     card = undefined;
 
@@ -201,16 +201,15 @@ export default {
         createOrder(){
             stripe.createToken(card).then(function(result) {
                 console.log(result.token);
-                console
                 if (!isEmpty(result.token)) {
                     // Send the token to your server.
-                    stripeTokenHandler(result.token);
+                    this.stripeTokenHandler(result.token);
                 }
             });
             
             
         },
-        processPayment() {
+        processPayment(token) {
             // Insert the token ID into the form so it gets submitted to the server
 
             if(!isEmpty(this.coordinates)){
@@ -231,7 +230,7 @@ export default {
                     amount: this.cartTotal + 20, // cart total + delivery fee
                     products: this.cartData,
                     coordinates: this.coordinates,
-                    stripeToken: "tok_1HTTfbHDyIu0bdYbh8DmW5Sz",
+                    stripeToken: token.id,
                 }
                 this.addOrder(payload).then(() => {
                     Notification({
