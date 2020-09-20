@@ -85,9 +85,7 @@
                     <button class="btn btn-lg btn-google btn-block text-uppercase" @click="loginGoogle('google')">
                         <i class="fab fa-google"></i> Continue with Google
                     </button>
-                    <button class="btn btn-lg btn-github  btn-block text-uppercase" @click="onLogin()">
-                        <i class="fab fa-facebook"></i> Continue with Facebook
-                    </button>
+                    
                     <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
                 </div>
             </div>
