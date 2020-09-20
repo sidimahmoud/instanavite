@@ -199,11 +199,12 @@ export default {
             this.removeFromCart(item);
         },
         createOrder(){
+            const _this = this;
             stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {
                     // Send the token to your server.
-                    this.stripeTokenHandler(result.token);
+                    _this.stripeTokenHandler(result.token);
                 }
             });
             
