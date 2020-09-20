@@ -128,6 +128,7 @@ export default {
             this.loadListByParams(payload); 
         },
         addToCart(item) {
+            item.price = parseFloat(item.price).toFixed(2)
             this.addProductCart(item);
         },
 

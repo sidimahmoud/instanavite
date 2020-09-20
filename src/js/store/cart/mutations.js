@@ -22,16 +22,18 @@ export default {
         item.product_id=item.id;
         if (found) {
             found.quantity ++;
-            found.total = (found.quantity * found.price).toFixed(2);
+            let som = found.quantity * found.price;
+            found.total = som.toFixed(2);
             //state.cartTotal += found.price.toFixed(2);
             
-            this.commit('cart/sumCartTotal',found.price.toFixed(2));
+            this.commit('cart/sumCartTotal',found.price);
         } else {
-            state.cart.push(item);
             //state.cartTotal += item.price.toFixed(2);
+            state.cart.push(item);
             Vue.set(item, 'quantity', 1);
             Vue.set(item, 'total', item.price);
-            this.commit('cart/sumCartTotal',item.price.toFixed(2));
+            
+            this.commit('cart/sumCartTotal',item.price);
         }
 
         state.cartCount++;
@@ -64,7 +66,8 @@ export default {
     sumCartTotal(state, value){
         console.log(value);
         console.log(state.cartTotal);
-        state.cartTotal = (parseFloat(state.cartTotal) + parseFloat(value)).toFixed(2);
+        let som = parseFloat(state.cartTotal) + parseFloat(value);
+        state.cartTotal = som.toFixed(2);
         console.log(state.cartTotal);
     }
 

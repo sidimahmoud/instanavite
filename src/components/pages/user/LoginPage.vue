@@ -82,11 +82,26 @@
                         <router-link :to="{name: 'register-user-page'}">Sign up</router-link>
                     </div>
                     <h2>Or</h2>
-                    <button class="btn btn-lg btn-google btn-block text-uppercase" @click="loginGoogle('google')">
+                    <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" @click="loginGoogle('google')">
                         <i class="fab fa-google"></i> Continue with Google
-                    </button>
-                    
-                    <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false" data-width=""></div>
+                    </button> -->
+                    <!-- <button class="btn btn-lg btn-github  btn-block text-uppercase" @click="onLogin()">
+                        <i class="fab fa-facebook"></i> Continue with Facebook
+                    </button> -->
+                    <g-signin-button
+                      class="btn btn-lg btn-google btn-block text-uppercase"
+                      :params="googleSignInParams"
+                      @success="ongSignInSuccess"
+                      @error="ongSignInError">
+                      <i class="fab fa-google"></i> Sign in with Google
+                    </g-signin-button>
+                    <fb-signin-button
+                      class="btn btn-lg btn-github  btn-block text-uppercase"
+                      :params="fbSignInParams"
+                      @success="onSignInSuccess"
+                      @error="onSignInError">
+                      <i class="fab fa-facebook"></i> Sign in with Facebook
+                    </fb-signin-button>
                 </div>
             </div>
         </div>
@@ -167,6 +182,13 @@
         
         password: '',
         errorMessage: '',
+        fbSignInParams: {
+          scope: 'email,user_likes',
+          return_scopes: true
+        },
+        googleSignInParams: {
+          client_id: '562139948414-sgs3p6c198oc9o4c65mse9l17c6t524h.apps.googleusercontent.com'
+        }
 
       };
     }, // End of component > data
@@ -240,58 +262,36 @@
             this.picture = user.picture.data.url;
           }
         )
-      },
-      sdkLoaded(payload) {
-        this.isConnected = payload.isConnected
-        this.FB = payload.FB
-        if (this.isConnected) this.getUserData()
-      },
-      onLogin() {
-        this.isConnected = true
-        this.getUserData()
-        this.redirectUser()
+        console.log(user);
       },
       onLogout() {
         this.isConnected = false;
       },
-
-      //google login
-      onSuccess(googleUser) {
-        console.log(googleUser);
-
-        // This only gets the user information: id, name, imageUrl and email
-        console.log(googleUser.getBasicProfile());
-      },
-      onFailure(googleUser) {
-        console.log(googleUser);
-
-        // This only gets the user information: id, name, imageUrl and email
-        console.log(googleUser.getBasicProfile());
-      },
-
-      onSignIn(googleUser) {
-        console.log(googleUser)
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        this.redirectUser()
-      },
-
       redirectUser(){
         this.$router.push({path: '/'});
       },
-      loginGoogle(provider) {
-        this.$store.dispatch('auth/socialStudentAuth', provider)
-          .then((res) => {
-            if (res.data.url) {
-              console.log(res.data.url);
-              window.location.href = res.data.url
-            }
-          })
-          .catch(err => console.log(err))
+
+      onSignInSuccess (response) {
+        FB.api('/me', dude => {
+          console.log(dude);
+          console.log(`Good to see you, ${dude.name}.`)
+          this.redirectUser();
+        })
       },
+      onSignInError (error) {
+        console.log('OH NOES', error)
+      },
+      ongSignInSuccess (googleUser) {
+        // `googleUser` is the GoogleUser object that represents the just-signed-in user.
+        // See https://developers.google.com/identity/sign-in/web/reference#users
+        const profile = googleUser.getBasicProfile() // etc etc
+        console.log(profile);
+        this.redirectUser(); 
+      },
+      ongSignInError (error) {
+        // `error` contains any error occurred.
+        console.log('OH NOES', error)
+      }
 
     }, // End of component > methods
 
@@ -416,5 +416,13 @@
 
     .btn-google a {
         color: white;
+    }
+    .fb-signin-button {
+      /* This is where you control how the button looks. Be creative! */
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 3px;
+      background-color: #4267b2;
+      color: #fff;
     }
 </style>

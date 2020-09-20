@@ -70,35 +70,30 @@
         <div style="margin-top:1rem">
             <el-row>
                 <el-col :md="11">
-                    <div class="cart-products">
-                        <h5><strong>BILLING DETAILS</strong></h5>
-                        <el-form>
-                            <div class="el-input google-maps-address-field">
-                                <el-form-item>
+                    <div style="padding:1%;height:405px;background-color: #f8f8f8;">
+                        <!-- <div class="cart-products"> -->
+                            <h5><strong>BILLING DETAILS</strong></h5>
+                            <form>
+                                <div class="el-input google-maps-address-field">
                                     <input type="text" v-bind:id="id"
                                         ref="google_address_autocomplete"
                                         v-model="address"
                                         class="el-input__inner"
                                         placeholder="Address"/>
-                                </el-form-item>
-                            </div>
-                                <el-form-item>
-                                    <el-input v-model="detail.first_name" placeholder="First name"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-input v-model="detail.last_name" placeholder="Last name"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-input v-model="detail.mobile" placeholder="Mobile"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-input v-model="detail.email" placeholder="email"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-input v-model="detail.post_code" placeholder="Zipcode"></el-input>
-                                </el-form-item>
-                            
-                        </el-form>
+                                </div>
+                                    <el-input class="custom-cart" v-model="detail.first_name" placeholder="First name"></el-input>
+                                
+                                    <el-input class="custom-cart" v-model="detail.last_name" placeholder="Last name"></el-input>
+                                
+                                    <el-input class="custom-cart" v-model="detail.mobile" placeholder="Mobile"></el-input>
+                                
+                                    <el-input class="custom-cart" v-model="detail.email" placeholder="email"></el-input>
+                                
+                                    <el-input class="custom-cart" v-model="detail.post_code" placeholder="Zipcode"></el-input>
+                                    
+                                
+                            </form>
+                       <!--  </div> -->
                     </div>
                 </el-col>
                 <el-col :md="12" :offset="1">
@@ -110,18 +105,12 @@
                             <img src="/images/payment/03.png">
                         </div>
                         <el-form>
-                            <el-form-item>
-                                <el-input placeholder="Cart Number" disabled></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-input placeholder="MM/YY" disabled></el-input>
-                            </el-form-item>
-                            <el-form-item>
-                                <el-input placeholder="CVV" disabled></el-input>
-                            </el-form-item>
+                            <el-input class="custom-cart" placeholder="Cart Number" disabled></el-input>
+                            <el-input class="custom-cart" placeholder="MM/YY" disabled></el-input>
+                            <el-input class="custom-cart" placeholder="CVV" disabled></el-input>
                         </el-form>
                         <div ref="card"></div>
-                        <el-button type="primary" @click="createOrder">Complete Order</el-button>
+                        <el-button class="cart-submit-button" type="primary" @click="createOrder">Complete Order</el-button>
 
                         <br/><br/>Or via<br/><br/>
                         <PayPal
@@ -193,7 +182,7 @@ export default {
         }),
         totalDispaly(){
             let somme = this.cartTotal + 20;
-            return somme.toFixed(2);
+            return parseFloat(somme).toFixed(2);
         }
     },
     /*

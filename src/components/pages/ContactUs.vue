@@ -1,20 +1,119 @@
 <template>
     <div class="contact-container">
-        <el-row>
+        <!--Section: Contact v.2-->
+        <section class="mb-4">
+
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+            <!--Section description-->
+            <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+                a matter of hours to help you.</p>
+
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-9 mb-md-0 mb-5">
+                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    <input type="text" id="name" name="name" class="form-control" v-model="formInline.name">
+                                    <label for="name" class="">Your name</label>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    <input type="text" id="email" name="email" class="form-control" v-model="formInline.email">
+                                    <label for="email" class="">Your email</label>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+
+                        </div>
+                        <!--Grid row-->
+
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    <input type="text" id="subject" name="subject" class="form-control" v-model="formInline.subject">
+                                    <label for="subject" class="">Subject</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-12">
+
+                                <div class="md-form">
+                                    <textarea type="text" id="message" name="message" rows="5" class="form-control md-textarea" v-model="formInline.message"></textarea>
+                                    <label for="message">Your message</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--Grid row-->
+
+                    </form>
+                    <div class="actions-form-item">
+                        <el-button type="primary"
+                                class="contact-button"
+                                @click="submitForm('userObject')">
+                            Envoyer
+                        </el-button>
+                    </div>
+                    <div class="status"></div>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-3 text-center">
+                    <ul class="list-unstyled mb-0">
+                        <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                            <p>GC47+R2 Ville-Marie, Montréal, QC, Canada</p>
+                        </li>
+
+                        <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                            <p>+1 (234) 567 08 09</p>
+                        </li>
+
+                        <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                            <p>communications@instantavite.ca</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+            </div>
+
+        </section>
+<!--Section: Contact v.2-->
+        <!-- <el-row>
             
             <el-col :md="10">
                 <el-form :model="formInline" ref="userObject" :rules="rules" :validate-on-rule-change="true">
-                    <!-- Nom -->
+                    
                     <el-form-item label="Nom (optional)" class="label-short">
                         <el-input v-model="formInline.name"/>
                     </el-form-item>
 
-                    <!-- Email -->
+                    
                     <el-form-item label="Email" class="label-short" prop="email">
                         <el-input v-model="formInline.email"/>
                     </el-form-item>
 
-                    <!-- Message -->
+                    
                     <el-form-item label="Message" class="label-short" prop="question">
                         <el-input type="textarea" v-model="formInline.message" :rows="3"/>
                     </el-form-item>
@@ -41,7 +140,7 @@
                 </div>
                 
             </el-col>
-        </el-row>
+        </el-row> -->
     </div>
 </template>
 <script>
@@ -59,7 +158,9 @@ export default {
                 name: '',
                 email: '',
                 password: 'instantavite',
-                type: 1
+                type: 1,
+                subject: '',
+                message: ''
             },
             rules: {
                 email: [

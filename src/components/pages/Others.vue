@@ -1,5 +1,5 @@
 <template>
-    <div class="others-page">
+    <div class="others-products-page">
         <span>
             Vous ne trouvez pas un produit que vous cherchez ? Nous pouvons quand même vous le livrer, au prix du magasin.
             <br> Nous prenons des commandes au téléphone. Appelez nous au <span class="text-jaune"><strong>1-800-562-1475.</strong></span><br><br><br>
