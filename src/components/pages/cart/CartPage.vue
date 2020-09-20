@@ -201,7 +201,7 @@ export default {
         createOrder(){
             stripe.createToken(card).then(function(result) {
                 console.log(result.token);
-                if (result.error) {
+                if (isEmpty(result.token)) {
                     // Inform the customer that there was an error.
                     var errorElement = document.getElementById('card-errors');
                     errorElement.textContent = result.error.message;
@@ -234,7 +234,7 @@ export default {
                     amount: this.cartTotal + 20, // cart total + delivery fee
                     products: this.cartData,
                     coordinates: this.coordinates,
-                    stripeToken: token,
+                    stripeToken: token.id,
                 }
                 this.addOrder(payload).then(() => {
                     Notification({
