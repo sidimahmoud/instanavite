@@ -46,13 +46,13 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                    <span v-if="!authLoading">Sign up </span>
+                                    <span @click="signUpSubmit">Sign up </span>
                                     <div class="text-center text-white" v-if="authLoading">
-                                    <span class="spinner-border spinner-border-sm" role="status"
-                                          aria-hidden="true">
+                                        <span class="spinner-border spinner-border-sm" role="status"
+                                            aria-hidden="true">
 
-                                    </span>
-                                        Loading...
+                                        </span>
+                                            Loading...
                                     </div>
                                 </button>
                             </div>
@@ -111,7 +111,8 @@
                 },
                 googleSignInParams: {
                     client_id: '562139948414-sgs3p6c198oc9o4c65mse9l17c6t524h.apps.googleusercontent.com'
-                }
+                },
+                authLoading: false
             }
         },
         methods: {
@@ -161,6 +162,10 @@
             ongSignInError (error) {
                 // `error` contains any error occurred.
                 console.log('OH NOES', error)
+            },
+            signUpSubmit(){
+                this.authLoading = true;
+                this.redirectUser(); 
             }
         },
         computed: mapGetters(["authLoading"])
