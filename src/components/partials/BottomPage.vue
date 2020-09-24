@@ -5,25 +5,23 @@
         <el-col :md="8">
           <img class="app-header-logo"  src="/images/defaults/logo.png"/>
           <div>
-            <i class="fa fa-phone"></i> +1 (234) 567 08 09
+            <i class="fa fa-phone"></i> {{$t('phone_number')}}
           </div>
           <div>
             <i class="fa fa-envelope"></i> <a href="#">communications@instantavite.ca</a>
           </div>
-          <div>
-            <i class="fa fa-phone"></i> GC47+R2 Ville-Marie, Montréal, QC, Canada
-          </div>
         </el-col>
         <el-col :md="6" :offset="2">
-          <h5>Usefull links</h5>
+          <h5>{{$t('usefull_links')}}</h5>
           <ul>
             <!--<li><a href="#">Nous joindre</a></li>-->
-            <li><a href="/#/terme-condition">Termes et Conditions</a></li>
+            <li><a href="/#/terme-condition">{{$t('termes_and_conditions')}}</a></li>
             <li><a href="#">FAQ</a></li>
+            <li><a href="#">{{$t('become_courier')}}</a></li>
           </ul>
         </el-col>
         <el-col :md="6" :offset="2">
-          <h5>Payments</h5>
+          <h5>{{$t('payments')}}</h5>
           <img src="/images/defaults/visa.png" height="60px"/>
           <img src="/images/defaults/mastercard.png"  height="60px"/>
           <img src="/images/payment/03.png">

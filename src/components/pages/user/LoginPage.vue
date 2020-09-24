@@ -208,7 +208,7 @@
     */
     methods: {
       ...mapActions('auth', ['requestAccessToken','socialStudentAuth']),
-      ...mapMutations('auth', ['initAccessToken', 'destroyAccessToken']),
+      ...mapMutations('auth', ['initAccessToken', 'destroyAccessToken','setAccessToken']),
       /**
        * Handle when the Log In form was submitted.
        *
@@ -263,7 +263,7 @@
             this.picture = user.picture.data.url;
           }
         )
-        console.log(user);
+        
       },
       onLogout() {
         this.isConnected = false;
@@ -276,6 +276,7 @@
         FB.api('/me', dude => {
           console.log(dude);
           console.log(`Good to see you, ${dude.name}.`)
+          this.setAccessToken('token test')
           this.redirectUser();
         })
       },
@@ -287,6 +288,7 @@
         // See https://developers.google.com/identity/sign-in/web/reference#users
         const profile = googleUser.getBasicProfile() // etc etc
         console.log(profile);
+        this.setAccessToken('token test')
         this.redirectUser(); 
       },
       ongSignInError (error) {
@@ -295,6 +297,7 @@
       },
       signIn(){
         this.authLoading = true;
+        this.setAccessToken('token test')
         this.redirectUser();
       }
 

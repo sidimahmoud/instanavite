@@ -108,5 +108,14 @@ export default [
       full_screen: true
     }
   },
+  {
+    path: '/order/:id/details', component: Vue.component('order-details-page'),
+    name: 'order-details-page',
+    meta: {
+      page_class: 'order-details-route',
+      full_screen: false
+    }
+  },
+  
 
 ] // End of default

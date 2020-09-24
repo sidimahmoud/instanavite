@@ -17,10 +17,13 @@ Vue.component('topbar-mobile', require('../components/partials/Mobile/TopbarMobi
 |--------------------------------------------------------------------------
 */
 Vue.component('products-list', require('../components/lists/ProductsList').default);
+Vue.component('progress-orders', require('../components/lists/ProgressOrders').default);
+Vue.component('orders-recips', require('../components/lists/OrdersRecips').default);
+
 
 /*
 |--------------------------------------------------------------------------
-| Forms
+| Pages
 |--------------------------------------------------------------------------
 */
 
@@ -29,6 +32,9 @@ Vue.component('login-page', require('../components/pages/user/LoginPage').defaul
 Vue.component('dashboard-page', require('../components/pages/Dashboard/Dashboard').default);
 Vue.component('user-profile', require('../components/pages/user/UserProfile').default);
 Vue.component('register-user', require('../components/pages/user/RegisterUser').default);
+
+//Order
+Vue.component('order-details-page', require('../components/pages/Order/OrderDetailsPage').default);
 
 //cart
 Vue.component('cart-page', require('../components/pages/cart/CartPage').default);
@@ -46,6 +52,6 @@ Vue.component('default-layout', require('../components/layouts/default-layout').
 
 /*
 |--------------------------------------------------------------------------
-| Layouts
+| Forms
 |--------------------------------------------------------------------------
 */

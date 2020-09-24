@@ -8,34 +8,34 @@
             <router-view :key="($route.path.includes('resources')) ? JSON.stringify($route) : ''"></router-view> 
         </main>
         <div v-if="isShowFull">
-            <button class="open-button" @click="openForm" v-if="!showForm">Clavarder <i class="fas fa-comments"></i> </button>
+            <button class="open-button" @click="openForm" v-if="!showForm">{{$t('clavarder')}} <i class="fas fa-comments"></i> </button>
 
             <div class="chat-popup" id="myForm" v-if="showForm">
-                <div class="chat-header"><h4>Clavardage <small><i class="close-icon" @click="closeForm">X</i></small></h4> </div>
+                <div class="chat-header"><h4>{{$t('clavardage')}} <small><i class="close-icon" @click="closeForm">X</i></small></h4> </div>
                 <div class="messaging">
                     <div class="inbox_msg">
                         <!-- v-if="!isLoggedIn" -->
                         <div v-if="!isListening" style="color:#000;text-align:centre;padding: 3px">
                             <el-form :model="formInline" ref="userObject" :rules="rules" :validate-on-rule-change="true">
                                 <!-- Nom -->
-                                <el-form-item label="Nom (optional)" class="label-short">
+                                <el-form-item :label="$t('name_optional')" class="label-short">
                                     <el-input v-model="formInline.name"/>
                                 </el-form-item>
 
                                 <!-- Email -->
-                                <el-form-item label="Email" class="label-short" prop="email">
+                                <el-form-item :label="$t('email')" class="label-short" prop="email">
                                     <el-input v-model="formInline.email"/>
                                 </el-form-item>
 
                                 <!-- Message -->
-                                <el-form-item label="Message" class="label-short" prop="question">
+                                <el-form-item :label="$t('message')" class="label-short" prop="question">
                                     <el-input type="textarea" v-model="formInline.message" :rows="3"/>
                                 </el-form-item>
 
                                 <el-button type="primary"
                                         class="button-close"
                                         @click="submitForm('userObject')">
-                                    Envoyer
+                                    {{$t('send')}}
                                 </el-button>
                             </el-form>
                             <!--Afin d'obtenir une assistance adaptée, veuillez vous <a href="javascript:;" @click="handleLogin" type="primary">connecter</a>-->

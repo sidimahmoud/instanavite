@@ -4,10 +4,9 @@
         <section class="mb-4">
 
             <!--Section heading-->
-            <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+            <h2 class="h1-responsive font-weight-bold text-center my-4">{{$t('contact_us')}}</h2>
             <!--Section description-->
-            <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
-                a matter of hours to help you.</p>
+            <p class="text-center w-responsive mx-auto mb-5">{{$t('service_msg')}}.</p>
 
             <div class="row">
 
@@ -22,7 +21,7 @@
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <input type="text" id="name" name="name" class="form-control" v-model="formInline.name">
-                                    <label for="name" class="">Your name</label>
+                                    <label for="name" class="">{{$t('votre_nom')}}</label>
                                 </div>
                             </div>
                             <!--Grid column-->
@@ -31,7 +30,7 @@
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
                                     <input type="text" id="email" name="email" class="form-control" v-model="formInline.email">
-                                    <label for="email" class="">Your email</label>
+                                    <label for="email" class="">{{$t('votre_email')}}</label>
                                 </div>
                             </div>
                             <!--Grid column-->
@@ -44,7 +43,7 @@
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
                                     <input type="text" id="subject" name="subject" class="form-control" v-model="formInline.subject">
-                                    <label for="subject" class="">Subject</label>
+                                    <label for="subject" class="">{{$t('subject')}}</label>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +57,7 @@
 
                                 <div class="md-form">
                                     <textarea type="text" id="message" name="message" rows="5" class="form-control md-textarea" v-model="formInline.message"></textarea>
-                                    <label for="message">Your message</label>
+                                    <label for="message">{{$t('message')}}</label>
                                 </div>
 
                             </div>
@@ -70,7 +69,7 @@
                         <el-button type="primary"
                                 class="contact-button"
                                 @click="submitForm('userObject')">
-                            Envoyer
+                            {{$t('send')}}
                         </el-button>
                     </div>
                     <div class="status"></div>

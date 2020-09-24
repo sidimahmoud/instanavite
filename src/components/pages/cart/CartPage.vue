@@ -2,25 +2,25 @@
     <div class="cart-container">
         <div class="cart-products">
             <div class="table-product">
-                <h5><strong>PRODUITS SÉLECTIONÉS</strong></h5>
+                <h5><strong>{{$t('selected_products')}}</strong></h5>
                 <el-table
                     :data="cartData"
                     style="width: 100%">
                     <el-table-column
                         prop="name"
-                        label="Name">
+                        :label="$t('item_name')">
                     </el-table-column>
                     <el-table-column
                         prop="price"
-                        label="Price">
+                        :label="$t('cout')">
                     </el-table-column>
                     <el-table-column
                         prop="quantity"
-                        label="Quantity">
+                        :label="$t('quantity')">
                     </el-table-column>
                     <el-table-column
                         prop="total"
-                        label="total">
+                        :label="$t('total')">
                     </el-table-column>
                     <el-table-column
                         label="Action">
@@ -36,31 +36,31 @@
             </div>
             <br/>
             <div v-if="cartTotal > 0">
-                <h5><strong> CART TOTALS</strong></h5>
+                <h5><strong> {{$t('total_panier')}}</strong></h5>
                 <div class="total-box">
                     <table>
                         <tr>
-                            <th>Subtotal</th>
+                            <th>{{$t('sous_total')}}</th>
                             <td><strong>${{cartTotal}} </strong></td>
                         </tr>
                         <tr>
-                            <th>TPS</th>
+                            <th>{{$t('tps')}}</th>
                             <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
-                            <th>TVQ</th>
+                            <th>{{$t('tvq')}}</th>
                             <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
-                            <th>Shipping fees</th>
+                            <th>{{$t('frais_preparation')}}</th>
                             <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
-                            <th>Order preparation fees</th>
+                            <th>{{$t('frais_livraison')}}</th>
                             <td><strong>$1.00</strong></td>
                         </tr>
                         <tr>
-                            <th>Total</th>
+                            <th>{{$t('total')}}</th>
                             <td><strong>${{totalDispaly}}</strong></td>
                         </tr>
                     </table>
@@ -72,27 +72,27 @@
                 <el-col :md="11">
                     <div style="padding:1%;height:353px;background-color: #f8f8f8;">
                         <!-- <div class="cart-products"> -->
-                            <h5><strong>BILLING DETAILS</strong></h5>
+                            <h5><strong>{{$t('billing_details')}}</strong></h5>
                             <form>
                                 <div class="el-input google-maps-address-field">
                                     <input type="text" v-bind:id="id"
                                         ref="google_address_autocomplete"
                                         v-model="address"
                                         class="el-input__inner"
-                                        placeholder="Address"/>
-                                    <el-input class="custom-cart" v-model="detail.post_code" placeholder="Zipcode"></el-input>
+                                        :placeholder="$t('address')"/>
+                                    <el-input class="custom-cart" v-model="detail.post_code" :placeholder="$t('code_postal')"></el-input>
                                 </div>
-                                    <el-input class="custom-cart" v-model="detail.first_name" placeholder="First name"></el-input>
-                                    <el-input class="custom-cart" v-model="detail.last_name" placeholder="Last name"></el-input>
-                                    <el-input class="custom-cart" v-model="detail.mobile" placeholder="Mobile"></el-input>
-                                    <el-input class="custom-cart" v-model="detail.email" placeholder="email"></el-input>
+                                    <el-input class="custom-cart" v-model="detail.first_name" :placeholder="$t('last_name')"></el-input>
+                                    <el-input class="custom-cart" v-model="detail.last_name" :placeholder="$t('name')"></el-input>
+                                    <el-input class="custom-cart" v-model="detail.mobile" :placeholder="$t('phone')"></el-input>
+                                    <el-input class="custom-cart" v-model="detail.email" :placeholder="$t('email')"></el-input>
                             </form>
                        <!--  </div> -->
                     </div>
                 </el-col>
                 <el-col :md="12" :offset="1">
                     <div class="cart-products">
-                        <h5><strong>PAYMENT OPTIONS</strong></h5>
+                        <h5><strong>{{$t('payment_option')}}</strong></h5>
                         <div style="text-align:center">
                             <img src="/images/defaults/visa.png" height="60px"/>
                             <img src="/images/defaults/mastercard.png" height="60px"/>
@@ -108,9 +108,9 @@
                         <div id="card-errors" role="alert"></div>
                         <div class="cart-ref" ref="card"></div>
                         
-                        <el-button class="cart-submit-button" type="primary" @click="createOrder">Complete Order</el-button>
+                        <el-button class="cart-submit-button" type="primary" @click="createOrder">{{$t('complet_order')}}</el-button>
 
-                        <br/><br/>Or via<br/><br/>
+                        <br/><br/>{{$t('or_via')}}<br/><br/>
                         <PayPal
                             amount="10.00"
                             currency="USD"

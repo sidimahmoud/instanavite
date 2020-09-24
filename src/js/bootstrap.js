@@ -31,17 +31,6 @@ window.app_client_grant_type = sd(process.env.MIX_CLIENT_GRANT_TYPE, "admin");
 // noinspection ES6ModulesDependencies
 window.app_api_prefix_3 = sd(process.env.MIX_APP_API_PREFIX_3, "v3");
 
-// Set Logout Redirect Path
-window.APP_LOGOUT_REDIRECT = sd(process.env.MIX_APP_LOGOUT_REDIRECT, "https://digitaltolk.se/");
-
-// notifier configs
-window.app_dt_notifier_url = sd(process.env.MIX_DT_NOTIFIER_URL, 'https://pling.digitaltolk.se');
-window.app_dt_notifier_project_code = sd(process.env.MIX_DT_NOTIFIER_PROJECT_CODE, 'dt-admin');
-window.app_core_project_code = sd(process.env.MIX_CORE_PROJECT_CODE, 'dt-core');
-
-
-window.app_dt_handesk_url = sd(process.env.MIX_DT_HANDESK_URL, 'https://post.digitaltolk.com/');
-window.app_dt_handesk_token = sd(process.env.MIX_DT_HANDESK_TOKEN, 'the-api-token');
 /**
  * @type {int}
  * If your gonna assigned an int value, it should be limited by 0 - 1

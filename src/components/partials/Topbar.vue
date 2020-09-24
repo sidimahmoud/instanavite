@@ -2,18 +2,19 @@
     <div class="app-page-top-bar">  
       <img class="app-header-logo" src="/images/defaults/small-logo.png" @click="handleHome"/>
       
-      <el-input class="header-input-field" placeholder="Chercher un produit" v-model="product" @keyup.enter.native="browseProduct">
+      <el-input class="header-input-field" :placeholder="$t('search_product')" v-model="product" @keyup.enter.native="browseProduct">
         <span class="el-icon-search el-input__icon app-cursor-pointer fas fa-search search-icon" slot="suffix" v-bind:click="browseProduct"></span>
       </el-input>
 
       <div class="app-header-language">
         <el-badge>
-          <span @click="handleChangeLanguage">{{language}}</span>
+          <span @click="handleChangeLanguage">{{languageLabel}}</span>
         </el-badge>
       </div>
 
       <div class="app-header-action">
         <div class="app-header-action-menu">
+
           <el-badge>
             <span class="icon-header" @click="handleAccount"><i class="fas fa-user"></i></span>
           </el-badge>
@@ -21,20 +22,18 @@
           <el-badge :value="cartCount" class="item" type="primary">
             <span class="icon-header-cart" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
           </el-badge>
-          <el-badge> 
-            <span class="app-info"><strong>Livraison dans la région de GATINEAU </strong></span> <br/> <span class="app-info"><strong>Tous les jours de 7h à 23h</strong></span>
-          </el-badge>
-        </div>
-        
-      </div> 
 
-      
-      
+          <el-badge> 
+            <span class="app-info"><strong>{{$t('region_gatineau')}} </strong></span> <br/> <span class="app-info"><strong>{{$t('every_day')}}</strong></span>
+          </el-badge>
+
+        </div>
+      </div> 
     </div> <!-- /.app-page-top-bar -->
 </template>
 
 <script>
-  import {mapGetters} from 'vuex';
+  import {mapGetters,mapState, mapMutations, mapActions} from "vuex";
   
   export default {
     /*
@@ -52,7 +51,7 @@
     data () {
       return {
         product: '',
-        language: 'FR',
+        languageLabel: 'FR',
         blockClass: 'top-bar-extras',
         searchProduct: false,
         searchProductResult:[],
@@ -66,9 +65,18 @@
     |--------------------------------------------------------------------------
     */
     computed: {
+      ...mapState('ui', ['language']),
       ...mapGetters('cart', {
         cartCount: 'cartCount',
       }),
+      iLanguage: {
+        get () {
+          return this.language
+        },
+        set (v) {
+          this.saveLanguage(v);
+        }
+      }
     },
 
     /*
@@ -77,6 +85,9 @@
     |--------------------------------------------------------------------------
     */
     methods: {
+      ...mapMutations({
+        saveLanguage: 'ui/saveLanguage',
+      }),
       handleCart() {
         this.$router.push({
           name: "cart-page",
@@ -104,10 +115,20 @@
         });
       },
       handleAccount() {
-        this.$router.push({
-          name: "login-page",
-          params: {}
-        });
+        const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
+
+        // If user has access token already, redirect to dashboard.
+        if (hasAccessToken) {
+          this.$router.push({
+            name: "profile-page",
+            params: {}
+          });
+        }else {
+          this.$router.push({
+            name: "login-page",
+            params: {}
+          });
+        }
       },
       handleHome(){
         this.$router.push({
@@ -116,12 +137,15 @@
         });
       },
       handleChangeLanguage(){
-        if(this.language == 'FR'){
-          this.language = 'EN'
+        if(this.languageLabel == 'FR'){
+          this.languageLabel = 'EN'
+          this.iLanguage = 'en'
         }else{
-          this.language = 'FR'
+          this.languageLabel = 'FR'
+          this.iLanguage = 'fr'
         }
       }
+      
      
     },
     /*

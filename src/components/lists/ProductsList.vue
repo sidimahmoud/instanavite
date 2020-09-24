@@ -3,16 +3,17 @@
         <el-row>
             <div class="categorie-wrapper-mobile">
                 <div class="categorie-filter" v-for="cat in categoriesOpts" v-bind:key="cat.id">
-                    <span @click="filterByCategorie(cat)">{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
+                    <span @click="filterByCategorie(cat)">{{$t(cat.name)}}</span> <!--<span :class="categorie_block_class"></span>-->
                 </div>
             </div>
             <el-col :md="4">
                 <div class="catgorie-wrapper">
                     <diV class="div-header">
-                        PRODUITS PAR CATÉGORIE
+                        {{$t('product_per_categorie')}}
                     </div>
                     <div :class="cat.active ? 'categorie-selected' : 'categorie-filter'" v-for="cat in categoriesOpts" v-bind:key="cat.id"  @click="filterByCategorie(cat)">
-                        <span>{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
+                        <span v-if="language == 'fr'">{{cat.name}}</span>
+                        <span v-else>{{cat.name_english}}</span>
                     </div>
                 </div>
             </el-col>
@@ -36,10 +37,12 @@
                                 <div class="product-grid__img-wrapper">			
                                     <img :src="item.image" alt="Img" class="product-grid__img"/>
                                 </div>
-                                <span class="product-grid__title">{{item.name}}</span>
+                                <span v-if="language == 'fr'" class="product-grid__title">{{item.name}}</span>
+                                <span v-else class="product-grid__title">{{item.name_english}}</span>
+                                
                                 <span class="product-grid__price">${{item.price.toFixed(2)}} / {{item.size}}</span>
                                 <p class="product-grid__description"></p>
-                                <span class="product-grid__btn product-grid__add-to-cart" @click="addToCart(item)"><i class="fa fa-cart-arrow-down"></i> Add to cart</span>				
+                                <span class="product-grid__btn product-grid__add-to-cart" @click="addToCart(item)"><i class="fa fa-cart-arrow-down"></i> {{$t('add_cart')}}</span>				
                                 <!--<span class="product-grid__btn product-grid__view" @click="handleDetails(item)"><i class="fa fa-eye"></i> View more</span>-->
                             </div>
                             <div v-if="isEmpty(listData)">
@@ -67,7 +70,7 @@
     </div>
 </template>
 <script>
-import {mapMutations, mapActions, mapGetters} from "vuex";
+import {mapMutations, mapState, mapActions, mapGetters} from "vuex";
 import {isEmpty} from "~/js/helpers/Common";
 
 export default {
@@ -98,6 +101,7 @@ export default {
             listData: 'listData',
             listPagination: 'listPagination',
         }),
+        ...mapState('ui', ['language']),
     },
     /*
     |--------------------------------------------------------------------------

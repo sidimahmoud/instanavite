@@ -7,20 +7,20 @@
                 <li>
                   <el-dropdown>
                     <span class="el-dropdown-link" @click="handleCategories">
-                      NOS PARTENAIRES<i class="el-icon-arrow-down el-icon--right"></i>
+                      {{$t('our_partners')}}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item>Produits Sprotive</el-dropdown-item>
-                      <el-dropdown-item>Produits elctronique</el-dropdown-item>
-                      <el-dropdown-item>Produits mecanique</el-dropdown-item>
+                      <el-dropdown-item>{{$t('produits_sprotive')}}</el-dropdown-item>
+                      <el-dropdown-item>{{$t('produits_elctronique')}}</el-dropdown-item>
+                      <el-dropdown-item>{{$t('produits_mecanique')}}</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </li>
-                <li><span @click="handleOthers">COMMANDES SPÉCIAUX</span></li>
-                <li><span @click="handleAbout">ABOUT US</span></li>
-                <li><span @click="handleContact">CONTACT</span></li>
+                <li><span @click="handleOthers">{{$t('special_orders')}}</span></li>
+                <li><span @click="handleAbout">{{$t('about_us')}}</span></li>
+                <li><span @click="handleContact">{{$t('contact_us')}}</span></li>
                 
-                <li class="last-number"><i class="fas fa-phone-alt icon-li"></i>  123-456-789 </li>
+                <li class="last-number"><i class="fas fa-phone-alt icon-li"></i>{{$t('phone_number')}}</li>
             </ul>
           </nav>
 
