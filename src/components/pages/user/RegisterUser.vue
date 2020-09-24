@@ -5,8 +5,8 @@
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div class="signup-form bg-white">
                         <form @submit.prevent="register">
-                            <h2>Register</h2>
-                            <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+                            <h2>{{$t('sign_up')}}</h2>
+                            <p class="hint-text">{{$t('create_msg')}}</p>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert"
                                  v-if="errorMessage">
                                 {{errorMessage}}
@@ -58,8 +58,8 @@
                             </div>
 
                         </form>
-                        <div class="text-center">Already have an account?
-                            <router-link :to="{name: 'Login'}">Sign in</router-link>
+                        <div class="text-center">{{$t('already_have_account')}}
+                            <router-link :to="{name: 'Login'}">{{$t('sign_in')}}</router-link>
                         </div>
                         <h2>Or</h2>
                         <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" @click="loginGoogle('google')">
@@ -73,14 +73,14 @@
                             :params="googleSignInParams"
                             @success="ongSignInSuccess"
                             @error="ongSignInError">
-                            <i class="fab fa-google"></i> Sign in with Google
+                            <i class="fab fa-google"></i> {{$t('sign_in_with_google')}}
                         </g-signin-button>
                         <fb-signin-button
                             class="btn btn-lg btn-github  btn-block text-uppercase"
                             :params="fbSignInParams"
                             @success="onSignInSuccess"
                             @error="onSignInError">
-                            <i class="fab fa-facebook"></i> Sign in with Facebook
+                            <i class="fab fa-facebook"></i> {{$t('sign_in_with_facebook')}}
                         </fb-signin-button>
                     </div>
                 </div>

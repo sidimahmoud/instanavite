@@ -3,7 +3,7 @@
         <el-row>
             <div class="categorie-wrapper-mobile">
                 <div class="categorie-filter" v-for="cat in categoriesOpts" v-bind:key="cat.id">
-                    <span @click="filterByCategorie(cat)">{{$t(cat.name)}}</span> <!--<span :class="categorie_block_class"></span>-->
+                    <span @click="filterByCategorie(cat)">{{cat.name}}</span> <!--<span :class="categorie_block_class"></span>-->
                 </div>
             </div>
             <el-col :md="4">

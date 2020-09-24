@@ -116,6 +116,15 @@ export default [
       full_screen: false
     }
   },
+  {
+    path: '/partners', component: Vue.component('partners-categories'),
+    name: 'partners-page',
+    meta: {
+      page_class: 'partners-route',
+      full_screen: false
+    }
+  },
+  
   
 
 ] // End of default

@@ -52,7 +52,7 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="signup-form bg-white">
                     <form method="post" @submit.prevent="login">
-                        <h2>Sign in</h2>
+                        <h2>{{$t('sign_in')}}</h2>
                         <p class="hint-text"></p>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="errorMessage">
                             <strong>Error!</strong> {{errorMessage}}
@@ -79,7 +79,7 @@
                         </div>
                     </form>
                     <div class="text-center">Don't have an account?
-                        <router-link :to="{name: 'register-user-page'}">Sign up</router-link>
+                        <router-link :to="{name: 'register-user-page'}">{{$t('sign_up')}}</router-link>
                     </div>
                     <h2>Or</h2>
                     <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" @click="loginGoogle('google')">
@@ -93,14 +93,14 @@
                       :params="googleSignInParams"
                       @success="ongSignInSuccess"
                       @error="ongSignInError">
-                      <i class="fab fa-google"></i> Sign in with Google
+                      <i class="fab fa-google"></i> {{$t('sign_in_with_google')}}
                     </g-signin-button>
                     <fb-signin-button
                       class="btn btn-lg btn-github  btn-block text-uppercase"
                       :params="fbSignInParams"
                       @success="onSignInSuccess"
                       @error="onSignInError">
-                      <i class="fab fa-facebook"></i> Sign in with Facebook
+                      <i class="fab fa-facebook"></i> {{$t('sign_in_with_facebook')}}
                     </fb-signin-button>
                 </div>
             </div>

@@ -6,13 +6,17 @@
                 <!--<li><span @click="handleCategories"><i class="fa fa-bars"></i>    BROWSE CATEGORIES</span></li>-->
                 <li>
                   <el-dropdown>
-                    <span class="el-dropdown-link" @click="handleCategories">
+                    <span class="el-dropdown-link">
                       {{$t('our_partners')}}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item>{{$t('produits_sprotive')}}</el-dropdown-item>
-                      <el-dropdown-item>{{$t('produits_elctronique')}}</el-dropdown-item>
-                      <el-dropdown-item>{{$t('produits_mecanique')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('produits_sprotive')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('produits_elctronique')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('produits_mecanique')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('ready_to_eat')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('pharmacy_products')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('tools_and_hardware')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('pharmacy_products')}}</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </li>
@@ -67,7 +71,7 @@
       },
       handleCategories(){
         this.$router.push({
-          name: "products-list",
+          name: "partners-page",
           params: {}
         });
     

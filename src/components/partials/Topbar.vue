@@ -51,7 +51,7 @@
     data () {
       return {
         product: '',
-        languageLabel: 'FR',
+        languageLabel: 'EN',
         blockClass: 'top-bar-extras',
         searchProduct: false,
         searchProductResult:[],
@@ -137,11 +137,11 @@
         });
       },
       handleChangeLanguage(){
-        if(this.languageLabel == 'FR'){
-          this.languageLabel = 'EN'
+        if(this.languageLabel == 'EN'){
+          this.languageLabel = 'FR'
           this.iLanguage = 'en'
         }else{
-          this.languageLabel = 'FR'
+          this.languageLabel = 'EN'
           this.iLanguage = 'fr'
         }
       }

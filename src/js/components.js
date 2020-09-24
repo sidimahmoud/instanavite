@@ -19,7 +19,7 @@ Vue.component('topbar-mobile', require('../components/partials/Mobile/TopbarMobi
 Vue.component('products-list', require('../components/lists/ProductsList').default);
 Vue.component('progress-orders', require('../components/lists/ProgressOrders').default);
 Vue.component('orders-recips', require('../components/lists/OrdersRecips').default);
-
+Vue.component('partners-categories', require('../components/lists/PartnersCategories').default);
 
 /*
 |--------------------------------------------------------------------------
