@@ -105,6 +105,7 @@
                             <el-input class="custom-cart" placeholder="CVV" disabled></el-input>
                         </el-form> -->
                         <!-- Used to display Element errors. -->
+                        <p class="text-jaune">Cart information</p>
                         <div id="card-errors" role="alert"></div>
                         <div class="cart-ref" ref="card"></div>
                         
@@ -200,13 +201,20 @@ export default {
         },
         createOrder(){
             const _this = this;
-            stripe.createToken(card).then(function(result) {
+            _this.processPayment('result.token');
+            /* stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {
                     // Send the token to your server.
                     _this.processPayment(result.token);
+                }else{
+                    Notification({
+                        title: 'Error',
+                        message: 'Sorry we cannot validate payment cart.',
+                        type: 'error'
+                    });
                 }
-            });
+            }); */
         },
         processPayment(token) {
             // Insert the token ID into the form so it gets submitted to the server
@@ -284,6 +292,9 @@ export default {
     |--------------------------------------------------------------------------
     */
     filters: {
+    },
+    beforeCreate(){
+
     },
     /*
     |--------------------------------------------------------------------------

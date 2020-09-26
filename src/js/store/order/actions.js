@@ -24,12 +24,26 @@ export default {
    * @returns {*}
    */
   fetchOrder (context, payload = {}) {
-    axios.get(`https://api.instantavite.com/api/orders/${payload.id}`)
+    axios.get(`https://api.instantavite.com/api/orders/${payload.id}?include=products.product`)
     .then((response) => {
       console.log(response.data);
       context.commit('setItemData', response.data)
     });
   }, // End of requestAccessToken method
+  /**
+   * Action for getting the products by params.
+   *
+   * @params {object} context - current Vuex scope.
+   * @params {object} payload - contains useful values.
+   * @params {object} payload.translator_id - ID of the target translator.
+   * @params {object} payload.params - query params that will be sent to API.
+   * @returns {*}
+   */
+  recieptOrder (context, payload = {}) {
+    axios.get(`http://localhost:8002/api/get-reciept`)
+    .then((response) => {
+    });
+  },
 
 
 } // End of export default

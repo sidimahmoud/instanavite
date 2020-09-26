@@ -1,15 +1,15 @@
 <template>
     <el-table
-        :data="tableData"
+        :data="listData"
         style="width: 100%">
         <el-table-column
-            prop="date"
+            prop="created_at"
             label="Date"
             width="180">
         </el-table-column>
         <el-table-column
-            prop="name"
-            label="Name"
+            prop="amount"
+            label="Amount"
             width="180">
         </el-table-column>
         <el-table-column
@@ -17,42 +17,72 @@
             label="Address">
         </el-table-column>
         <el-table-column
-            label="Operations">
+            label="Reçus">
             <template slot-scope="scope">
                 <el-button
-                    size="mini">Show</el-button>
+                    size="mini"
+                    @click="handleShow(scope.row)">Show</el-button>
             </template>
         </el-table-column>
     </el-table>
 </template>
 
 <script>
+import {mapMutations, mapActions, mapGetters} from "vuex";
+import {isEmpty} from "~/js/helpers/Common";
+
 export default {
+    /*
+    |--------------------------------------------------------------------------
+    | Component > data
+    |--------------------------------------------------------------------------
+    */
     data() {
         return {
-            tableData: [
-                {
-                    date: '2016-05-03',
-                    name: 'Tom',
-                    address: 'No. 189, Grove St, Los Angeles'
-                }, 
-                {
-                    date: '2016-05-02',
-                    name: 'Tom',
-                    address: 'No. 189, Grove St, Los Angeles'
-                }, 
-                {
-                    date: '2016-05-04',
-                    name: 'Tom',
-                    address: 'No. 189, Grove St, Los Angeles'
-                }, 
-                {
-                    date: '2016-05-01',
-                    name: 'Tom',
-                    address: 'No. 189, Grove St, Los Angeles'
-                }
-            ]
         }
+    },
+    /*
+    |--------------------------------------------------------------------------
+    | Component > computed
+    |--------------------------------------------------------------------------
+    */
+    computed: {
+        ...mapGetters('user', {
+            listData: 'progressOrders',
+        }),
+    },
+    /*
+    |--------------------------------------------------------------------------
+    | Component > methods
+    |--------------------------------------------------------------------------
+    */
+    methods: {
+        ...mapActions('user', {
+            loadList: 'fetchProgressOrders',
+        }),
+        ...mapActions('order', {
+            getReciept: 'recieptOrder',
+        }),
+        
+
+        fetchData() {
+            let params = {
+                id: 1
+            }
+            this.loadList(params);
+        },
+        handleShow(row){
+            this.getReciept();
+            /* window.open("https://firebasestorage.googleapis.com/v0/b/instantavite-1ea10.appspot.com/reciept/document.pdf", "_blank"); */
+        }
+    },
+    /*
+    |--------------------------------------------------------------------------
+    | Component > mountes
+    |--------------------------------------------------------------------------
+    */
+    mounted() {
+       this.fetchData();
     }
 }
 </script>

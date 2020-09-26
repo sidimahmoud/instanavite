@@ -86,4 +86,5 @@ export default {
     sign_up: 'Sign up',
     create_msg: 'Create your account. It\'s free and only takes a minute.',
     already_have_account: 'Already have an account?',
+    order_rogress: 'Order Progress',
 } // End of root

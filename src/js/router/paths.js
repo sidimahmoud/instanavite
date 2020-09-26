@@ -117,6 +117,14 @@ export default [
     }
   },
   {
+    path: '/order/:id/receipt', component: Vue.component('order-recit-page'),
+    name: 'order-receipt-page',
+    meta: {
+      page_class: 'order-recit-route',
+      full_screen: false
+    }
+  },
+  {
     path: '/partners', component: Vue.component('partners-categories'),
     name: 'partners-page',
     meta: {

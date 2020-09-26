@@ -17,11 +17,11 @@
             label="Address">
         </el-table-column>
         <el-table-column
-            label="Operations">
+            label="Actions">
             <template slot-scope="scope">
                 <el-button
                     size="mini"
-                    @click="handleShow(scope.row)">Show</el-button>
+                    @click="handleShow(scope.row)">Details</el-button>
             </template>
         </el-table-column>
     </el-table>

@@ -35,7 +35,7 @@ Vue.component('register-user', require('../components/pages/user/RegisterUser').
 
 //Order
 Vue.component('order-details-page', require('../components/pages/Order/OrderDetailsPage').default);
-
+Vue.component('order-recit-page', require('../components/pages/Order/OrderRecipPage').default);
 //cart
 Vue.component('cart-page', require('../components/pages/cart/CartPage').default);
 Vue.component('about-us', require('../components/pages/AboutUs').default);
