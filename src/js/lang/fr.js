@@ -38,7 +38,7 @@ export default {
     code_postal: 'Code postale',
     last_name: "Prénom",
     name: 'Nom',
-    phone:'Télephone mobile',
+    phone:'Numéro de Télephone',
     email: 'Courriel électronique',
     payment_option: 'OPTIONS DE PAIEMENT',
     or_via: 'Ou par',

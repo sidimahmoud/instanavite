@@ -38,7 +38,7 @@ export default {
     code_postal: 'ZIP code',
     last_name: "First name",
     name: 'Last name',
-    phone:'Mobile phone',
+    phone:'Mobile',
     email: 'Email address',
     payment_option: 'PAYMENT OPTIONS',
     or_via: 'Or via',
