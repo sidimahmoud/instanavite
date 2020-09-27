@@ -121,7 +121,7 @@
 
                         <br/><br/>{{$t('or_via')}}<br/><br/>
                         <PayPal
-                            amount="10.00"
+                            :amount="cartTotal"
                             currency="USD"
                             :client="credentials"
                             env="sandbox">
@@ -261,11 +261,19 @@ export default {
                     coordinates: this.coordinates,
                     stripeToken: token.id,
                 }
-                this.addOrder(payload).then(() => {
+                this.addOrder(payload)
+                .then(() => {
                     Notification({
                         title: 'Success',
                         message: 'Thank you for your order we will deliver soon.',
                         type: 'success'
+                    });
+                })
+                .catch((error) => {
+                    Notification({
+                        title: 'Success',
+                        message: error,
+                        type: 'error'
                     });
                 });
             } else {
