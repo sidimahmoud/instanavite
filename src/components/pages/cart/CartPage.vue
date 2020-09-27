@@ -111,7 +111,7 @@
                         <stripe-elements
                             ref="elementsRef"
                             :pk="publishableKey"
-                            :amount="cartTotal"
+                            :amount="totalDispaly"
                             locale="en"
                             @token="tokenCreated"
                             @loading="loading = $event"
@@ -193,8 +193,8 @@ export default {
             cartTotal:'cartTotal'
         }),
         totalDispaly(){
-            let somme = this.cartTotal + 4;
-            return parseFloat(somme).toFixed(2);
+            //let somme = this.cartTotal + 4;
+            return parseFloat(this.cartTotal).toFixed(2);
         }
     },
     /*
