@@ -269,7 +269,8 @@
         this.isConnected = false;
       },
       redirectUser(){
-        this.$router.push({path: '/'});
+        window.history.back();
+        //this.$router.push({path: '/'});
       },
 
       onSignInSuccess (response) {

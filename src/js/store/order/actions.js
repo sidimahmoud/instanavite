@@ -26,7 +26,6 @@ export default {
   fetchOrder (context, payload = {}) {
     axios.get(`https://api.instantavite.com/api/orders/${payload.id}?include=products.product`)
     .then((response) => {
-      console.log(response.data);
       context.commit('setItemData', response.data)
     });
   }, // End of requestAccessToken method
@@ -40,7 +39,7 @@ export default {
    * @returns {*}
    */
   recieptOrder (context, payload = {}) {
-    axios.get(`http://localhost:8002/api/get-reciept`)
+    axios.get(`https://api.instantavite.com/api/get-reciept`)
     .then((response) => {
     });
   },

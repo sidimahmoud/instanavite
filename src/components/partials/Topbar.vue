@@ -3,7 +3,7 @@
       <img class="app-header-logo" src="/images/defaults/small-logo.png" @click="handleHome"/>
       
       <el-input class="header-input-field" :placeholder="$t('search_product')" v-model="product" @keyup.enter.native="browseProduct">
-        <span class="el-icon-search el-input__icon app-cursor-pointer fas fa-search search-icon" slot="suffix" v-bind:click="browseProduct"></span>
+        <span class="el-icon-search el-input__icon app-cursor-pointer fas fa-search search-icon" slot="suffix" @click.native="browseProduct"></span>
       </el-input>
 
       <div class="app-header-language">
@@ -16,7 +16,8 @@
         <div class="app-header-action-menu">
 
           <el-badge>
-            <span class="icon-header" @click="handleAccount"><i class="fas fa-user"></i></span>
+            <span class="icon-header" v-if="!isConnected" @click="handleAccount"><i class="fas fa-user"></i></span>
+            <span class="icon-header" v-else @click="handleAccount">{{$t('hello')}}, Mokhtar</span>
           </el-badge>
           
           <el-badge :value="cartCount" class="item" type="primary">
@@ -76,6 +77,11 @@
         set (v) {
           this.saveLanguage(v);
         }
+      },
+      isConnected(){
+        const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
+
+        return hasAccessToken ? true : false;
       }
     },
 

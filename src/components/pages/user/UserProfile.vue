@@ -4,14 +4,12 @@
             <el-col :md="5">
                 <div class="profile-card">
                     <img src="http://demo.geekslabs.com/materialize/v2.1/layout03/images/avatar.jpg"  alt="John" style="width:100%">
-                    <h1>John Doe</h1>
-                    <p class="title">CEO & Founder, Example</p>
-                    <p>Harvard University</p>
+                    <h1>test user</h1>
+                    <p>65 allee nicolas carnot, Montreal, QC, Canada</p>
                     <div style="margin: 24px 0;">
-                        <a href="#"><i class="fas fa-dribbble"></i></a> 
-                        <a href="#"><i class="fas fa-twitter"></i></a>  
-                        <a href="#"><i class="fas fa-linkedin"></i></a>  
-                        <a href="#"><i class="fas fa-facebook"></i></a> 
+                        <a href="#"><i class="fab fa-facebook-f"></i></a> 
+                        <a href="#"><i class="fab fa-instagram"></i></a>  
+                        <a href="#"><i class="fab fa-twitter"></i></a> 
                     </div>
                 </div>
             </el-col>

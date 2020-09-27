@@ -80,8 +80,8 @@
                                         v-model="address"
                                         class="el-input__inner"
                                         :placeholder="$t('address')"/>
-                                    <el-input class="custom-cart" v-model="detail.post_code" :placeholder="$t('code_postal')"></el-input>
                                 </div>
+                                    <el-input class="custom-cart" v-model="detail.post_code" :placeholder="$t('code_postal')"></el-input>
                                     <el-input class="custom-cart" v-model="detail.first_name" :placeholder="$t('last_name')"></el-input>
                                     <el-input class="custom-cart" v-model="detail.last_name" :placeholder="$t('name')"></el-input>
                                     <el-input class="custom-cart" v-model="detail.mobile" :placeholder="$t('phone')"></el-input>
@@ -106,9 +106,17 @@
                         </el-form> -->
                         <!-- Used to display Element errors. -->
                         <p class="text-jaune">Cart information</p>
-                        <div id="card-errors" role="alert"></div>
-                        <div class="cart-ref" ref="card"></div>
-                        
+                        <!-- <div id="card-errors" role="alert"></div>
+                        <div class="cart-ref" ref="card"></div> -->
+                        <stripe-elements
+                            ref="elementsRef"
+                            :pk="publishableKey"
+                            :amount="cartTotal"
+                            locale="en"
+                            @token="tokenCreated"
+                            @loading="loading = $event"
+                        >
+                        </stripe-elements>
                         <el-button class="cart-submit-button" type="primary" @click="createOrder">{{$t('complet_order')}}</el-button>
 
                         <br/><br/>{{$t('or_via')}}<br/><br/>
@@ -130,10 +138,11 @@ import {mapMutations, mapGetters, mapActions} from "vuex";
 import { Notification } from 'element-ui';
 import {isEmpty} from "~/js/helpers/Common";
 import PayPal from 'vue-paypal-checkout';
+import { StripeElements } from 'vue-stripe-checkout';
 
-let stripe = Stripe(`pk_live_51HB0HpHDyIu0bdYbv47CLk1imRIm5l8JwxVpg3uWGClstvnaVKQ8hPa4gnkqOIMZvOWTL7JOKIiNn2muThX3O9YA00EYiEVmHx`),
+/* let stripe = Stripe(`pk_live_51HB0HpHDyIu0bdYbv47CLk1imRIm5l8JwxVpg3uWGClstvnaVKQ8hPa4gnkqOIMZvOWTL7JOKIiNn2muThX3O9YA00EYiEVmHx`),
     elements = stripe.elements(),
-    card = undefined;
+    card = undefined; */
 
 export default {
     name: "product-list",
@@ -144,7 +153,8 @@ export default {
     |--------------------------------------------------------------------------
     */
     components: {
-      PayPal
+      PayPal,
+      StripeElements
     },
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +176,10 @@ export default {
             coordinates: "",
             credentials: {
                 sandbox: 'AQd-XDPukcWgJQfqJPTfVvsTP6HsdZ1fcFzy0ceLLGKYaIZ_GjQDCPLng1OhJ6aKcV_h3Np2AbWHRyiX',
-            }   
+            },
+            loading: false,
+            publishableKey: 'pk_live_51HB0HpHDyIu0bdYbv47CLk1imRIm5l8JwxVpg3uWGClstvnaVKQ8hPa4gnkqOIMZvOWTL7JOKIiNn2muThX3O9YA00EYiEVmHx', 
+            token: null
         }
     },
     /*
@@ -201,7 +214,16 @@ export default {
         },
         createOrder(){
             const _this = this;
-            _this.processPayment('result.token');
+            const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
+
+            if(hasAccessToken){
+                this.$refs.elementsRef.submit();
+            }else {
+                this.$router.push({
+                    name: "login-page",
+                    params: {}
+                });
+            }
             /* stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {
@@ -254,25 +276,16 @@ export default {
                 });
             }
         },
-         /**
-         * Helper method to get and return the preferred city value form
-         * Google Maps Autocomplete result.
-         *
-         * @param {object} place
-         *   The getPlace() for Autocomplete result upon choosing a suggestion.
-         *   e.g. autocomplete.getPlace()
-         *
-         * @return {string}
-         */
-        getCityValue(place) {
-            let result = '';
 
-            // Iterate and get "locality" value,
-            // if there are none, just get "postal_code" as a fallback.
+        getCoordinate(place) {
+            return place.geometry.location.lat()+","+place.geometry.location.lng();
+        },
+
+        getPostalCode(place){
+            let result = '';
             _.each(place.address_components, (v) => {
                 if (
-                    _.includes(v.types, 'locality') ||
-                    _.includes(v.types, 'postal_town')
+                    _.includes(v.types, 'postal_code')
                 ) {
                     result = v.short_name;
                     return false; // Break the loop
@@ -281,10 +294,11 @@ export default {
             return result;
         },
 
-        getCoordinate(place) {
-            return place.geometry.location.lat()+","+place.geometry.location.lng();
+        tokenCreated (token) {
+            //this.loading = true
+            this.token = token;
+            this.processPayment(token)
         },
-        
     },
     /*
     |--------------------------------------------------------------------------
@@ -308,20 +322,20 @@ export default {
 
         // Add listener when a selection has been chosen or changed.
         autocomplete.addListener('place_changed', () => {
-            let result = autocomplete.getPlace().formatted_address;
-            
-            let city = this.getCityValue(autocomplete.getPlace());
+            console.log('event changed');
+            console.log(autocomplete.getPlace());
+            const result = autocomplete.getPlace().formatted_address;
+            this.address =  result;
+            let postcode = this.getPostalCode(autocomplete.getPlace());
             let coordinate= this.getCoordinate(autocomplete.getPlace());
             this.coordinates = coordinate;
+            this.detail.post_code = postcode;
             console.log('coordinate');
             console.log(coordinate);
-           /* this.$emit('input', result); // Update this component's value.
-            this.$emit('update:city', city); // Update city prop value.
-            this.$emit('update:coordinate', coordinate); // Update coordinate prop value.*/
         });
 
-        card = elements.create('card');
-        card.mount(this.$refs.card);
+        /* card = elements.create('card');
+        card.mount(this.$refs.card); */
 
     },
 }

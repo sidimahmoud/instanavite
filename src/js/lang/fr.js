@@ -87,5 +87,6 @@ export default {
     create_msg: 'Créez votre compte. C\'est gratuit et cela ne prend qu\'une minute.',
     already_have_account: 'Vous avez déjà un compte?',
     order_rogress: 'Progression de la commande',
+    hello: 'Bonjour',
 } // End of root
   

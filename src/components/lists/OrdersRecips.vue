@@ -21,7 +21,7 @@
             <template slot-scope="scope">
                 <el-button
                     size="mini"
-                    @click="handleShow(scope.row)">Show</el-button>
+                    @click="handleShow(scope.row)">Download</el-button>
             </template>
         </el-table-column>
     </el-table>
