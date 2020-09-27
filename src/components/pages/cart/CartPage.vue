@@ -82,8 +82,8 @@
                                         :placeholder="$t('address')"/>
                                 </div>
                                     <el-input class="custom-cart" v-model="detail.post_code" :placeholder="$t('code_postal')"></el-input>
-                                    <el-input class="custom-cart" v-model="detail.first_name" :placeholder="$t('last_name')"></el-input>
-                                    <el-input class="custom-cart" v-model="detail.last_name" :placeholder="$t('name')"></el-input>
+                                    <!-- <el-input class="custom-cart" v-model="detail.first_name" :placeholder="$t('last_name')"></el-input>
+                                    <el-input class="custom-cart" v-model="detail.last_name" :placeholder="$t('name')"></el-input> -->
                                     <el-input class="custom-cart" v-model="detail.mobile" :placeholder="$t('phone')"></el-input>
                                     <el-input class="custom-cart" v-model="detail.email" :placeholder="$t('email')"></el-input>
                             </form>
