@@ -88,5 +88,7 @@ export default {
     already_have_account: 'Vous avez déjà un compte?',
     order_rogress: 'Progression de la commande',
     hello: 'Bonjour',
+    ready_to_cook_products: 'Produits prêt-à-cuisiner',
+    healthy_products: 'Produits de santé',
 } // End of root
   

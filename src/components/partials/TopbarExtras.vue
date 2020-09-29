@@ -10,13 +10,8 @@
                       {{$t('our_partners')}}<i class="el-icon-arrow-down el-icon--right"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                      <el-dropdown-item @click.native="handleCategories">{{$t('produits_sprotive')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('ready_to_cook_products')}}</el-dropdown-item>
                       <el-dropdown-item @click.native="handleCategories">{{$t('produits_elctronique')}}</el-dropdown-item>
-                      <el-dropdown-item @click.native="handleCategories">{{$t('produits_mecanique')}}</el-dropdown-item>
-                      <el-dropdown-item @click.native="handleCategories">{{$t('ready_to_eat')}}</el-dropdown-item>
-                      <el-dropdown-item @click.native="handleCategories">{{$t('pharmacy_products')}}</el-dropdown-item>
-                      <el-dropdown-item @click.native="handleCategories">{{$t('tools_and_hardware')}}</el-dropdown-item>
-                      <el-dropdown-item @click.native="handleCategories">{{$t('pharmacy_products')}}</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </li>

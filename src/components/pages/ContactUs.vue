@@ -84,7 +84,7 @@
                         </li>
 
                         <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                            <p>+1 (234) 567 08 09</p>
+                            <p>{{$t('phone_number')}}</p>
                         </li>
 
                         <li><i class="fas fa-envelope mt-4 fa-2x"></i>

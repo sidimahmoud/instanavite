@@ -88,4 +88,6 @@ export default {
     already_have_account: 'Already have an account?',
     order_rogress: 'Order Progress',
     hello: 'Hello',
+    ready_to_cook_products: 'Produits prêt-à-cuisiner',
+    healthy_products: 'healthy products',
 } // End of root
