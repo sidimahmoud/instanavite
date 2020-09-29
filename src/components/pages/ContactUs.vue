@@ -80,7 +80,7 @@
                 <div class="col-md-3 text-center">
                     <ul class="list-unstyled mb-0">
                         <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                            <p>GC47+R2 Ville-Marie, Montréal, QC, Canada</p>
+                            <p>32 Avenue Monseigneur Deziel, G1E2T7</p>
                         </li>
 
                         <li><i class="fas fa-phone mt-4 fa-2x"></i>
