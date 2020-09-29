@@ -11,7 +11,7 @@
                     </span>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item @click.native="handleCategories">{{$t('ready_to_cook_products')}}</el-dropdown-item>
-                      <el-dropdown-item @click.native="handleCategories">{{$t('produits_elctronique')}}</el-dropdown-item>
+                      <el-dropdown-item @click.native="handleCategories">{{$t('healthy_products')}}</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </li>
