@@ -14,11 +14,11 @@ let cart = window.localStorage.getItem('cart');
 let cartCount = window.localStorage.getItem('cartCount');
 let cartTotal = window.localStorage.getItem('cartTotal');
 
-
 export default {
     
     cart: cart ? JSON.parse(cart) : [],
     cartCount: cartCount ? parseInt(cartCount) : 0,
     cartTotal: cartTotal ? parseFloat(cartTotal) : 0,
+    tips : 0,
 
 } // End of export default

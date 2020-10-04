@@ -21,7 +21,7 @@
             <template slot-scope="scope">
                 <el-button
                     size="mini"
-                    @click="handleShow(scope.row)">Details</el-button>
+                    @click="handleShow(scope.row)">{{$t('view_order_progress')}}</el-button>
             </template>
         </el-table-column>
     </el-table>

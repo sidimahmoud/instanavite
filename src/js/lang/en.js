@@ -90,4 +90,10 @@ export default {
     hello: 'Hello',
     ready_to_cook_products: 'Ready to cook products',
     healthy_products: 'healthy products',
+    personnel_settings: 'Personal Settings',
+    recus: 'Receipts',
+    orders_list: 'Orders list',
+    view_order_progress: 'View order progress',
+    pourboir: 'Tip',
+    login_errors: 'The connection cannot be made. Please verify your email or password.',
 } // End of root

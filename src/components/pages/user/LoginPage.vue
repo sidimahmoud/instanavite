@@ -48,10 +48,13 @@
 </template>-->
 <template>
     <div style="margin-top:5%" class="container">
+        
         <div class="row">
+            
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="signup-form bg-white">
-                    <form method="post" @submit.prevent="login">
+                <div class="logo-app"><img class="app-header-logo" src="/images/defaults/small-logo.png" width="250px" height="80px" @click="handleHome"/></div><br/>
+                <div class="signup-form bg-white">  
+                    <form method="post" @submit.prevent="handleFormSubmit">
                         <h2>{{$t('sign_in')}}</h2>
                         <p class="hint-text"></p>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="errorMessage">
@@ -62,15 +65,18 @@
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control" name="email" placeholder="Email"
-                                   required="required" v-model="email">
+                                   required="required" v-model="form.email">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" name="password" placeholder="Password"
-                                   required="required" v-model="password">
+                                   required="required" v-model="form.password">
+                        </div>
+                        <div v-if="!isEmpty(loginErrors)">
+                          <p class="error-login"><i class="fas fa-times"></i> {{$t('login_errors')}}</p>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block " >
-                                <span @click="signIn">Sign in </span>
+                                <span @click="handleFormSubmit">Sign in </span>
                                 <div class="text-center text-white" v-if="authLoading">
                                     <span class="spinner-border spinner-border-sm" role="staitus" aria-hidden="true"/>
                                     Loading...
@@ -112,6 +118,8 @@
   import VFacebookLogin from 'vue-facebook-login-component'
   import GoogleLogin from 'vue-google-login';
   import {mapMutations, mapActions} from "vuex";
+  import {isEmpty} from "~/js/helpers/Common";
+
   export default {
 
     /*
@@ -189,8 +197,8 @@
         googleSignInParams: {
           client_id: '562139948414-sgs3p6c198oc9o4c65mse9l17c6t524h.apps.googleusercontent.com'
         },
-        authLoading: false
-
+        authLoading: false,
+        loginErrors: '',
       };
     }, // End of component > data
 
@@ -215,7 +223,7 @@
        * @return {boolean}
        */
       handleFormSubmit () {
-
+        const _this = this;
         // Prepare payload data to be sent to API.
         let data = {
           grant_type: 'password',
@@ -225,7 +233,6 @@
           client_secret: app_client_secret,
           scope:'*'
         };
-        console.log(data);
 
         // Clear old token
         this.destroyAccessToken();
@@ -237,6 +244,7 @@
               title: 'Unable to login',
               message: window._.isNil(r.response) ? 'Email or password is incorrect' : r.data.message,
             });
+            _this.loginErrors = "Email or password is incorrect"
           }
           else {
             this.$router.push({
@@ -249,6 +257,7 @@
             title: 'Unable to login',
             message: window._.isNil(e.response) ? 'Email or password is incorrect' : e.response.data.message,
           });
+          _this.loginErrors = "Email or password is incorrect"
         });
 
       }, // End of handleFormSubmit() method
@@ -300,7 +309,16 @@
         this.authLoading = true;
         this.setAccessToken('token test')
         this.redirectUser();
-      }
+      },
+      handleHome(){
+        this.$router.push({
+          name: "products-list",
+          params: {}
+        });
+      },
+      isEmpty (v) {
+        return isEmpty(v);
+      },
 
     }, // End of component > methods
 
@@ -334,7 +352,7 @@
 
     .signup-form {
         margin: 0 auto;
-        padding: 30px 0;
+        padding: 20px 0;
     }
 
     .signup-form h2 {
@@ -347,7 +365,7 @@
     .signup-form h2:before, .signup-form h2:after {
         content: "";
         height: 2px;
-        width: 30%;
+        width: 25%;
         background: #d4d4d4;
         position: absolute;
         top: 50%;
@@ -433,5 +451,12 @@
       border-radius: 3px;
       background-color: #4267b2;
       color: #fff;
+    }
+    .logo-app {
+      text-align: center;
+      align-content: center;
+    }
+    .error-login{
+      color: red;
     }
 </style>

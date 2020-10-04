@@ -40,7 +40,7 @@
                                 <span v-if="language == 'fr'" class="product-grid__title">{{item.name}}</span>
                                 <span v-else class="product-grid__title">{{item.name_english}}</span>
                                 
-                                <span class="product-grid__price">${{item.price.toFixed(2)}} / {{item.size}}</span>
+                                <span class="product-grid__price">${{item.price}} / {{item.size}}</span>
                                 <p class="product-grid__description"></p>
                                 <span class="product-grid__btn product-grid__add-to-cart" @click="addToCart(item)"><i class="fa fa-cart-arrow-down"></i> {{$t('add_cart')}}</span>				
                                 <!--<span class="product-grid__btn product-grid__view" @click="handleDetails(item)"><i class="fa fa-eye"></i> View more</span>-->

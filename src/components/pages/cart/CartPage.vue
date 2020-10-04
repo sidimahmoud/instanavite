@@ -35,37 +35,52 @@
                 </el-table>
             </div>
             <br/>
-            <div v-if="cartTotal > 0">
-                <h5><strong> {{$t('total_panier')}}</strong></h5>
-                <div class="total-box">
-                    <table>
-                        <tr>
-                            <th>{{$t('sous_total')}}</th>
-                            <td><strong>${{cartTotal}} </strong></td>
-                        </tr>
-                        <tr>
-                            <th>{{$t('tps')}}</th>
-                            <td><strong>$1.00</strong></td>
-                        </tr>
-                        <tr>
-                            <th>{{$t('tvq')}}</th>
-                            <td><strong>$1.00</strong></td>
-                        </tr>
-                        <tr>
-                            <th>{{$t('frais_preparation')}}</th>
-                            <td><strong>$1.00</strong></td>
-                        </tr>
-                        <tr>
-                            <th>{{$t('frais_livraison')}}</th>
-                            <td><strong>$1.00</strong></td>
-                        </tr>
-                        <tr>
-                            <th>{{$t('total')}}</th>
-                            <td><strong>${{totalDispaly}}</strong></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            <el-row v-if="cartTotal > 0">
+                <el-col :md="6">
+                    <h5><strong> {{$t('total_panier')}}</strong></h5>
+                    <div class="total-box">
+                        <table>
+                            <tr>
+                                <th>{{$t('sous_total')}}</th>
+                                <td><strong>${{cartTotal}} </strong></td>
+                            </tr>
+                            <tr>
+                                <th>{{$t('tps')}}</th>
+                                <td><strong>$1.00</strong></td>
+                            </tr>
+                            <tr>
+                                <th>{{$t('tvq')}}</th>
+                                <td><strong>$1.00</strong></td>
+                            </tr>
+                            <tr>
+                                <th>{{$t('frais_preparation')}}</th>
+                                <td><strong>$1.00</strong></td>
+                            </tr>
+                            <tr>
+                                <th>{{$t('frais_livraison')}}</th>
+                                <td><strong>$1.00</strong></td>
+                            </tr>
+                            <tr v-if="!isEmpty(orderTips)">
+                                <th>{{$t('pourboir')}}</th>
+                                <td><strong>${{orderTips}}</strong></td>
+                            </tr>
+                            <tr>
+                                <th>{{$t('total')}}</th>
+                                <td><strong>${{cartAllTotal}}</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                </el-col>
+                <el-col :md="14" :offset="1">
+                    <h5><strong> {{$t('pourboir')}}</strong></h5>
+                    <el-button @click="addTips(5)" round>5%</el-button>
+                    <el-button @click="addTips(10)" round>10%</el-button>
+                    <el-button @click="addTips(15)" round>15%</el-button>
+                    <el-button @click="addTips(20)" round>20%</el-button>
+                    <el-input placeholder="Write an amount" v-model="orderTips" style="width:20%;"></el-input>
+                    <el-button>Thank you</el-button>
+                </el-col>
+            </el-row>
         </div>
         <div style="margin-top:1rem">
             <el-row>
@@ -111,7 +126,7 @@
                         <stripe-elements
                             ref="elementsRef"
                             :pk="publishableKey"
-                            :amount="totalDispaly"
+                            :amount="cartAllTotal"
                             locale="en"
                             @token="tokenCreated"
                             @loading="loading = $event"
@@ -120,12 +135,11 @@
                         <el-button class="cart-submit-button" type="primary" @click="createOrder">{{$t('complet_order')}}</el-button>
 
                         <br/><br/>{{$t('or_via')}}<br/><br/>
-                        <PayPal
-                            :amount="cartTotal"
+                        <!-- <PayPal
+                            :amount="cartAllTotal"
                             currency="USD"
-                            :client="credentials"
-                            env="sandbox">
-                        </PayPal>
+                            :client="credentials">
+                        </PayPal> -->
                     </div>
                    
                 </el-col>
@@ -175,11 +189,13 @@ export default {
             address: "",
             coordinates: "",
             credentials: {
-                sandbox: 'AQd-XDPukcWgJQfqJPTfVvsTP6HsdZ1fcFzy0ceLLGKYaIZ_GjQDCPLng1OhJ6aKcV_h3Np2AbWHRyiX',
+                sandbox: 'sb-irwra2790525@business.example.com',
+                production: 'AQd-XDPukcWgJQfqJPTfVvsTP6HsdZ1fcFzy0ceLLGKYaIZ_GjQDCPLng1OhJ6aKcV_h3Np2AbWHRyiX'
             },
             loading: false,
             publishableKey: 'pk_live_51HB0HpHDyIu0bdYbv47CLk1imRIm5l8JwxVpg3uWGClstvnaVKQ8hPa4gnkqOIMZvOWTL7JOKIiNn2muThX3O9YA00EYiEVmHx', 
-            token: null
+            token: null,
+            
         }
     },
     /*
@@ -190,11 +206,12 @@ export default {
     computed: {
         ...mapGetters('cart', {
             cartData: 'cartData',
-            cartTotal:'cartTotal'
+            cartTotal:'cartTotal',
+            cartAllTotal: 'cartAllTotal',
+            orderTips: 'getTips'
         }),
         totalDispaly(){
-            //let somme = this.cartTotal + 4;
-            return parseFloat(this.cartTotal).toFixed(2);
+            return parseFloat(this.cartTotal + 4).toFixed(2);
         }
     },
     /*
@@ -204,26 +221,29 @@ export default {
     */
     methods: {
         ...mapMutations('cart', {
-            removeFromCart: 'removeFromCart'
+            removeFromCart: 'removeFromCart',
+            setTips: 'setTips',
+            clearCart: 'clearCart',
         }),
         ...mapActions('cart', {
             addOrder: 'createOrder'
         }),
+
         handleDelete(item){
             this.removeFromCart(item);
         },
         createOrder(){
             const _this = this;
             const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
-
-            if(hasAccessToken){
+            this.processPayment('token');
+            /* if(hasAccessToken){
                 this.$refs.elementsRef.submit();
             }else {
                 this.$router.push({
                     name: "login-page",
                     params: {}
                 });
-            }
+            } */
             /* stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {
@@ -256,26 +276,17 @@ export default {
                     status_id: 1,
                     is_test: 1,
                     booker_name: this.detail.first_name,
-                    amount: this.cartTotal + 4, // cart total + delivery fee
+                    amount: this.cartAllTotal,
                     products: this.cartData,
                     coordinates: this.coordinates,
-                    stripeToken: token.id,
+                    //stripeToken: token.id,
                 }
-                this.addOrder(payload)
-                .then(() => {
-                    Notification({
-                        title: 'Success',
-                        message: 'Thank you for your order we will deliver soon.',
-                        type: 'success'
-                    });
+
+                this.addOrder(payload).then((r) => {
+                    if(!isEmpty(r)){
+                        this.clearCart();
+                    }
                 })
-                .catch((error) => {
-                    Notification({
-                        title: 'Success',
-                        message: error,
-                        type: 'error'
-                    });
-                });
             } else {
                 Notification({
                     title: 'Error',
@@ -307,6 +318,14 @@ export default {
             this.token = token;
             this.processPayment(token)
         },
+        isEmpty (v) {
+            return isEmpty(v);
+        },
+        addTips(v) {
+            let s = (this.cartTotal * v ) / 100;
+            let formated = parseFloat(s).toFixed(2);
+            this.setTips(formated);
+        }
     },
     /*
     |--------------------------------------------------------------------------

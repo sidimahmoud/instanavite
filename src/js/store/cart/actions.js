@@ -10,6 +10,7 @@
 |
 */
 'use strict';
+import { Notification } from 'element-ui';
 
 
 export default {
@@ -23,14 +24,27 @@ export default {
    * @params {object} payload.params - query params that will be sent to API.
    * @returns {*}
    */
-  createOrder (context, payload = {}) {
-    axios({
+  async createOrder (context, payload = {}) {
+    await axios({
       method: 'post',
       url: 'https://api.instantavite.com/api/orders',
       data: payload
     })
     .then((response) => {
+      Notification({
+        title: 'Success',
+        message: 'Thank you for your order we will deliver soon.',
+        type: 'success'
+      });
       return response;
+    })
+    .catch((e) => {
+      Notification({
+        title: 'Error',
+        message: e,
+        type: 'error'
+      });
+      return e;
     });
   }, // End of requestAccessToken method
 

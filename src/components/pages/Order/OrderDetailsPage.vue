@@ -26,11 +26,11 @@
             <div class="order-steps">
                 <h5>Order Status</h5>
                 <el-steps class="stpes" :active="order.status_id" finish-status="success" simple style="margin-top: 20px">
-                    <el-step title="Pending" icon="el-icon-edit"></el-step>
-                    <el-step title="Assigned" icon="el-icon-upload"></el-step>
-                    <el-step title="PickedUp" icon="el-icon-picture"></el-step>
-                    <el-step title="On the way" icon="el-icon-upload"></el-step>
-                    <el-step title="Delivered" icon="el-icon-picture"></el-step>
+                    <el-step title="Pending"><i class="fas fa-car-side"></i></el-step>
+                    <el-step title="Assigned"></el-step>
+                    <el-step title="PickedUp"></el-step>
+                    <el-step title="On the way"></el-step>
+                    <el-step title="Delivered"></el-step>
                 </el-steps>
             </div>
 
