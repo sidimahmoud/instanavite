@@ -14,7 +14,7 @@
 
       <div class="app-header-action">
         <div class="app-header-action-menu">
-
+          <br/>
           <el-badge>
             <span class="icon-header" v-if="!isConnected" @click="handleAccount"><i class="fas fa-user"></i></span>
             <span class="icon-header" v-else @click="handleAccount">{{$t('hello')}}, Mokhtar</span>
@@ -24,9 +24,9 @@
             <span class="icon-header-cart" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
           </el-badge>
 
-          <el-badge> 
+          <!-- <el-badge> 
             <span class="app-info"><strong>{{$t('region_gatineau')}} </strong></span> <br/> <span class="app-info"><strong>{{$t('every_day')}}</strong></span>
-          </el-badge>
+          </el-badge> -->
 
         </div>
       </div> 

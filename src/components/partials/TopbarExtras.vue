@@ -18,8 +18,13 @@
                 <li><span @click="handleOthers">{{$t('special_orders')}}</span></li>
                 <li><span @click="handleAbout">{{$t('about_us')}}</span></li>
                 <li><span @click="handleContact">{{$t('contact_us')}}</span></li>
-                
-                <li class="last-number"><i class="fas fa-phone-alt icon-li"></i>{{$t('phone_number')}}</li>
+
+                <li class="last-number">
+                  <i class="fas fa-phone-alt icon-li"></i>{{$t('phone_number')}}
+                </li>
+                <li class="last-number">
+                  <span class="text-jaune"><strong>{{$t('region_gatineau')}} </strong></span> <span class="text-jaune"><strong>{{$t('every_day')}}</strong></span>
+                </li>
             </ul>
           </nav>
 
