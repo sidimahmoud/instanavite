@@ -285,6 +285,9 @@ export default {
                 this.addOrder(payload).then((r) => {
                     if(!isEmpty(r)){
                         this.clearCart();
+                        this.$router.push({
+                            path: "/",
+                        });
                     }
                 })
             } else {

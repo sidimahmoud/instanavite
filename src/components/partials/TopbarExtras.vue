@@ -4,7 +4,7 @@
           <nav class="menu">
             <ul>
                 <!--<li><span @click="handleCategories"><i class="fa fa-bars"></i>    BROWSE CATEGORIES</span></li>-->
-                <li>
+                <!-- <li>
                   <el-dropdown>
                     <span class="el-dropdown-link">
                       {{$t('our_partners')}}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -14,7 +14,7 @@
                       <el-dropdown-item @click.native="handleCategories">{{$t('healthy_products')}}</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
-                </li>
+                </li> -->
                 <li><span @click="handleOthers">{{$t('special_orders')}}</span></li>
                 <li><span @click="handleAbout">{{$t('about_us')}}</span></li>
                 <li><span @click="handleContact">{{$t('contact_us')}}</span></li>
