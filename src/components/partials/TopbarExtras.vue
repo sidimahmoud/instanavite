@@ -22,8 +22,8 @@
                 <li class="last-number">
                   <i class="fas fa-phone-alt icon-li"></i>{{$t('phone_number')}}
                 </li>
-                <li class="last-number">
-                  <span class="text-jaune"><strong>{{$t('region_gatineau')}} </strong></span> <span class="text-jaune"><strong>{{$t('every_day')}}</strong></span>
+                <li class="before-last-number">
+                  <span>{{$t('region_gatineau')}}</span> <span>{{$t('every_day')}}</span>
                 </li>
             </ul>
           </nav>
