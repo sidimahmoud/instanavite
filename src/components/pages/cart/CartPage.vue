@@ -235,15 +235,15 @@ export default {
         createOrder(){
             const _this = this;
             const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
-            this.processPayment('token');
-            /* if(hasAccessToken){
+            //this.processPayment('token');
+            if(hasAccessToken){
                 this.$refs.elementsRef.submit();
             }else {
                 this.$router.push({
                     name: "login-page",
                     params: {}
                 });
-            } */
+            }
             /* stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {
@@ -279,7 +279,7 @@ export default {
                     amount: this.cartAllTotal,
                     products: this.cartData,
                     coordinates: this.coordinates,
-                    //stripeToken: token.id,
+                    stripeToken: token.id,
                 }
 
                 this.addOrder(payload).then((r) => {
