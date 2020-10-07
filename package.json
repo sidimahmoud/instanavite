@@ -27,6 +27,7 @@
     "vue-facebook-signin-button": "^1.0.1",
     "vue-google-login": "^2.0.5",
     "vue-google-signin-button": "^1.0.4",
+    "vue-html-to-paper": "^1.3.1",
     "vue-i18n": "^8.21.1",
     "vue-paypal-checkout": "^3.2.0",
     "vue-router": "^3.1.3",

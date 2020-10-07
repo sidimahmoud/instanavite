@@ -14,6 +14,19 @@ import 'element-ui/lib/theme-chalk/index.css';
 import i18n from './i18n';
 import FBSignInButton from 'vue-facebook-signin-button'
 import GSignInButton from 'vue-google-signin-button'
+import VueHtmlToPaper from "vue-html-to-paper";
+
+// ...
+const options = {
+  name: "_blank",
+  specs: ["fullscreen=yes", "titlebar=yes", "scrollbars=yes"],
+  styles: [
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",
+    "https://unpkg.com/kidlat-css/css/kidlat.css"
+  ]
+};
+
+Vue.use(VueHtmlToPaper, options);
 
 // Use the plugins
 Vue.use(ElementUI, { i18n: (key, value) => i18n.t(key, value) });

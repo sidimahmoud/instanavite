@@ -14,9 +14,17 @@
                         prop="price"
                         :label="$t('cout')">
                     </el-table-column>
-                    <el-table-column
-                        prop="quantity"
+                    <el-table-column 
                         :label="$t('quantity')">
+                        <template slot-scope="scope">
+                            <el-button
+                                size="mini"
+                            @click="handleRemoveQuantity(scope.row)"><i class="fas fa-minus"></i></el-button>
+                            <span>{{scope.row.quantity}}</span>
+                            <el-button
+                                size="mini"
+                            @click="handleAddQuantity(scope.row)"><i class="fas fa-plus"></i></el-button>
+                        </template>
                     </el-table-column>
                     <el-table-column
                         prop="total"
@@ -224,6 +232,8 @@ export default {
             removeFromCart: 'removeFromCart',
             setTips: 'setTips',
             clearCart: 'clearCart',
+            addQuantity: 'addQuantity',
+            removeQuantity: 'removeQuantity',
         }),
         ...mapActions('cart', {
             addOrder: 'createOrder'
@@ -232,18 +242,24 @@ export default {
         handleDelete(item){
             this.removeFromCart(item);
         },
+        handleAddQuantity(item){
+            this.addQuantity(item);
+        },
+        handleRemoveQuantity(item){
+            this.removeQuantity(item)
+        },
         createOrder(){
             const _this = this;
             const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
-            //this.processPayment('token');
-            if(hasAccessToken){
+            this.processPayment('token');
+            /* if(hasAccessToken){
                 this.$refs.elementsRef.submit();
             }else {
                 this.$router.push({
                     name: "login-page",
                     params: {}
                 });
-            }
+            } */
             /* stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {

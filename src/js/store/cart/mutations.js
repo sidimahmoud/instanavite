@@ -59,6 +59,37 @@ export default {
         this.commit('cart/saveCart');
     },
 
+    addQuantity(state, item) {
+        let index = state.cart.indexOf(item);
+    
+        if (index > -1) {
+            let found = state.cart[index];
+            state.cartCount = state.cartCount + 1 ;
+            found.quantity ++;
+            let som = found.quantity * found.price;
+            found.total = som.toFixed(2);
+            //state.cartTotal += found.price.toFixed(2);
+            
+            this.commit('cart/sumCartTotal',parseFloat(found.price).toFixed(2));
+        }
+        this.commit('cart/saveCart');
+    },
+    removeQuantity(state, item) {
+        let index = state.cart.indexOf(item);
+    
+        if (index > -1) {
+            let found = state.cart[index];
+            if(found.quantity >= 1){
+                found.quantity = found.quantity -1;
+                state.cartCount = state.cartCount - 1 ;
+                let rest= parseFloat(found.total) - parseFloat(found.price);
+                found.total = parseFloat(rest).toFixed(2)
+                this.commit('cart/sousCartTotal',parseFloat(found.price).toFixed(2));
+            } 
+        }
+        this.commit('cart/saveCart');
+    },
+
     saveCart(state) {
         window.localStorage.setItem('cart', JSON.stringify(state.cart));
         window.localStorage.setItem('cartCount', state.cartCount);
@@ -69,6 +100,13 @@ export default {
         state.cartTotal = som.toFixed(2);
         this.commit('cart/saveCart');
     },
+
+    sousCartTotal(state, value){
+        let som = parseFloat(state.cartTotal) - parseFloat(value);
+        state.cartTotal = som.toFixed(2);
+        this.commit('cart/saveCart');
+    },
+
     setTips(state, value){
         state.tips = value;
     },

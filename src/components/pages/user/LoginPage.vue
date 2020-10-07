@@ -52,7 +52,7 @@
         <div class="row">
             
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                <div class="logo-app"><img class="app-header-logo" src="/images/defaults/small-logo.png" width="250px" height="80px" @click="handleHome"/></div><br/>
+                <div class="logo-app"><img class="app-header-logo" src="/images/defaults/larger.png" @click="handleHome"/></div><br/>
                 <div class="signup-form bg-white">  
                     <form method="post" @submit.prevent="handleFormSubmit">
                         <h2>{{$t('sign_in')}}</h2>
@@ -240,10 +240,10 @@
         // Request freshly baked token from the oven!
         this.requestAccessToken({data}).then((r) => {
           if( r.data.token_type!=='Bearer'){
-            this.$notify.error({
+            /* this.$notify.error({
               title: 'Unable to login',
               message: window._.isNil(r.response) ? 'Email or password is incorrect' : r.data.message,
-            });
+            }); */
             _this.loginErrors = "Email or password is incorrect"
           }
           else {

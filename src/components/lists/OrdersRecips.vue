@@ -72,7 +72,11 @@ export default {
             this.loadList(params);
         },
         handleShow(row){
-            this.getReciept();
+            //this.getReciept();
+            this.$router.push({
+                name: "order-receipt-page",
+                params: {id: row.id}
+            });
             /* window.open("https://firebasestorage.googleapis.com/v0/b/instantavite-1ea10.appspot.com/reciept/document.pdf", "_blank"); */
         }
     },

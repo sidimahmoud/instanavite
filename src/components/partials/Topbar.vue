@@ -1,10 +1,11 @@
 <template>
     <div class="app-page-top-bar">  
-      <img class="app-header-logo" src="/images/defaults/small-logo.png" @click="handleHome"/>
+      <img class="app-header-logo" src="/images/defaults/small.png" @click="handleHome"/>
       
       <el-input class="header-input-field" :placeholder="$t('search_product')" v-model="product" @keyup.enter.native="browseProduct">
-        <span class="el-icon-search el-input__icon app-cursor-pointer fas fa-search search-icon" slot="suffix" @click.native="browseProduct"></span>
+          <el-button slot="append" @click="browseProduct"><i class="fas fa-search search-icon"></i></el-button>
       </el-input>
+      
 
       <div class="app-header-language">
         <el-badge>
@@ -17,7 +18,7 @@
           <br/>
           <el-badge>
             <span class="icon-header" v-if="!isConnected" @click="handleAccount"><i class="fas fa-user"></i></span>
-            <span class="icon-header" v-else @click="handleAccount">{{$t('hello')}}, Mokhtar</span>
+            <span class="icon-header" v-else @click="handleAccount">{{$t('hello')}}, {{userData.name}}</span>
           </el-badge>
           
           <el-badge :value="cartCount" class="item" type="primary">
@@ -35,6 +36,7 @@
 
 <script>
   import {mapGetters,mapState, mapMutations, mapActions} from "vuex";
+  import {isEmpty} from "~/js/helpers/Common";
   
   export default {
     /*
@@ -69,6 +71,9 @@
       ...mapState('ui', ['language']),
       ...mapGetters('cart', {
         cartCount: 'cartCount',
+      }),
+      ...mapGetters('auth', {
+        userData: 'userData',
       }),
       iLanguage: {
         get () {
@@ -108,17 +113,17 @@
         });
       },
       browseProduct(){
-        console.log("triggerd");
         const _this = this;
         let query = {};
-        
-        query[`filter[name]`] = this.product;
-        const path = '/products';
-        
-        this.$router.push({path, query}, () => {
-          if (_this.$route.path === path)
-            window.location.reload();
-        });
+        if(!isEmpty(this.product)){
+          query[`filter[name]`] = this.product;
+          const path = '/products';
+          
+          this.$router.push({path, query}, () => {
+            if (_this.$route.path === path)
+              window.location.reload();
+          });
+        }
       },
       handleAccount() {
         const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
@@ -163,7 +168,7 @@
       // Assign the query values stuff to the form ---
       const q = _.clone(this.$route.query);
       const filters = _.filter(Object.keys(q), (v) => _.includes(v, 'filter'));
-
+   
       if (filters.length > 0) {
           _.each(filters, (x) => {
             this.product = q[x];
