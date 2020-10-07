@@ -253,10 +253,10 @@
           }
 
         }).catch((e) => {
-          this.$notify.error({
+          /* this.$notify.error({
             title: 'Unable to login',
             message: window._.isNil(e.response) ? 'Email or password is incorrect' : e.response.data.message,
-          });
+          }); */
           _this.loginErrors = "Email or password is incorrect"
         });
 
