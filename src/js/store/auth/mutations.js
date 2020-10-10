@@ -84,14 +84,10 @@ export default {
      * @return {void}
      */
     destroyAccessToken: function (state) {
-
         console.log('Clearing Access Token');
-
         // Destroy the token and its state
         state.accessToken = null;
-        //localStorage.removeItem('app_access_token');
-
-
+        localStorage.removeItem('app_access_token');
     }, // End of destroyAccessToken method
 
 

@@ -96,5 +96,6 @@ export default {
     view_order_progress: 'Afficher la progression',
     pourboir: 'Pourboir',
     login_errors: 'La connexion ne peut pas être effectuée. Veuillez vérifier votre courriel ou mot de passe.',
+    display_reciept: 'Afficher Reçus',
 } // End of root
   

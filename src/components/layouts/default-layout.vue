@@ -234,11 +234,7 @@ export default {
     |--------------------------------------------------------------------------
     */
     mounted() {
-        this.getList({user_id: this.userEmail});
-        /*setTimeout(() => {
-            this.scrollToEnd();
-        },3000)*/
-        
+        this.getList({user_id: this.userEmail});        
     },
 }
 </script>

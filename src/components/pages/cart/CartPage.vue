@@ -218,6 +218,9 @@ export default {
             cartAllTotal: 'cartAllTotal',
             orderTips: 'getTips'
         }),
+        ...mapGetters('auth', {
+            userData: 'userData',
+        }),
         totalDispaly(){
             return parseFloat(this.cartTotal + 4).toFixed(2);
         }
@@ -251,15 +254,16 @@ export default {
         createOrder(){
             const _this = this;
             const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
-            this.processPayment('token');
-            /* if(hasAccessToken){
-                this.$refs.elementsRef.submit();
+            
+            if(hasAccessToken){
+                this.processPayment('token');
+                //this.$refs.elementsRef.submit();
             }else {
                 this.$router.push({
                     name: "login-page",
                     params: {}
                 });
-            } */
+            }
             /* stripe.createToken(card).then(function(result) {
                 console.log(result.token);
                 if (!isEmpty(result.token)) {
@@ -281,7 +285,7 @@ export default {
                 let payload= {
                     language: "Français",
                     address: this.address,
-                    client_id: 1,
+                    client_id: this.userData.id,
                     town_id:1,
                     super_market_id: 1,
                     is_immediate: false,

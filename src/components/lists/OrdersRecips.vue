@@ -21,7 +21,7 @@
             <template slot-scope="scope">
                 <el-button
                     size="mini"
-                    @click="handleShow(scope.row)">Download</el-button>
+                    @click="handleShow(scope.row)">{{$t('display_reciept')}}</el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -50,6 +50,9 @@ export default {
         ...mapGetters('user', {
             listData: 'progressOrders',
         }),
+        ...mapGetters('auth', {
+            userData: 'userData',
+        }),
     },
     /*
     |--------------------------------------------------------------------------
@@ -67,7 +70,7 @@ export default {
 
         fetchData() {
             let params = {
-                id: 1
+                id: this.userData.id,
             }
             this.loadList(params);
         },

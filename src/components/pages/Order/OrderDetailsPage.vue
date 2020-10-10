@@ -25,13 +25,24 @@
 
             <div class="order-steps">
                 <h5>Order Status</h5>
-                <el-steps class="stpes" :active="order.status_id" finish-status="success" simple style="margin-top: 20px">
-                    <el-step title="Pending"><i class="fas fa-car-side"></i></el-step>
+                <!-- <el-steps class="stpes" :active="order.status_id" finish-status="success" simple style="margin-top: 20px">
+                    <el-step title="Pending">ici</el-step>
                     <el-step title="Assigned"></el-step>
                     <el-step title="PickedUp"></el-step>
                     <el-step title="On the way"></el-step>
                     <el-step title="Delivered"></el-step>
-                </el-steps>
+                </el-steps> -->
+                <div class="stpes">
+                    <ul class="list">
+                        <li :class="`${order.status_id >=1 ? 'active': ''}`">
+                            Pending
+                        </li>
+                        <!-- <li :class="`${order.status_id >=2 ? 'active': ''}`"><i class="fas fa-archive"></i>Assigned</li> -->
+                        <li :class="`${order.status_id >=3 ? 'active': ''}`">PickedUp</li>
+                        <li :class="`${order.status_id >=4 ? 'active': ''}`">On the way</li>
+                        <li :class="`${order.status_id >=5 ? 'active': ''}`">Delivered</li>
+                    </ul>
+                    </div>
             </div>
 
             <div class="order-products">

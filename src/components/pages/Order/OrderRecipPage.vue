@@ -1,33 +1,5 @@
 <template>
     <div id="printSection" class="order-reciept-page printSection">
-        <!-- <div class="order-container"> -->
-            <!-- <div class="order-reciept-header">
-                <el-row>
-                    <el-col :md="4" >
-                        <h6>N° DE COMMANDE</h6>
-                    </el-col>
-                    <el-col :md="6">
-                        <span>#{{order.id}}</span>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :md="4" >
-                        <h6>Total of the order</h6>
-                    </el-col>
-                    <el-col :md="6">
-                        <span>${{order.amount}}</span>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :md="4" >
-                        <h6>Order Date</h6>
-                    </el-col>
-                    <el-col :md="6">
-                        <span>{{order.created_at}}</span>
-                    </el-col>
-                </el-row>
-            </div> -->
-
             <el-row>
                 <el-col :md="13" >
                     <div class="order-reciept">
@@ -35,7 +7,7 @@
                         32 avenue monsiegneur dézel,<br/>
                         Ville de Québec, Quebec,<br/>
                         G1E2T7<br/>
-                        <a href="https://instantavite-dev.netlify.app" target="_blank">ww.instantavite.com</a>
+                        <a href="https://instantavite-dev.netlify.app" target="_blank">www.instantavite.com</a>
                     </div>
                 </el-col>
                 <el-col :md="8">
@@ -54,6 +26,7 @@
             <el-row>
                 <el-col :md="6" >
                     <h5>BILL TO</h5>
+                    <el-divider></el-divider>
                     <el-row>
                         <el-col :md="12" >
                             <p>Name of the customer</p>
@@ -81,6 +54,7 @@
                 </el-col>
                 <el-col :md="4" :offset="1">
                     <h5>SHIPPING ADDRESS</h5>
+                    <el-divider></el-divider>
                     <span><strong>{{order.address}}</strong></span>
                 </el-col>
                 <el-col :md="6" :offset="1">
@@ -100,13 +74,21 @@
                             <span>{{order.created_at}}</span>
                         </el-col>
                     </el-row>
+                    <el-row>
+                        <el-col :md="8" >
+                            <p>Order Status:</p>
+                        </el-col>
+                        <el-col :md="8">
+                            <span class="text-green">{{$t('delivered')}}</span>
+                        </el-col>
+                    </el-row>
                 </el-col>
             </el-row>
 
             <div>
                 <el-table
                     :data="order.products"
-                    style="width: 100%"
+                    style="width: 80%"
                     :row-class-name="tableRowClassName">
                     <el-table-column
                         label="Description">
@@ -132,37 +114,43 @@
                     </el-table-column>
                 </el-table>
             </div>
-            <br/><br/>
             <div>
-                <table>
-                    <tr>
-                        <th>{{$t('sous_total')}}</th>
-                        <td><strong>${{order.amount}} </strong></td>
-                    </tr>
-                    <tr>
-                        <th>{{$t('tps')}}</th>
-                        <td><strong>$1.00</strong></td>
-                    </tr>
-                    <tr>
-                        <th>{{$t('tvq')}}</th>
-                        <td><strong>$1.00</strong></td>
-                    </tr>
-                    <tr>
-                        <th>{{$t('frais_preparation')}}</th>
-                        <td><strong>$1.00</strong></td>
-                    </tr>
-                    <tr>
-                        <th>{{$t('frais_livraison')}}</th>
-                        <td><strong>$1.00</strong></td>
-                    </tr>
-                    <tr>
-                        <th>{{$t('total')}}</th>
-                        <td><strong>${{order.amount}}</strong></td>
-                    </tr>
-                </table>
+                <el-row>
+                    <el-col :md="4">
+                    </el-col>
+                    <el-col :md="11" :offset="5">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th>{{$t('sous_total')}}</th>
+                                    <td><strong>${{order.amount}} </strong></td>
+                                </tr>
+                                <tr>
+                                    <th>{{$t('tps')}}</th>
+                                    <td><strong>$1.00</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>{{$t('tvq')}}</th>
+                                    <td><strong>$1.00</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>{{$t('frais_preparation')}}</th>
+                                    <td><strong>$1.00</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>{{$t('frais_livraison')}}</th>
+                                    <td><strong>$1.00</strong></td>
+                                </tr>
+                                <tr class="last-row">
+                                    <th>{{$t('total')}}</th>
+                                    <td><strong>${{order.amount}}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </el-col>
+                </el-row>
             </div>
-       <!--  </div> -->
-    </div>
+    </div> 
 </template>
 
 <script>

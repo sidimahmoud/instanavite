@@ -1,51 +1,3 @@
-<!--<template>
-  <div class="login-view">
-    <div class="wrap-login p-t-30 p-b-50">
-      <img src="/images/defaults/logo.png"/>
-      <el-form class="login-form" id="login_form" :model="form" ref="login_form" :rules="rules"
-              @keyup.enter.native="handleFormSubmit">
-
-        
-        <el-form-item label="Email"
-                      class="el-form-item label-short"
-                      prop="email">
-          <el-input id="login_email"
-                    v-model="form.email"
-                    placeholder="your@email.com"/>
-        </el-form-item>
-
-        
-        <el-form-item label="Password"
-                      class="el-form-item label-short"
-                      prop="password">
-          <el-input id="login_password" v-model="form.password" type="password"
-                    placeholder="*******"/>
-        </el-form-item>
-
-        
-
-
-     
-        <el-form-item class="el-form-item">
-          <el-button id="login_submit_btn"
-                    type="primary"
-                    class="login-button"
-                    @click="handleFormSubmit">Se connecter</el-button>
-        </el-form-item>
-
-       
-    </div> 
-    <div>
-      <el-divider>ou</el-divider>
-      <div class="social-login">
-        <div>
-          <v-facebook-login app-id="261288108609958"></v-facebook-login><br/>
-          <div id="google-signin-button" class="g-signin2" data-width="215" data-onsuccess="onSignIn" data-onfailure="onFailure"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>-->
 <template>
     <div style="margin-top:5%" class="container">
         
@@ -76,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block " >
-                                <span @click="handleFormSubmit">Sign in </span>
+                                <span v-if="!authLoading" @click="handleFormSubmit">Sign in </span>
                                 <div class="text-center text-white" v-if="authLoading">
                                     <span class="spinner-border spinner-border-sm" role="staitus" aria-hidden="true"/>
                                     Loading...
@@ -88,12 +40,6 @@
                         <router-link :to="{name: 'register-user-page'}">{{$t('sign_up')}}</router-link>
                     </div>
                     <h2>Or</h2>
-                    <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" @click="loginGoogle('google')">
-                        <i class="fab fa-google"></i> Continue with Google
-                    </button> -->
-                    <!-- <button class="btn btn-lg btn-github  btn-block text-uppercase" @click="onLogin()">
-                        <i class="fab fa-facebook"></i> Continue with Facebook
-                    </button> -->
                     <g-signin-button
                       class="btn btn-lg btn-google btn-block text-uppercase"
                       :params="googleSignInParams"
@@ -224,6 +170,7 @@
        */
       handleFormSubmit () {
         const _this = this;
+        this.authLoading=true;
         // Prepare payload data to be sent to API.
         let data = {
           grant_type: 'password',
@@ -236,27 +183,18 @@
 
         // Clear old token
         this.destroyAccessToken();
-
+        
         // Request freshly baked token from the oven!
         this.requestAccessToken({data}).then((r) => {
+          _this.authLoading=false;
           if( r.data.token_type!=='Bearer'){
-            /* this.$notify.error({
-              title: 'Unable to login',
-              message: window._.isNil(r.response) ? 'Email or password is incorrect' : r.data.message,
-            }); */
             _this.loginErrors = "Email or password is incorrect"
           }
           else {
-            this.$router.push({
-              path: "/",
-            });
+            this.redirectUser();
           }
-
         }).catch((e) => {
-          /* this.$notify.error({
-            title: 'Unable to login',
-            message: window._.isNil(e.response) ? 'Email or password is incorrect' : e.response.data.message,
-          }); */
+          _this.authLoading=false;
           _this.loginErrors = "Email or password is incorrect"
         });
 
@@ -278,8 +216,9 @@
         this.isConnected = false;
       },
       redirectUser(){
-        window.history.back();
-        //this.$router.push({path: '/'});
+        //window.history.back();
+        //console.log(window.history.previous.href);
+        this.$router.push({path: '/'});
       },
 
       onSignInSuccess (response) {

@@ -50,6 +50,10 @@ export default {
         ...mapGetters('user', {
             listData: 'progressOrders',
         }),
+        ...mapGetters('auth', {
+            userData: 'userData',
+        }),
+        
     },
     /*
     |--------------------------------------------------------------------------
@@ -63,7 +67,7 @@ export default {
 
         fetchData() {
             let params = {
-                id: 1
+                id: this.userData.id
             }
 
             this.loadList(params);

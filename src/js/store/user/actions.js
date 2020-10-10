@@ -32,5 +32,25 @@ export default {
     });
   }, // End of requestAccessToken method
 
+  /**
+   * Action for getting the products by params.
+   *
+   * @params {object} context - current Vuex scope.
+   * @params {object} payload - contains useful values.
+   * @params {object} payload.translator_id - ID of the target translator.
+   * @params {object} payload.params - query params that will be sent to API.
+   * @returns {*}
+   */
+  createUser (context, payload = {}) {
+    return axios({
+      method: 'post',
+      url: 'https://api.instantavite.com/api/users',
+      data: payload
+    })
+    .then(r => {
+      return r;
+    })
+    .catch((e) => {return "error"});
+  },
 
 } // End of export default

@@ -15,6 +15,11 @@ export default [
   // Landing Page
   {
     path: '/', component: Vue.component('products-list'),
+    name: 'landing-page',
+    meta: {
+      page_class: 'starting-route',
+      full_screen: false
+    }
   },
   {
     path: '/dashboard', component: Vue.component('dashboard-page'),

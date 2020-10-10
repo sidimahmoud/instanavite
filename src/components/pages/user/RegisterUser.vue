@@ -4,39 +4,33 @@
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div class="signup-form bg-white">
-                        <form @submit.prevent="register">
+                        <form @submit.prevent="signUpSubmit">
                             <h2>{{$t('sign_up')}}</h2>
                             <p class="hint-text">{{$t('create_msg')}}</p>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
-                                 v-if="errorMessage">
-                                {{errorMessage}}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
+                            
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
                                         <input type="text" class="form-control" name="first_name"
-                                               placeholder="First Name" required="required" v-model="first_name">
+                                               placeholder="First Name" required="required" v-model="form.name">
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control" name="last_name" placeholder="Last Name"
-                                               required="required" v-model="last_name">
+                                               required="required" v-model="form.last_name">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="email" class="form-control" name="email" placeholder="Email"
-                                       required="required" v-model="email">
+                                       required="required" v-model="form.email">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="password" placeholder="Password"
-                                       required="required" v-model="password1">
+                                       required="required" v-model="form.password">
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control" name="confirm_password"
-                                       placeholder="Confirm Password" required="required" v-model="password2">
+                                       placeholder="Confirm Password" required="required" v-model="form.password2">
                             </div>
                             <div class="form-group">
                                 <label class="form-check-label">
@@ -44,9 +38,16 @@
                                     I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a>
                                 </label>
                             </div>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                                v-if="errorStatus">
+                                {{errorMessage}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                    <span @click="signUpSubmit">Sign up </span>
+                                    <span v-if="!authLoading" @click="signUpSubmit">Sign up </span>
                                     <div class="text-center text-white" v-if="authLoading">
                                         <span class="spinner-border spinner-border-sm" role="status"
                                             aria-hidden="true">
@@ -58,8 +59,9 @@
                             </div>
 
                         </form>
+                        
                         <div class="text-center">{{$t('already_have_account')}}
-                            <router-link :to="{name: 'Login'}">{{$t('sign_in')}}</router-link>
+                            <router-link :to="{name: 'login-page'}">{{$t('sign_in')}}</router-link>
                         </div>
                         <h2>Or</h2>
                         <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" @click="loginGoogle('google')">
@@ -92,19 +94,21 @@
 </template>
 
 <script>
-    import {mapGetters} from "vuex";
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         name: "Register",
 
         data() {
             return {
-                first_name: '',
-                last_name: '',
-                email: '',
-                password1: '',
-                password2: '',
-                errorMessage: '',
+                form:{
+                    name: '',
+                    last_name: '',
+                    email: '',
+                    password: '',
+                    password2: '',
+                    type: 1,
+                },
                 fbSignInParams: {
                 scope: 'email,user_likes',
                     return_scopes: true
@@ -112,32 +116,15 @@
                 googleSignInParams: {
                     client_id: '562139948414-sgs3p6c198oc9o4c65mse9l17c6t524h.apps.googleusercontent.com'
                 },
-                authLoading: false
+                authLoading: false,
+                errorStatus: false,
+                errorMessage: '',
             }
         },
         methods: {
-
-            register() {
-                if (this.password1 !== this.password2) {
-                    this.errorMessage = "Password confirmation doesn't match Password";
-                    return
-                }
-                this.$store.dispatch('register', {
-                    first_name: this.first_name,
-                    last_name: this.last_name,
-                    email: this.email,
-                    password: this.password1,
-                })
-                    .then(res => {
-                        console.log(res)
-                        this.$router.push({name: 'Email'})
-                        // (res.data.user.roles[0].name === "teacher") ? this.$router.push({name: 'TeacherProfile'}) : this.$router.push({name: 'StudentProfile'});
-                    })
-                    .catch(err => {
-                        console.log(err.response.data.errors[Object.keys(err.response.data.errors)[0][0]]);
-                        this.errorMessage = err.response.data.errors[Object.keys(err.response.data.errors)[0]]
-                    })
-            },
+            ...mapActions('user', {
+                addUser: 'createUser',
+            }),
             redirectUser(){
                 this.$router.push({path: '/'});
             },
@@ -157,7 +144,7 @@
                 // See https://developers.google.com/identity/sign-in/web/reference#users
                 const profile = googleUser.getBasicProfile() // etc etc
                 console.log(profile);
-                this.redirectUser(); 
+                //this.redirectUser(); 
             },
             ongSignInError (error) {
                 // `error` contains any error occurred.
@@ -165,10 +152,28 @@
             },
             signUpSubmit(){
                 this.authLoading = true;
-                this.redirectUser(); 
+                if(this.verifyPassword()){
+                    this.addUser(this.form)
+                    .then((r) => {
+                        if(r != "error"){
+                            this.$router.push({path: '/login'});
+                        }else{
+                            this.authLoading = false;
+                            this.errorStatus = true;
+                            this.errorMessage = "Cannot Create User."
+                        }
+                    })
+                } else{
+                    this.authLoading = false;
+                    this.errorStatus = true;
+                    this.errorMessage = "The password does not conform."
+                }
+                
+            },
+            verifyPassword(){
+                return this.form.password == this.form.password2 ? true : false;
             }
         },
-        computed: mapGetters(["authLoading"])
     }
 </script>
 

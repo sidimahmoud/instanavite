@@ -96,4 +96,5 @@ export default {
     view_order_progress: 'View order progress',
     pourboir: 'Tip',
     login_errors: 'The connection cannot be made. Please verify your email or password.',
+    display_reciept: 'Show Receipt',
 } // End of root
