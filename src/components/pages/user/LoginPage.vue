@@ -6,7 +6,7 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="logo-app"><img class="app-header-logo" src="/images/defaults/larger.png" @click="handleHome"/></div><br/>
                 <div class="signup-form bg-white">  
-                    <el-form>
+                    <form method="post" @submit.prevent="handleFormSubmit">
                         <h2>{{$t('sign_in')}}</h2>
                         <p class="hint-text"></p>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="errorMessage">
@@ -28,14 +28,14 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block " >
-                                <span v-if="!authLoading" @click="handleFormSubmit">Sign in </span>
+                                <span v-if="!authLoading">Sign in </span>
                                 <div class="text-center text-white" v-if="authLoading">
                                     <span class="spinner-border spinner-border-sm" role="staitus" aria-hidden="true"/>
                                     Loading...
                                 </div>
                             </button>
                         </div>
-                    </el-form>
+                    </form>
                     <div class="text-center">Don't have an account?
                         <router-link :to="{name: 'register-user-page'}">{{$t('sign_up')}}</router-link>
                     </div>
