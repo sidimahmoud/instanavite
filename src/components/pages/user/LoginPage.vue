@@ -6,7 +6,7 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="logo-app"><img class="app-header-logo" src="/images/defaults/larger.png" @click="handleHome"/></div><br/>
                 <div class="signup-form bg-white">  
-                    <form method="post">
+                    <el-form>
                         <h2>{{$t('sign_in')}}</h2>
                         <p class="hint-text"></p>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="errorMessage">
@@ -35,7 +35,7 @@
                                 </div>
                             </button>
                         </div>
-                    </form>
+                    </el-form>
                     <div class="text-center">Don't have an account?
                         <router-link :to="{name: 'register-user-page'}">{{$t('sign_up')}}</router-link>
                     </div>
