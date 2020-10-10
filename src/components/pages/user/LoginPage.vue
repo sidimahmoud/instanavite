@@ -6,7 +6,7 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="logo-app"><img class="app-header-logo" src="/images/defaults/larger.png" @click="handleHome"/></div><br/>
                 <div class="signup-form bg-white">  
-                    <form method="post" @submit.prevent="handleFormSubmit">
+                    <form method="post">
                         <h2>{{$t('sign_in')}}</h2>
                         <p class="hint-text"></p>
                         <div class="alert alert-danger alert-dismissible fade show" role="alert" v-if="errorMessage">
@@ -162,7 +162,7 @@
     */
     methods: {
       ...mapActions('auth', ['requestAccessToken','socialStudentAuth']),
-      ...mapMutations('auth', ['initAccessToken', 'destroyAccessToken','setAccessToken']),
+      ...mapMutations('auth', ['initAccessToken','destroyUserData', 'destroyAccessToken','setAccessToken']),
       /**
        * Handle when the Log In form was submitted.
        *
@@ -183,6 +183,7 @@
 
         // Clear old token
         this.destroyAccessToken();
+        this.destroyUserData();
         
         // Request freshly baked token from the oven!
         this.requestAccessToken({data}).then((r) => {

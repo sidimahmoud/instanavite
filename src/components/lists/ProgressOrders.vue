@@ -86,7 +86,13 @@ export default {
     |--------------------------------------------------------------------------
     */
     mounted() {
-       this.fetchData();
+      const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
+
+      // If user has access token already, redirect to dashboard.
+      if (!hasAccessToken) {
+        this.fetchData();
+      }
+       
     }
 }
 </script>

@@ -86,8 +86,9 @@ export default {
      * @return {object}
      */
     userData: function (state) {
-
-        if (state.userData.id.length <= 0) {
+        console.log('get userData');
+        console.log(state.userData);
+        if (!isEmpty(state.userData) && state.userData.id.length <= 0) {
             let t = localStorage.getItem("app_user_data");
             if (!isEmpty(t)) {
                 state.userData = JSON.parse(t);

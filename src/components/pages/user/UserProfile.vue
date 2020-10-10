@@ -56,7 +56,8 @@ export default {
             console.log('ici');
             this.destroyAccessToken();
             this.destroyUserData();
-            window.location.reload();
+            //window.location.reload();
+             this.$router.push({path: '/login'});
         },
     },
     /*

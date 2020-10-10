@@ -41,6 +41,10 @@ export default {
         if(r.data.token_type === 'Bearer'){
         let token = r.data.access_token;
         let userData = r.data.user;
+        console.log('r');
+        console.log(r.data);
+        console.log('userData');
+        console.log(userData);
         console.group('Gathering Login Responses');
         context.commit('setAccessToken', token);
         context.commit('setUserData', userData);
