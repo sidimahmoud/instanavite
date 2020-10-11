@@ -103,8 +103,8 @@
                     <el-button @click="addTips(10)" round>10%</el-button>
                     <el-button @click="addTips(15)" round>15%</el-button>
                     <el-button @click="addTips(20)" round>20%</el-button>
-                    Saisir un montant: <el-input placeholder="Write an amount" v-model="tips_montant" style="width:20%;"></el-input>
-                    <el-button>Thank you</el-button><br/><br/>
+                    Saisir un montant: <el-input placeholder="Write an amount" v-model="tips_montant" style="width:20%;" @change="addTipshard"></el-input>
+                    <el-button @click="removeTips">Thank you</el-button><br/><br/>
 
                     <span><strong>{{$t('note_to_driver')}}</strong></span>
                     <el-input 
@@ -372,6 +372,7 @@ export default {
                     products: this.cartData,
                     coordinates: this.iCoorinates,
                     stripeToken: token.id,
+                    post_code: this.iPostal,
                 }
 
                 this.addOrder(payload).then((r) => {
@@ -420,6 +421,12 @@ export default {
             let s = (this.cartTotal * v ) / 100;
             let formated = parseFloat(s).toFixed(2);
             this.setTips(formated);
+        },
+        addTipshard() {
+            this.setTips(this.tips_montant);
+        },
+        removeTips() {
+            this.setTips(0);
         },
         onProceesCheckout(){
             this.showTodoForm = true;

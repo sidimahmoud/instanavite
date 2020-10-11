@@ -3,6 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                    <div class="logo-app"><img class="app-header-logo" src="/images/defaults/larger.png" @click="handleHome"/></div><br/>
                     <div class="signup-form bg-white">
                         <form @submit.prevent="signUpSubmit">
                             <h2>{{$t('sign_up')}}</h2>
@@ -131,9 +132,9 @@
 
             onSignInSuccess (response) {
                 FB.api('/me', dude => {
-                console.log(dude);
-                console.log(`Good to see you, ${dude.name}.`)
-                this.redirectUser();
+                    console.log(dude);
+                    console.log(`Good to see you, ${dude.name}.`)
+                    this.redirectUser();
                 })
             },
             onSignInError (error) {
@@ -144,11 +145,37 @@
                 // See https://developers.google.com/identity/sign-in/web/reference#users
                 const profile = googleUser.getBasicProfile() // etc etc
                 console.log(profile);
+                this.createSocialUser({
+                    'name': profile['Ad'],
+                    'last_name': profile['Ad'],
+                    'email': profile['Wt'],
+                    'password': profile['Ad'] + "3695",
+                })
                 //this.redirectUser(); 
             },
             ongSignInError (error) {
                 // `error` contains any error occurred.
                 console.log('OH NOES', error)
+            },
+            createSocialUser(data){
+                let payload = {
+                    name: data.name,
+                    last_name: data.last_name,
+                    email: data.email,
+                    password: data.name,
+                    type: 1,
+                }
+
+                this.addUser(payload)
+                .then((r) => {
+                    if(r != "error"){
+                        this.$router.push({path: '/login'});
+                    }else{
+                        this.authLoading = false;
+                        this.errorStatus = true;
+                        this.errorMessage = "Cannot Create User."
+                    }
+                })
             },
             signUpSubmit(){
                 this.authLoading = true;
@@ -169,6 +196,12 @@
                     this.errorMessage = "The password does not conform."
                 }
                 
+            },
+            handleHome(){
+                this.$router.push({
+                name: "products-list",
+                params: {}
+                });
             },
             verifyPassword(){
                 return this.form.password == this.form.password2 ? true : false;
@@ -279,5 +312,12 @@
       border-radius: 3px;
       background-color: #4267b2;
       color: #fff;
+    }
+    .logo-app {
+      text-align: center;
+      align-content: center;
+    }
+    .error-login{
+      color: red;
     }
 </style>
