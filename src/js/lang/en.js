@@ -97,4 +97,9 @@ export default {
     pourboir: 'Tip',
     login_errors: 'The connection cannot be made. Please verify your email or password.',
     display_reciept: 'Show Receipt',
+    delivery_address: 'Please input delivery address',
+    submit: 'Submit',
+    cancel: 'Cancel',
+    note_to_driver: 'Would you like to leave special note to your courier ?',
+    proceed_checkout: 'Proceed to checkout',
 } // End of root

@@ -85,7 +85,11 @@ export default {
                 let rest= parseFloat(found.total) - parseFloat(found.price);
                 found.total = parseFloat(rest).toFixed(2)
                 this.commit('cart/sousCartTotal',parseFloat(found.price).toFixed(2));
-            } 
+            }
+            
+            if(found.quantity == 0){
+                state.cart.splice(index, 1);
+            }
         }
         this.commit('cart/saveCart');
     },
@@ -118,6 +122,18 @@ export default {
         state.cart = []
         state.tips = 0;
         this.commit('cart/saveCart');
-    }
-
+    },
+    setAddress(state , value){
+        window.localStorage.setItem('cartAddress', value);
+        state.cartAddress = value;
+    },
+    setPostCode(state , value){
+        window.localStorage.setItem('cartPostal', value);
+        state.cartPostal = value
+    },
+    
+    setCartCoordinates(state , value){
+        window.localStorage.setItem('cartCoordinates', value);
+        state.cartCoordinates = value
+    },
 } // End of export default

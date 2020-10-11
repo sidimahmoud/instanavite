@@ -217,9 +217,7 @@
         this.isConnected = false;
       },
       redirectUser(){
-        //window.history.back();
-        //console.log(window.history.previous.href);
-        this.$router.push({path: '/'});
+        this.$router.push({path: '/cart'});
       },
 
       onSignInSuccess (response) {

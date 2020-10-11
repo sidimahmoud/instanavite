@@ -94,8 +94,13 @@ export default {
     recus: 'Reçus',
     orders_list: 'Liste des commandes',
     view_order_progress: 'Afficher la progression',
-    pourboir: 'Pourboir',
+    pourboir: 'Pourboire',
     login_errors: 'La connexion ne peut pas être effectuée. Veuillez vérifier votre courriel ou mot de passe.',
     display_reciept: 'Afficher Reçus',
+    delivery_address: 'Address de livraison',
+    submit: 'Valider',
+    cancel: 'Annuler',
+    note_to_driver: 'Souhaitez-vous laisser une note spéciale à votre coursier ?',
+    proceed_checkout: 'Proceed to checkout',
 } // End of root
   

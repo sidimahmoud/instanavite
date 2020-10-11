@@ -13,12 +13,16 @@
 let cart = window.localStorage.getItem('cart');
 let cartCount = window.localStorage.getItem('cartCount');
 let cartTotal = window.localStorage.getItem('cartTotal');
+let cartAddress = window.localStorage.getItem('cartAddress');
+let cartPostal = window.localStorage.getItem('cartPostal');
+let cartCoordinates = window.localStorage.getItem('cartCoordinates');
 
-export default {
-    
+export default {  
     cart: cart ? JSON.parse(cart) : [],
     cartCount: cartCount ? parseInt(cartCount) : 0,
     cartTotal: cartTotal ? parseFloat(cartTotal) : 0,
     tips : 0,
-
+    cartAddress: cartAddress ? cartAddress : '',
+    cartPostal: cartPostal ? cartPostal : '',
+    cartCoordinates: cartCoordinates? cartCoordinates: '',
 } // End of export default

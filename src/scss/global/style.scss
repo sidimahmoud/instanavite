@@ -91,3 +91,30 @@ body {
   margin-top: 1%;
   padding: 2%;
 }
+.custom-modal {
+  margin: 10% 20%!important;
+  z-index: 1000 !important;
+}
+
+.el-form-actions {
+  text-align: center;
+  margin-top: 20px !important;
+}
+
+.google-maps-address-field{
+  z-index: 1000 !important;
+}
+.google-maps-field{
+  z-index: 1000 !important;
+}
+
+.el-dialog {
+  position: relative;
+  margin: 0 auto 50px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  z-index: 800 !important;
+}
+
+.pac-container { z-index: 100000; }
+

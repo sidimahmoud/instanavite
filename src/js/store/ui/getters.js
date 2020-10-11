@@ -14,6 +14,6 @@
 import {isEmpty} from "../../helpers/Common";
 
 export default {
-    
+    postList: (state) => state.postList,
 } // End of export default
 

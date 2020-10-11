@@ -42,8 +42,26 @@
                     
                 </el-table>
             </div>
+            <div v-if="!isConnected && cartTotal > 0">
+                
+                <div class="total-box">
+                    <table>
+                        <tr>
+                            <th>
+                                <h5>
+                                    <strong> {{$t('sous_total')}}</strong>
+                                </h5>
+                            </th>
+                            <td><strong>${{cartTotal}} </strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="procees-div-checkout">
+                    <el-button class="procees-button" @click="onProceesCheckout">{{$t('proceed_checkout')}}</el-button>
+                </div>
+            </div>
             <br/>
-            <el-row v-if="cartTotal > 0">
+            <el-row v-if="isConnected && cartTotal > 0">
                 <el-col :md="6">
                     <h5><strong> {{$t('total_panier')}}</strong></h5>
                     <div class="total-box">
@@ -85,12 +103,22 @@
                     <el-button @click="addTips(10)" round>10%</el-button>
                     <el-button @click="addTips(15)" round>15%</el-button>
                     <el-button @click="addTips(20)" round>20%</el-button>
-                    <el-input placeholder="Write an amount" v-model="orderTips" style="width:20%;"></el-input>
-                    <el-button>Thank you</el-button>
+                    Saisir un montant: <el-input placeholder="Write an amount" v-model="tips_montant" style="width:20%;"></el-input>
+                    <el-button>Thank you</el-button><br/><br/>
+
+                    <span><strong>{{$t('note_to_driver')}}</strong></span>
+                    <el-input 
+                      placeholder="Note"
+                      v-model="detail.note"
+                      type="textarea"
+                      :autosize="{ minRows: 5, maxRows: 6}"
+                      maxlength="200"
+                      show-word-limit>
+                    </el-input>
                 </el-col>
             </el-row>
         </div>
-        <div style="margin-top:1rem">
+        <div style="margin-top:1rem" v-if="isConnected">
             <el-row>
                 <el-col :md="11">
                     <div style="padding:1%;height:353px;background-color: #f8f8f8;">
@@ -100,15 +128,14 @@
                                 <div class="el-input google-maps-address-field">
                                     <input type="text" v-bind:id="id"
                                         ref="google_address_autocomplete"
-                                        v-model="address"
+                                        v-model="iAddress"
                                         class="el-input__inner"
                                         :placeholder="$t('address')"/>
                                 </div>
-                                    <el-input class="custom-cart" v-model="detail.post_code" :placeholder="$t('code_postal')"></el-input>
-                                    <!-- <el-input class="custom-cart" v-model="detail.first_name" :placeholder="$t('last_name')"></el-input>
-                                    <el-input class="custom-cart" v-model="detail.last_name" :placeholder="$t('name')"></el-input> -->
-                                    <el-input class="custom-cart" v-model="detail.mobile" :placeholder="$t('phone')"></el-input>
-                                    <el-input class="custom-cart" v-model="detail.email" :placeholder="$t('email')"></el-input>
+                                <!-- <el-input class="custom-cart" v-model="cartAddress" :placeholder="$t('address')" disabled></el-input> -->
+                                <el-input class="custom-cart" v-model="cartPostal" :placeholder="$t('code_postal')" disabled></el-input>
+                                <el-input class="custom-cart" v-model="detail.mobile" :placeholder="$t('phone')"></el-input>
+                                <el-input class="custom-cart" v-model="detail.email" :placeholder="$t('email')"></el-input>
                             </form>
                        <!--  </div> -->
                     </div>
@@ -153,6 +180,7 @@
                 </el-col>
             </el-row>
         </div>
+        <address-modal :visible.sync="showTodoForm"></address-modal>
     </div>
 </template>
 <script>
@@ -191,7 +219,8 @@ export default {
                 mobile: '',
                 email:'',
                 address: '',
-                post_code:''
+                post_code:'',
+                note: '',
             },
             id: "google_address_autocomplete",
             address: "",
@@ -203,7 +232,8 @@ export default {
             loading: false,
             publishableKey: 'pk_live_51HB0HpHDyIu0bdYbv47CLk1imRIm5l8JwxVpg3uWGClstvnaVKQ8hPa4gnkqOIMZvOWTL7JOKIiNn2muThX3O9YA00EYiEVmHx', 
             token: null,
-            
+            showTodoForm: false,
+            tips_montant: '',
         }
     },
     /*
@@ -216,14 +246,51 @@ export default {
             cartData: 'cartData',
             cartTotal:'cartTotal',
             cartAllTotal: 'cartAllTotal',
-            orderTips: 'getTips'
+            orderTips: 'getTips',
+            cartAddress: 'cartAddress',
+            cartPostal: 'cartPostal',
+            cartCoordinates: 'cartCoordinates',
         }),
         ...mapGetters('auth', {
             userData: 'userData',
         }),
         totalDispaly(){
             return parseFloat(this.cartTotal + 4).toFixed(2);
-        }
+        },
+        isConnected(){
+            const hasAccessToken = !window._.isNil(localStorage.getItem("app_access_token"));
+            return hasAccessToken;
+        },
+        /**
+         * Interface for the v-model of this component.
+         */
+        iAddress: {
+            get () {
+            return this.cartAddress;
+            },
+            set (v) {
+                this.setAddress(v);
+            },
+        },
+        /**
+         * Interface for the v-model of this component.
+         */
+        iPostal: {
+            get () {
+            return this.cartPostal;
+            },
+            set (v) {
+                this.setPostCode(v);
+            },
+        },
+        iCoorinates: {
+            get () {
+            return this.cartCoordinates;
+            },
+            set (v) {
+                this.setCartCoordinates(v);
+            },
+        },
     },
     /*
     |--------------------------------------------------------------------------
@@ -237,6 +304,9 @@ export default {
             clearCart: 'clearCart',
             addQuantity: 'addQuantity',
             removeQuantity: 'removeQuantity',
+            setAddress : 'setAddress',
+            setPostCode: 'setPostCode',
+            setCartCoordinates: 'setCartCoordinates',
         }),
         ...mapActions('cart', {
             addOrder: 'createOrder'
@@ -278,18 +348,20 @@ export default {
                 }
             }); */
         },
+        inDeliveryErea(){
+            return this.iPostal.startsWith('J8') || this.iPostal.startsWith('J9');
+        },
+        
         processPayment(token) {
-            // Insert the token ID into the form so it gets submitted to the server
-
-            if(!isEmpty(this.coordinates)){
+            if(!isEmpty(this.iCoorinates) && this.inDeliveryErea){
                 let payload= {
                     language: "Français",
-                    address: this.address,
+                    address: this.iAddress,
                     client_id: this.userData.id,
                     town_id:1,
                     super_market_id: 1,
                     is_immediate: false,
-                    instructions: "",
+                    instructions: this.detail.note,
                     start_date: "2020-02-28 15:26:43",
                     manually_handled: false,
                     mobile: this.detail.mobile,
@@ -298,7 +370,7 @@ export default {
                     booker_name: this.detail.first_name,
                     amount: this.cartAllTotal,
                     products: this.cartData,
-                    coordinates: this.coordinates,
+                    coordinates: this.iCoorinates,
                     stripeToken: token.id,
                 }
 
@@ -313,8 +385,8 @@ export default {
             } else {
                 Notification({
                     title: 'Error',
-                    message: 'The address cannot be empty.',
-                    type: 'warning'
+                    message: 'Unfortunetly for this moment we do not perfom delivry in this area.',
+                    type: 'error'
                 });
             }
         },
@@ -348,6 +420,9 @@ export default {
             let s = (this.cartTotal * v ) / 100;
             let formated = parseFloat(s).toFixed(2);
             this.setTips(formated);
+        },
+        onProceesCheckout(){
+            this.showTodoForm = true;
         }
     },
     /*
@@ -355,11 +430,13 @@ export default {
     | Component > filters
     |--------------------------------------------------------------------------
     */
-    filters: {
-    },
-    beforeCreate(){
-
-    },
+    filters: {},
+    /*
+    |--------------------------------------------------------------------------
+    | Component > beforeCreate
+    |--------------------------------------------------------------------------
+    */
+    beforeCreate(){},
     /*
     |--------------------------------------------------------------------------
     | Component > mounted
@@ -372,21 +449,18 @@ export default {
 
         // Add listener when a selection has been chosen or changed.
         autocomplete.addListener('place_changed', () => {
-            console.log('event changed');
-            console.log(autocomplete.getPlace());
+            
             const result = autocomplete.getPlace().formatted_address;
             this.address =  result;
             let postcode = this.getPostalCode(autocomplete.getPlace());
             let coordinate= this.getCoordinate(autocomplete.getPlace());
-            this.coordinates = coordinate;
-            this.detail.post_code = postcode;
-            console.log('coordinate');
-            console.log(coordinate);
+            this.iCoorinates = coordinate;
+            this.iAddress = result;
+            this.iPostal = postcode;
         });
 
         /* card = elements.create('card');
         card.mount(this.$refs.card); */
-
     },
 }
 </script>

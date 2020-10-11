@@ -10,6 +10,7 @@ Vue.component('topbar-extras', require('../components/partials/TopbarExtras').de
 Vue.component('bottom-page', require('../components/partials/BottomPage').default);
 Vue.component('topbar-page', require('../components/partials/Topbar').default);
 Vue.component('topbar-mobile', require('../components/partials/Mobile/TopbarMobile').default);
+Vue.component('google-maps-address', require('../components/partials/GoogleMapsAddress').default);
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,10 @@ Vue.component('default-layout', require('../components/layouts/default-layout').
 | Forms
 |--------------------------------------------------------------------------
 */
+
+/*
+|--------------------------------------------------------------------------
+| Modals
+|--------------------------------------------------------------------------
+*/
+Vue.component('address-modal', require('../components/modals/AddressModal').default);

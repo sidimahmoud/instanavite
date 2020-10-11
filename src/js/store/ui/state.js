@@ -14,5 +14,5 @@
 
 export default {
     language: 'fr',
-
+    postList: ['J9A'],
 } // End of export default

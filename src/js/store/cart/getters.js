@@ -11,13 +11,14 @@
 */
 'use strict';
 
-import {isEmpty} from "../../helpers/Common";
-
 export default {
     cartData: (state) => state.cart,
     cartCount: (state) => state.cartCount,
     cartTotal: (state) => state.cartTotal,
     cartAllTotal: (state) =>  parseFloat(state.cartTotal + state.tips + 4).toFixed(2),
     getTips: (state) => state.tips,
+    cartAddress: (state) => state.cartAddress,
+    cartPostal: (state) => state.cartPostal,
+    cartCoordinates: (state) => state.cartCoordinates,
 } // End of export default
 

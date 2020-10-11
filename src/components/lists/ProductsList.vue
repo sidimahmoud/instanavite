@@ -139,7 +139,8 @@ export default {
         reloadList(n){
             let payload = {
                 'page': n,
-                'filter[categorie]': this.categorie_selected
+                'filter[categorie]': this.categorie_selected,
+                'sort': this.sortBy
             }
             this.loadListByParams(payload); 
         },
