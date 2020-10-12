@@ -26,7 +26,7 @@ export default {
   sendMessage (context, payload = {}) {
     axios({
       method: 'post',
-      url: 'https://api.instantavite.com/api/inboxes',
+      url: 'https://api.instantavite.com/api/questions',
       data: payload.data
     })
     .then((response) => {

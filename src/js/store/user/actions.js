@@ -24,11 +24,11 @@ export default {
    * @returns {*}
    */
   fetchProgressOrders (context, payload = {}) {
-    axios.get(`https://api.instantavite.com/api/user/${payload.id}/user-orders`, {
+    axios.get(`https://api.instantavite.com/api/orders?filter[client_id]=${payload.id}&sort=-created_at`, {
       params: payload
     })
     .then((response) => {
-      context.commit('setProgressList', response.data)
+      context.commit('setProgressList', response.data.data)
     });
   }, // End of requestAccessToken method
 

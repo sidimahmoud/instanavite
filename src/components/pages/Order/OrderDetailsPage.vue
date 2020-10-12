@@ -23,7 +23,7 @@
                 </el-row>
             </div>
 
-            <div class="order-steps">
+            <div class="order-steps" v-if="order.status_id < 4">
                 <h5>Order Status</h5>
                 <!-- <el-steps class="stpes" :active="order.status_id" finish-status="success" simple style="margin-top: 20px">
                     <el-step title="Pending">ici</el-step>
@@ -39,10 +39,28 @@
                         </li>
                         <!-- <li :class="`${order.status_id >=2 ? 'active': ''}`"><i class="fas fa-archive"></i>Assigned</li> -->
                         <li :class="`${order.status_id >=3 ? 'active': ''}`">PickedUp</li>
-                        <li :class="`${order.status_id >=4 ? 'active': ''}`">On the way</li>
-                        <li :class="`${order.status_id >=5 ? 'active': ''}`">Delivered</li>
+                        <li :class="`${order.status_id >=3 ? 'active': ''}`">On the way</li>
+                        <li :class="`${order.status_id ==4 ? 'active': ''}`">Delivered</li>
                     </ul>
-                    </div>
+                </div>
+            </div>
+            <div class="order-steps" v-if="order.status_id == 4">
+                <h5>Order Status</h5>
+                <div class="rate-content">
+                    <span class="text-green">The Order was delivered at {{order.completed_at}} thank you for your order.</span><br/><br/>
+                    <span><strong>Rate {{order.driver.driver.name}}: <el-rate v-model="comment.rate"></el-rate></strong></span>   
+                    <span>Comment the service of Mokhtar:</span>
+                    <el-input 
+                      placeholder="Comment"
+                      v-model="comment.comment"
+                      type="textarea"
+                      :autosize="{ minRows: 5, maxRows: 6}"
+                      maxlength="200"
+                      show-word-limit>
+                    </el-input><br/>
+
+                    <el-button type="success" @click="rate">{{$t('send')}}</el-button>
+                </div>
             </div>
 
             <div class="order-products">
@@ -72,7 +90,12 @@ export default {
     |--------------------------------------------------------------------------
     */
     data() {
-        return {}
+        return {
+            comment:{
+                comment:'',
+                rate: 0
+            }
+        }
     },
     /*
     |--------------------------------------------------------------------------
@@ -92,6 +115,7 @@ export default {
     methods: {
         ...mapActions('order', {
             fetchOrder: 'fetchOrder',
+            rateOrder: 'rateOrder'
         }),
 
         fetchData() {
@@ -100,6 +124,17 @@ export default {
             }
 
             this.fetchOrder(params);
+        },
+        rate(){
+            let payload = {
+                order_id: this.order.id,
+                from_client: true,
+                from_driver: false,
+                rate: this.comment.rate,
+                message: this.comment.comment,
+            }
+
+            this.rateOrder(payload);
         }
     },
     /*

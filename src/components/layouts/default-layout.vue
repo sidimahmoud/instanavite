@@ -62,7 +62,11 @@
                             <div class="type_msg">
                                 <div class="input_msg_write">
                                     <el-input type="text" class="write_msg" placeholder="Type a message" v-model="message"/>
-                                    <button class="msg_send_btn" type="button" @click="sendMessage"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                    <el-button type="primary"
+                                        class="button-close"
+                                        @click="submitForm('userObject')">
+                                        {{$t('send')}}
+                                    </el-button>
                                 </div>
                                 
                             </div>
