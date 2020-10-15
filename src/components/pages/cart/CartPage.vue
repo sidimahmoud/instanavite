@@ -62,7 +62,7 @@
             </div>
             <br/>
             <el-row v-if="isConnected && cartTotal > 0">
-                <el-col :md="6">
+                <el-col :md="5">
                     <h5><strong> {{$t('total_panier')}}</strong></h5>
                     <div class="total-box">
                         <table>
@@ -97,24 +97,26 @@
                         </table>
                     </div>
                 </el-col>
-                <el-col :md="14" :offset="1">
-                    <h5><strong> {{$t('pourboir')}}</strong></h5>
-                    <el-button @click="addTips(5)" round>5%</el-button>
-                    <el-button @click="addTips(10)" round>10%</el-button>
-                    <el-button @click="addTips(15)" round>15%</el-button>
-                    <el-button @click="addTips(20)" round>20%</el-button>
-                    Saisir un montant: <el-input placeholder="Write an amount" v-model="tips_montant" style="width:20%;" @change="addTipshard"></el-input>
-                    <el-button @click="removeTips">Thank you</el-button><br/><br/>
+                <el-col :md="19">
+                    <div class="pour-boir-section">
+                        <h5><strong> {{$t('pourboir')}}</strong></h5>
+                        <el-button @click="addTips(5)" round>5%</el-button>
+                        <el-button @click="addTips(10)" round>10%</el-button>
+                        <el-button @click="addTips(15)" round>15%</el-button>
+                        <el-button @click="addTips(20)" round>20%</el-button>
+                        Saisir un montant: <el-input placeholder="Write an amount" v-model="tips_montant" class="amout-field" @change="addTipshard"></el-input>
+                        <el-button @click="removeTips">Thank you</el-button><br/><br/>
 
-                    <span><strong>{{$t('note_to_driver')}}</strong></span>
-                    <el-input 
-                      placeholder="Note"
-                      v-model="detail.note"
-                      type="textarea"
-                      :autosize="{ minRows: 5, maxRows: 6}"
-                      maxlength="200"
-                      show-word-limit>
-                    </el-input>
+                        <span><strong>{{$t('note_to_driver')}}</strong></span>
+                        <el-input 
+                        placeholder="Note"
+                        v-model="detail.note"
+                        type="textarea"
+                        :autosize="{ minRows: 5, maxRows: 6}"
+                        maxlength="200"
+                        show-word-limit>
+                        </el-input>
+                    </div>
                 </el-col>
             </el-row>
         </div>
@@ -134,13 +136,14 @@
                                 </div>
                                 <!-- <el-input class="custom-cart" v-model="cartAddress" :placeholder="$t('address')" disabled></el-input> -->
                                 <el-input class="custom-cart" v-model="cartPostal" :placeholder="$t('code_postal')" disabled></el-input>
+                                <el-input class="custom-cart" v-model="detail.address_complement" :placeholder="$t('address_complement')"></el-input>
                                 <el-input class="custom-cart" v-model="detail.mobile" :placeholder="$t('phone')"></el-input>
                                 <el-input class="custom-cart" v-model="detail.email" :placeholder="$t('email')"></el-input>
                             </form>
                        <!--  </div> -->
                     </div>
                 </el-col>
-                <el-col :md="12" :offset="1">
+                <el-col :md="12">
                     <div class="cart-products">
                         <h5><strong>{{$t('payment_option')}}</strong></h5>
                         <div style="text-align:center">
@@ -170,11 +173,11 @@
                         <el-button class="cart-submit-button" type="primary" @click="createOrder">{{$t('complet_order')}}</el-button>
 
                         <br/><br/>{{$t('or_via')}}<br/><br/>
-                        <!-- <PayPal
+                        <PayPal
                             :amount="cartAllTotal"
                             currency="USD"
                             :client="credentials">
-                        </PayPal> -->
+                        </PayPal>
                     </div>
                    
                 </el-col>
@@ -221,6 +224,7 @@ export default {
                 address: '',
                 post_code:'',
                 note: '',
+                address_complement: ''
             },
             id: "google_address_autocomplete",
             address: "",
@@ -373,6 +377,7 @@ export default {
                     coordinates: this.iCoorinates,
                     stripeToken: token.id,
                     post_code: this.iPostal,
+                    address_complement: this.detail.address_complement
                 }
 
                 this.addOrder(payload).then((r) => {

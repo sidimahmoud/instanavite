@@ -119,8 +119,8 @@ export default {
                 //this.form.postal_code = '';
 
                 Notification({
-                    title: 'Error',
-                    message: 'Unfortunetly for this moment we do not perfom delivry in this area.',
+                    title: this.$t('important_msg'),
+                    message: this.$t('warning_address'),
                     type: 'warning'
                 });
             }

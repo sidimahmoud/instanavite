@@ -1,0 +1,33 @@
+.app-modal {
+
+    @mixin dialog_header($bgcolor) {
+      &__header {
+        padding: 7px 20px;
+        background-color: $bgcolor;
+      }
+  
+      &__title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+      }
+  
+      &__headerbtn {
+        top: 11px;
+      }
+  
+      &__close,
+      &__close:hover {
+        font-weight: bold;
+        color: #fff;
+      }
+    }
+  
+    &-primary {
+  
+      .el-dialog {
+        @include dialog_header($app-primary-color);
+      }
+    }
+}
+  

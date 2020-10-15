@@ -18,16 +18,17 @@
           <br/>
           <el-badge>
             <span class="icon-header" v-if="!isConnected" @click="handleAccount"><i class="fas fa-user"></i></span>
-            <span class="icon-header" v-else @click="handleAccount">{{$t('hello')}}, {{userData.name}}</span>
+            <span class="icon-header" v-else @click="handleAccount">{{$t('purchase_history')}}</span>
           </el-badge>
           
           <el-badge :value="cartCount" class="item" type="primary">
             <span class="icon-header-cart" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
           </el-badge>
+          <span v-if="isConnected">{{$t('hello')}}, {{userData.name}}</span>
 
-          <!-- <el-badge> 
-            <span class="app-info"><strong>{{$t('region_gatineau')}} </strong></span> <br/> <span class="app-info"><strong>{{$t('every_day')}}</strong></span>
-          </el-badge> -->
+          <el-badge v-if="isConnected">
+            <span class="button-header" @click="handleLogout">{{$t('logout')}}</span>
+          </el-badge>
 
         </div>
       </div> 
@@ -99,6 +100,12 @@
       ...mapMutations({
         saveLanguage: 'ui/saveLanguage',
       }),
+      ...mapMutations('auth', ['destroyAccessToken','destroyUserData']),
+      handleLogout () {
+        this.destroyAccessToken();
+        this.destroyUserData();
+        window.location.reload();
+      },
       handleCart() {
         this.$router.push({
           name: "cart-page",

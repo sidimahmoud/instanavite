@@ -186,6 +186,7 @@ export default {
     |--------------------------------------------------------------------------
     */
     mounted() {
+        this.loadCategories();
         const params = _.clone(this.$route.query);
         const filters = _.filter(Object.keys(params), (v) => _.includes(v, 'filter'));
 
@@ -203,7 +204,6 @@ export default {
             this.categorie_selected = 7;
             this.loadListByParams(payload);
         }
-        this.loadCategories();
     },
 }
 </script>
