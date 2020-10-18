@@ -112,7 +112,7 @@
                     type: 1,
                 },
                 fbSignInParams: {
-                scope: 'email,user_likes',
+                    scope: 'email,pages_show_list',
                     return_scopes: true
                 },
                 googleSignInParams: {

@@ -138,7 +138,7 @@
         password: '',
         errorMessage: '',
         fbSignInParams: {
-          scope: 'email,user_likes',
+          scope: 'email,pages_show_list',
           return_scopes: true
         },
         googleSignInParams: {
@@ -236,7 +236,7 @@
           };
           _this.handleSocial(payload);
         })
-        
+
       },
       onSignInError (error) {
         _this.loginErrors = "Error occured durring facebook login."
