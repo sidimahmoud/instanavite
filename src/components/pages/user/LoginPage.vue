@@ -138,7 +138,7 @@
         password: '',
         errorMessage: '',
         fbSignInParams: {
-          scope: 'email,pages_show_list',
+          scope: 'email',
           return_scopes: true
         },
         googleSignInParams: {
