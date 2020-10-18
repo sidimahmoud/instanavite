@@ -78,12 +78,6 @@
       &.is-disabled {
         cursor: not-allowed !important;
         background-image: none !important;
-        //background-color: lighten($app-primary-color, 30%) !important;
-        //border-color: lighten($app-primary-color, 30%) !important;
-        //color: lighten($app-primary-color, 10%) !important;
-        background-color: lighten(#eef1f7, 2%) !important;
-        border-color: lighten(#eef1f7, 2%) !important;
-        color: lighten($app-primary-color, 37%) !important;
       }
     }
   

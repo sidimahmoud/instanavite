@@ -144,7 +144,7 @@
                     </div>
                 </el-col>
                 <el-col :md="12">
-                    <div class="cart-products">
+                    <div class="cart-payment-section">
                         <h5><strong>{{$t('payment_option')}}</strong></h5>
                         <div style="text-align:center">
                             <img src="/images/defaults/visa.png" height="60px"/>

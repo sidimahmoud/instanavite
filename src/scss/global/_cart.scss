@@ -6,6 +6,13 @@
     padding: 1rem;
     background-color: #f8f8f8;
 }
+.cart-payment-section{
+    padding: 1rem;
+    background-color: #f8f8f8;
+    margin-left: 2rem;
+    width: 100%;
+}
+
 .total-box {
     width: 100%;
 
@@ -85,6 +92,14 @@
 
     .amout-field{
         width: 40% !important;
+    }
+
+    .cart-payment-section{
+        padding: 1rem;
+        background-color: #f8f8f8;
+        margin-left: 0;
+        margin-top: 1rem;
+        width: 100%;
     }
 
 }
