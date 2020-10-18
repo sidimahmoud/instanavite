@@ -138,15 +138,15 @@
 
             onSignInSuccess (response) {
                 const _this = this;
-                FB.api('/me', dude => {
-                    console.log(dude);
-                    console.log(`Good to see you, ${dude.name}.`)
+
+                FB.api('/me?fields=email,name', dude => {
                     let payload = {
                         'name': dude.name,
                         'email': dude.email
                     };
                     _this.handleSocial(payload);
                 })
+
             },
             onSignInError (error) {
                 console.log('OH NOES', error)

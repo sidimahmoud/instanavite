@@ -230,8 +230,6 @@
         const _this = this;
 
         FB.api('/me?fields=email,name', dude => {
-          console.log('dude');
-          console.log(dude);
           let payload = {
             'name': dude.name,
             'email': dude.email
