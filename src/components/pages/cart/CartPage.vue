@@ -92,7 +92,7 @@
                             </tr>
                             <tr>
                                 <th>{{$t('total')}}</th>
-                                <td><strong>${{cartAllTotal}}</strong></td>
+                                <td><strong>${{totalAmount}}</strong></td>
                             </tr>
                         </table>
                     </div>
@@ -164,7 +164,7 @@
                         <stripe-elements
                             ref="elementsRef"
                             :pk="publishableKey"
-                            :amount="cartAllTotal"
+                            :amount="totalAmount"
                             locale="en"
                             @token="tokenCreated"
                             @loading="loading = $event"
@@ -295,6 +295,9 @@ export default {
                 this.setCartCoordinates(v);
             },
         },
+        totalAmount(){
+            return parseFloat(this.cartAllTotal);
+        }
     },
     /*
     |--------------------------------------------------------------------------
