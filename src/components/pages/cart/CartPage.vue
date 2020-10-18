@@ -57,7 +57,7 @@
                     </table>
                 </div>
                 <div class="procees-div-checkout">
-                    <el-button class="procees-button" @click="onProceesCheckout">{{$t('proceed_checkout')}}</el-button>
+                    <el-button type="primary" class="procees-button" @click="onProceesCheckout">{{$t('proceed_checkout')}}</el-button>
                 </div>
             </div>
             <br/>
