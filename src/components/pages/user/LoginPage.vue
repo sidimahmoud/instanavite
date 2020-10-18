@@ -229,7 +229,7 @@
       onSignInSuccess (response) {
         const _this = this;
 
-        FB.api('/me', dude => {
+        FB.api('/me?fields=email,name', dude => {
           console.log('dude');
           console.log(dude);
           let payload = {
