@@ -80,11 +80,11 @@
                             </tr>
                             <tr>
                                 <th>{{$t('frais_preparation')}}</th>
-                                <td><strong>$1.00</strong></td>
+                                <td><strong>${{preperation}}</strong></td>
                             </tr>
                             <tr>
                                 <th>{{$t('frais_livraison')}}</th>
-                                <td><strong>$1.00</strong></td>
+                                <td><strong>${{livraison}}</strong></td>
                             </tr>
                             <tr v-if="!isEmpty(orderTips)">
                                 <th>{{$t('pourboir')}}</th>
@@ -238,6 +238,8 @@ export default {
             token: null,
             showTodoForm: false,
             tips_montant: '',
+            preperation: 0,
+            livraison: 0,
         }
     },
     /*
@@ -321,12 +323,15 @@ export default {
 
         handleDelete(item){
             this.removeFromCart(item);
+            this.preperationAmount();
         },
         handleAddQuantity(item){
             this.addQuantity(item);
+            this.preperationAmount();
         },
         handleRemoveQuantity(item){
-            this.removeQuantity(item)
+            this.removeQuantity(item);
+            this.preperationAmount();
         },
         createOrder(){
             const _this = this;
@@ -429,15 +434,90 @@ export default {
             let s = (this.cartTotal * v ) / 100;
             let formated = parseFloat(s).toFixed(2);
             this.setTips(formated);
+            this.preperationAmount();
         },
         addTipshard() {
             this.setTips(this.tips_montant);
         },
         removeTips() {
             this.setTips(0);
+            this.preperationAmount();
         },
         onProceesCheckout(){
             this.showTodoForm = true;
+        },
+        preperationAmount(){
+            const _this = this;
+            switch(true) {
+                case (this.totalAmount < 10):
+                    // code block
+                    var total = (this.totalAmount * 150)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 20):
+                    // code block
+                    var total = (this.totalAmount * 60)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 30):
+                    // code block
+                    var total = (this.totalAmount * 50)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 40):
+                    // code block
+                    var total = (this.totalAmount * 50)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 60):
+                    // code block
+                    var total = (this.totalAmount * 25)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 80):
+                    // code block
+                    var total = (this.totalAmount * 20)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 100):
+                    // code block
+                    var total = (this.totalAmount * 18)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 130):
+                    // code block
+                    var total = (this.totalAmount * 15)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 170):
+                    // code block
+                    var total = (this.totalAmount * 12)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount < 220):
+                    // code block
+                    var total = (this.totalAmount * 10)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                case  (this.totalAmount > 220):
+                    // code block
+                    var total = (this.totalAmount * 10)/100;
+                    _this.preperation = (total * 0.3).toFixed(2);
+                    _this.livraison = (total * 0.7).toFixed(2);
+                    break;
+                default:
+                    // silence is gold.
+            }
         }
     },
     /*
@@ -473,6 +553,7 @@ export default {
             this.iAddress = result;
             this.iPostal = postcode;
         });
+        this.preperationAmount();
 
         /* card = elements.create('card');
         card.mount(this.$refs.card); */
