@@ -48,14 +48,14 @@
 }
 
 .amout-field{
-    width: 20%;
+    width: 20% !important;
 }
 
 .procees-button {
     text-align: center;
-    align-items: center !important;
-    background-color: #1363a8 !important;
-    color: #fff;
+    align-items: center;
+    background-color: #1363a8 ;
+    color: #fff !important;
 }
 
 .pour-boir-section{
@@ -86,7 +86,7 @@
     }
 
     .amout-field{
-        width: 40%;
+        width: 40% !important;
     }
 
 }

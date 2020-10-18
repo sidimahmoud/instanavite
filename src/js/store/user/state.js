@@ -14,6 +14,7 @@
 
 export default {
     pagination: {},
-    progressOrders: []
+    progressOrders: [],
+    user: {}
 
 } // End of export default

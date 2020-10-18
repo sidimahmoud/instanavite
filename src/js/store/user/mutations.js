@@ -20,5 +20,8 @@ export default {
     setProgressList(state, payload) {
         state.progressOrders = payload;
     },
+    setUser(state, payload) {
+        state.user = payload;
+    },
 
 } // End of export default

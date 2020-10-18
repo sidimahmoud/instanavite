@@ -63,3 +63,4 @@ Vue.component('default-layout', require('../components/layouts/default-layout').
 |--------------------------------------------------------------------------
 */
 Vue.component('address-modal', require('../components/modals/AddressModal').default);
+Vue.component('social-media-confirm', require('../components/modals/SocialMediaConfirm').default);

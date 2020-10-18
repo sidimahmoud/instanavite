@@ -89,6 +89,7 @@
                 </div>
             </div>
         </div>
+        <social-media-confirm :visible.sync="showModal" :user="socialUser"></social-media-confirm>
     </div>
 
 
@@ -120,6 +121,11 @@
                 authLoading: false,
                 errorStatus: false,
                 errorMessage: '',
+                showModal: false,
+                socialUser: {
+                    email: '',
+                    name: ''
+                }
             }
         },
         methods: {
@@ -131,10 +137,15 @@
             },
 
             onSignInSuccess (response) {
+                const _this = this;
                 FB.api('/me', dude => {
                     console.log(dude);
                     console.log(`Good to see you, ${dude.name}.`)
-                    this.redirectUser();
+                    let payload = {
+                        'name': dude.name,
+                        'email': dude.email
+                    };
+                    _this.handleSocial(payload);
                 })
             },
             onSignInError (error) {
@@ -144,14 +155,11 @@
                 // `googleUser` is the GoogleUser object that represents the just-signed-in user.
                 // See https://developers.google.com/identity/sign-in/web/reference#users
                 const profile = googleUser.getBasicProfile() // etc etc
-                console.log(profile);
-                this.createSocialUser({
+                let payload = {
                     'name': profile['Ad'],
-                    'last_name': profile['Ad'],
-                    'email': profile['Wt'],
-                    'password': profile['Ad'] + "3695",
-                })
-                //this.redirectUser(); 
+                    'email': profile['Wt']
+                };
+                this.handleSocial(payload);
             },
             ongSignInError (error) {
                 // `error` contains any error occurred.
@@ -205,6 +213,13 @@
             },
             verifyPassword(){
                 return this.form.password == this.form.password2 ? true : false;
+            },
+            handleSocial(user){
+                this.socialUser = {
+                    'name': user.name,
+                    'email': user.email
+                };
+                this.showModal = true
             }
         },
     }

@@ -1,0 +1,154 @@
+/*
+|--------------------------------------------------------------------------
+| Button Default
+|--------------------------------------------------------------------------
+*/
+.el-button {
+    //border-radius: 20px;
+    border-radius: 5px;
+    min-width: 140px;
+    margin: 5px 2px;
+    vertical-align: middle;
+  
+    font-weight: 600;
+    font-size: 14px;
+    box-sizing: border-box;
+    border-width: 2px;
+  
+    &.fluid-width {
+      min-width: auto;
+    }
+  
+    [class^="el-icon-"]:before {
+      font-size: 16px;
+    }
+  
+    & + .el-button {
+      margin-left: 0;
+    }
+  
+    i.fa {
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+  
+    &.btn-small {
+      font-size: 12px;
+      margin: 2px;
+      padding: 5px 7px;
+      min-width: 115px;
+    }
+  
+  }
+  
+  .el-button.is-plain:hover, .el-button.is-plain:focus {
+    border-color: $app-primary-color;
+    color: $app-primary-color;
+  }
+  
+  .el-input-group__append .el-button,
+  .el-input-group__preppend .el-button,
+  .el-button {
+  
+    &.el-button--default {
+      background-color: transparent;
+      border-color: $app-default-color;
+      color: $app-default-color;
+  
+      &.is-disabled {
+        color: #b4bccc !important;
+        cursor: not-allowed !important;
+        background-image: none !important;
+        background-color: #fff !important;
+        border-color: #e6ebf5 !important;
+      }
+    }
+  
+    &.el-button--primary {
+      //background-color: $app-primary-color;
+      //border-color: $app-primary-color;
+      //color: #fff;
+      background-color: #eef1f7;
+      border-color: #eef1f7;
+      color: $app-primary-color;
+  
+  
+      &.btn-o {
+        background-color: transparent;
+        border-color: $app-primary-color;
+        color: $app-primary-color;
+      }
+  
+      &.is-disabled {
+        cursor: not-allowed !important;
+        background-image: none !important;
+        //background-color: lighten($app-primary-color, 30%) !important;
+        //border-color: lighten($app-primary-color, 30%) !important;
+        //color: lighten($app-primary-color, 10%) !important;
+        background-color: lighten(#eef1f7, 2%) !important;
+        border-color: lighten(#eef1f7, 2%) !important;
+        color: lighten($app-primary-color, 37%) !important;
+      }
+    }
+  
+    &.el-button--success {
+      background-color: $app-success-color;
+      border-color: $app-success-color;
+      color: #fff;
+    }
+  
+    &.el-button--info {
+      background-color: $app-info-color;
+      border-color: $app-info-color;
+      color: #fff;
+    }
+  
+    &.el-button--warning {
+      background-color: $app-warning-color;
+      border-color: $app-warning-color;
+      color: #fff;
+    }
+  
+    &.el-button--danger {
+      background-color: $app-danger-color;
+      border-color: $app-danger-color;
+    }
+  
+    &.el-button--text {
+      color: $app-primary-color;
+    }
+  }
+  
+  .el-input-group__append {
+    background-color: transparent;
+    border: 0;
+  
+    .el-button {
+      position: relative;
+      top: 1px;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
+  
+  .el-button.circle {
+    display: inline-block;
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+  
+  .el-button.extra-mini {
+    min-width: auto;
+    font-size: 11px;
+    padding: 5px;
+  }
+  
+  .el-button.modal-size {
+    width: 160px !important;
+    min-width: 40px;
+    height: 40px;
+  
+  }
+  

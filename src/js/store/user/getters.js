@@ -15,5 +15,6 @@ import {isEmpty} from "../../helpers/Common";
 
 export default {
     progressOrders: (state) => state.progressOrders,
+    user: (state) => state.user,
 } // End of export default
 

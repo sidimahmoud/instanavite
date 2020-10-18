@@ -57,6 +57,7 @@
                 </div>
             </div>
         </div>
+        <social-media-confirm :visible.sync="showModal" :user="socialUser"></social-media-confirm>
     </div>
 </template>
 
@@ -145,6 +146,11 @@
         },
         authLoading: false,
         loginErrors: '',
+        showModal: false,
+        socialUser: {
+          email: '',
+          name: ''
+        }
       };
     }, // End of component > data
 
@@ -221,32 +227,35 @@
       },
 
       onSignInSuccess (response) {
+        const _this = this;
+
         FB.api('/me', dude => {
-          console.log(dude);
-          console.log(`Good to see you, ${dude.name}.`)
-          this.setAccessToken('token test')
-          this.redirectUser();
+          let payload = {
+            'name': dude.name,
+            'email': dude.email
+          };
+          _this.handleSocial(payload);
         })
+        
       },
       onSignInError (error) {
+        _this.loginErrors = "Error occured durring facebook login."
         console.log('OH NOES', error)
       },
       ongSignInSuccess (googleUser) {
-        // `googleUser` is the GoogleUser object that represents the just-signed-in user.
-        // See https://developers.google.com/identity/sign-in/web/reference#users
+
         const profile = googleUser.getBasicProfile() // etc etc
         console.log(profile);
-        this.setAccessToken('token test')
-        this.redirectUser(); 
+        let payload = {
+          'name': profile['Ad'],
+          'email': profile['Wt']
+        };
+        this.handleSocial(payload);
+
       },
       ongSignInError (error) {
-        // `error` contains any error occurred.
+        _this.loginErrors = "Error occured durring facebook login."
         console.log('OH NOES', error)
-      },
-      signIn(){
-        this.authLoading = true;
-        this.setAccessToken('token test')
-        this.redirectUser();
       },
       handleHome(){
         this.$router.push({
@@ -257,6 +266,14 @@
       isEmpty (v) {
         return isEmpty(v);
       },
+
+      handleSocial(user){
+        this.socialUser = {
+          'name': user.name,
+          'email': user.email
+        };
+        this.showModal = true
+      }
 
     }, // End of component > methods
 

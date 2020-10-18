@@ -16,6 +16,15 @@
       <div class="app-header-action">
         <div class="app-header-action-menu">
           <br/>
+          <el-dropdown v-if="isConnected">
+            <span class="el-dropdown-link">
+              {{$t('hello')}}, {{userData.name}}<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item  @click.native="handleAccount">{{$t('profile')}}</el-dropdown-item>
+              <el-dropdown-item  @click.native="handleLogout" divided>{{$t('logout')}}</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
           <el-badge>
             <span class="icon-header" v-if="!isConnected" @click="handleAccount"><i class="fas fa-user"></i></span>
             <span class="icon-header" v-else @click="handleAccount">{{$t('purchase_history')}}</span>
@@ -24,11 +33,12 @@
           <el-badge :value="cartCount" class="item" type="primary">
             <span class="icon-header-cart" @click="handleCart"><i class="fas fa-cart-plus"></i></span>
           </el-badge>
-          <span v-if="isConnected">{{$t('hello')}}, {{userData.name}}</span>
+          
+          <!-- <span v-if="isConnected">{{$t('hello')}}, {{userData.name}}</span> -->
 
-          <el-badge v-if="isConnected">
+          <!-- <el-badge v-if="isConnected">
             <span class="button-header" @click="handleLogout">{{$t('logout')}}</span>
-          </el-badge>
+          </el-badge> -->
 
         </div>
       </div> 
@@ -102,9 +112,15 @@
       }),
       ...mapMutations('auth', ['destroyAccessToken','destroyUserData']),
       handleLogout () {
+        const _this = this;
         this.destroyAccessToken();
         this.destroyUserData();
-        window.location.reload();
+        const path = '/';
+
+        this.$router.push({path: "/"}, () => {
+            if (_this.$route.path === path)
+              window.location.reload();
+        });
       },
       handleCart() {
         this.$router.push({
