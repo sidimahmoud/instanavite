@@ -20,7 +20,7 @@
     "laravel-mix": "^5.0.0",
     "moment": "^2.24.0",
     "moment-range": "^4.0.2",
-    "moment-timezone": "^0.5.27",
+    "moment-timezone": "^0.5.35",
     "vue": "^2.6.10",
     "vue-burger-menu": "^2.0.5",
     "vue-facebook-login-component": "^2.3.0",
